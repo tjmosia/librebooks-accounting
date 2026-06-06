@@ -32,8 +32,8 @@ public class AuthController (UserManagerExtension userManager,
 	private readonly VerificationStore verificationStore = verificationStore;
 	private readonly AppDbContext context = context;
 
-	[HttpPost("")]
-	public async Task<IActionResult> FindUserAsync ([FromBody] UsernameModel.Request input)
+	[HttpGet("")]
+	public async Task<IActionResult> FindUserAsync ([FromQuery] UsernameModel.Request input)
 	{
 		if (!ModelState.IsValid)
 			return BadRequest(ModelState);

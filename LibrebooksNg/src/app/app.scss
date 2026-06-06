@@ -1,0 +1,33 @@
+:host {
+    display: contents;
+}
+
+
+.shell {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    width: 100%;
+
+    .content {
+        display: block;
+        height: calc(100vh - 28px);
+        min-width: 100%;
+        margin: 0 auto;
+    }
+
+    footer {
+        box-sizing: border-box;
+        height: 28px;
+        margin-top: auto;
+        text-align: center;
+        color: #555;
+        font-size: .85rem;
+        text-align: center;
+        width: 100%;
+        border-top: 1px solid var(--color-border-subtle);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

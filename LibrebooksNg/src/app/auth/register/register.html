@@ -1,0 +1,17 @@
+<form class="auth-form">
+    <wx-form-group [label]="'First Name'">
+        <wx-input-group type="text" [required]="true" name="firstName" />
+    </wx-form-group>
+    <wx-form-group [label]="'Last Name'">
+        <wx-input-group type="text" [required]="true" name="lastName" />
+    </wx-form-group>
+    <wx-form-group [label]="'Password'">
+        <wx-input-group type="password" [required]="true" name="password" />
+    </wx-form-group><wx-form-group [label]="'Confirm Pasword'">
+        <wx-input-group type="password" [required]="true" name="confirmPassword" />
+    </wx-form-group>
+    <wx-button type="submit" text="Sign up" variant="primary" size="medium" />
+    <wx-button type="button" variant="outlined" (click)="goToAuth()">
+        change email
+    </wx-button>
+</form>

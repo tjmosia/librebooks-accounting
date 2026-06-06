@@ -88,7 +88,7 @@ public class TaxesController (ISystemsManager systemManager)
 		if (tax == null)
 			return NotFound();
 
-		var result = await Manager.DeleteTaxesAsync(tax);
+		var result = await Manager.DeleteTaxesAsync([tax]);
 		return Ok(result);
 	}
 

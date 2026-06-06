@@ -1,0 +1,17 @@
+<label [class]="['wx-form-field', intent()]" [for]="htmlFor()" [id]="id()">
+    <span class="wx-form-field_label">
+        {{label()}}
+        @if(required()){
+        <span class="wx-form-field_label_required">*</span>
+        }
+    </span>
+    <span class="wx-form-field_helper-text"></span>
+    <span class="wx-form-field_control">
+        <ng-content></ng-content>
+    </span>
+    @if(validationMessage()){
+    <span class="wx-form-field_validation-message">
+        {{validationMessage()}}
+    </span>
+    }
+</label>

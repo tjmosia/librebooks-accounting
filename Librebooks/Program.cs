@@ -52,7 +52,7 @@ builder.Services.AddCors(options =>
 {
 	options.AddPolicy("DevOrigin", options =>
 	{
-		options.WithOrigins("https://localhost:5173")
+		options.WithOrigins("https://localhost:4200")
 			.AllowCredentials()
 			.AllowAnyHeader()
 			.AllowAnyMethod();
@@ -86,11 +86,11 @@ app.Use(async (context, next) =>
 	if (token != null)
 	{
 		context.Response.Headers.Authorization = $"Bearer {token}";
-		Console.Write(token);
 	}
 
 	await next.Invoke(context);
 });
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

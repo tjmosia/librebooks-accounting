@@ -1,0 +1,13 @@
+<button [disabled]="disabled()" [type]="type()"
+    [class]="['wx-button', getSizeClass(), getVariantClass(), class(),{'wx--inline': inline()}]" [attr.id]="id()"
+    [attr.aria-label]="ariaLabel()">
+    @if(text() && !loading()){
+    <span class="wx-button_text">{{text()}}</span>
+    }
+    @else {
+    <ng-content></ng-content>
+    }
+    @if(loading()){
+    <wx-spinner size="tiny"></wx-spinner>
+    }
+</button>
