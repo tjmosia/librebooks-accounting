@@ -1,1 +1,8 @@
-<p>login works!</p>
+<form class="auth-form" (submit)="handleSubmit($event)">
+    <wx-form-group [validationMessage]="model().error" 
+        [validationState]="getValidationStateClass()" 
+        label="Password">
+        <wx-input-group />
+    </wx-form-group>
+    <wx-button type="submit" text="Login" />
+</form>

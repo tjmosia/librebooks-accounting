@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResetPassword } from './reset-password';
+import { WxCheckbox } from './wx-checkbox';
 
-describe('ResetPassword', () => {
-  let component: ResetPassword;
-  let fixture: ComponentFixture<ResetPassword>;
+describe('WxCheckbox', () => {
+  let component: WxCheckbox;
+  let fixture: ComponentFixture<WxCheckbox>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResetPassword],
+      imports: [WxCheckbox],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ResetPassword);
+    fixture = TestBed.createComponent(WxCheckbox);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

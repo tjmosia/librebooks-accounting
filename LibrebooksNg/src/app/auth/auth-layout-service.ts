@@ -7,24 +7,50 @@ import { FindUserDto } from './auth-dtos';
   providedIn: null
 })
 export class AuthLayoutService {
-  formTitle = signal<string | undefined>(undefined)
-  formMessage = signal<string | undefined>(undefined)
-  email = signal<string>("")
-  user = signal<FindUserDto | null>(null)
+  private formTitle = signal<string>("Login or Register")
+  private formMessage = signal<string>("")
+  private email = signal("")
+  private user = signal<FindUserDto | null>(null)
+  private loading = signal(false)
 
-  setTitle(title: string | undefined) {
+  constructor() {
+    this.email.set(sessionStorage.getItem("AUTH_EMAIL") ?? "")
+  }
+
+  getFormTitle(): string {
+    return this.formTitle()
+  }
+
+  getFormMessage(): string {
+    return this.formMessage()
+  }
+
+  isLoading(): boolean {
+    return this.loading()
+  }
+
+  getUser(): FindUserDto | null {
+    return this.user()
+  }
+
+  setFormTitle(title: string) {
     this.formTitle.set(title)
   }
 
-  setMessage(message: string | undefined) {
+  setFormMessage(message: string) {
     this.formMessage.set(message)
   }
 
   setEmail(email: string = "") {
+    sessionStorage.setItem("AUTH_EMAIL", email)
     this.email.set(email)
   }
 
   setUser(user: FindUserDto | null = null) {
     this.user.set(user)
+  }
+
+  setLoading(state: boolean = true) {
+    this.loading.set(state)
   }
 }

@@ -22,20 +22,21 @@ export class Username implements OnInit {
   readonly http = inject(HttpClient)
   readonly router = inject(Router)
   model = signal<IFormFieldProps<string>>({ value: "" })
+  
   constructor(private titleService: Title) {
     this.titleService.setTitle("Sign in or Sign Up")
   }
 
-  handleChange({ data, event }: { data: string, event: Event }) {
-    this.model.set({ value: data })
+  handleChange({ value, event }: { value: string, event: Event }) {
+    this.model.set({ value: value })
   }
 
   ngOnInit(): void {
-    this.authLayout.formTitle.set("Sign in or Sign Up")
-    this.authLayout.formMessage.set("Enter your username to continue")
+    this.authLayout.setFormTitle("Sign in or Sign Up")
+    this.authLayout.setFormMessage("Enter your username to continue")
   }
 
-  getValidationState() {
+  getValidationStateClass() {
     return this.model().error ? intents.error : null;
   }
 
@@ -49,7 +50,6 @@ export class Username implements OnInit {
       this.model.set({ ...this.model(), error: "Email is not valid." })
       return false
     }
-
     return true
   }
 
@@ -60,7 +60,7 @@ export class Username implements OnInit {
       .subscribe({
         next: (response: AjaxResponse<FindUserDto>) => {
           const user = response.response
-          this.authLayout.user.set(user)
+          this.authLayout.setUser(user)
           this.router.navigate(['/auth', 'login'])
         },
         error: (error: AjaxError) => {

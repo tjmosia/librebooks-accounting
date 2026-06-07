@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Register } from './register';
+import { WxRadio } from './wx-radio';
 
-describe('Register', () => {
-  let component: Register;
-  let fixture: ComponentFixture<Register>;
+describe('WxRadio', () => {
+  let component: WxRadio;
+  let fixture: ComponentFixture<WxRadio>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Register],
+      imports: [WxRadio],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Register);
+    fixture = TestBed.createComponent(WxRadio);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

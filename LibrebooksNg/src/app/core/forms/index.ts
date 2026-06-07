@@ -1,2 +1,2 @@
-export { type IFormFieldProps } from './form-field'
-export { formValidators } from './form-validators'  
+export { type IFormFieldProps } from './form-field-props'
+export { formValidators } from './form-validators'

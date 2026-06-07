@@ -12,7 +12,7 @@ type InputSize = "small" | "medium" | "large"
 export class WxInputGroup {
   readonly id = input<string | null>();
   readonly value = input<string>();
-  readonly onChange = output<{ data: string, event: Event }>();
+  readonly onChange = output<{ value: string, event: Event }>();
   readonly class = input<string>("");
   readonly inputClass = input<string>("");
   readonly placeholder = input<string | null>(null);
@@ -22,9 +22,10 @@ export class WxInputGroup {
   readonly required = input<boolean>(false)
   readonly size = input<InputSize>("medium")
   readonly inputId = input<string | null>(null)
+  readonly disabled = input<boolean>(false)
 
   changeHandler(event: Event) {
-    this.onChange.emit({ data: (event.target as HTMLInputElement).value, event })
+    this.onChange.emit({ value: (event.target as HTMLInputElement).value, event })
   }
 
   getInputSizeClass() {

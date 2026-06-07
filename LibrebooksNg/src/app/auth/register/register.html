@@ -1,17 +1,36 @@
 <form class="auth-form">
-    <wx-form-group [label]="'First Name'">
-        <wx-input-group type="text" [required]="true" name="firstName" />
+    <wx-form-group [label]="'First Name'" 
+        [validationMessage]="model().name.error"
+        [validationState]="getModelValidationClass(model().name)">
+        <wx-input-group type="text" 
+            [required]="true" name="name" 
+            [value]="model().name.value" />
     </wx-form-group>
-    <wx-form-group [label]="'Last Name'">
-        <wx-input-group type="text" [required]="true" name="lastName" />
+    <wx-form-group [label]="'Last Name'" 
+        [validationMessage]="model().surname.error"
+        [validationState]="getModelValidationClass(model().surname)">
+        <wx-input-group type="text" [required]="true" 
+            name="surname" 
+            [value]="model().surname.value" 
+            (input)="handleInputChange($event)"  />
     </wx-form-group>
-    <wx-form-group [label]="'Password'">
-        <wx-input-group type="password" [required]="true" name="password" />
-    </wx-form-group><wx-form-group [label]="'Confirm Pasword'">
-        <wx-input-group type="password" [required]="true" name="confirmPassword" />
+    <wx-form-group [label]="'Password'" [validationMessage]="model().password.value" 
+        [validationState]="getModelValidationClass(model().password)">
+        <wx-input-group type="password" [required]="true" 
+        name="password"
+        (input)="handleInputChange($event)" 
+        [value]="model().password.value"  />
+    </wx-form-group>
+    <wx-form-group [label]="'Confirm Pasword'" 
+        [validationMessage]="model().confirmPassword.error"
+        [validationState]="getModelValidationClass(model().confirmPassword)">
+        <wx-input-group type="password" [required]="true" 
+            name="confirmPassword" 
+            (input)="handleInputChange($event)"
+            [value]="model().confirmPassword.value"  />
     </wx-form-group>
     <wx-button type="submit" text="Sign up" variant="primary" size="medium" />
     <wx-button type="button" variant="outlined" (click)="goToAuth()">
-        change email
+        Change Email
     </wx-button>
 </form>
