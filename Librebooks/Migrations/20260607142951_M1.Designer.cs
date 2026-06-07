@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Librebooks.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260329105439_M1")]
+    [Migration("20260607142951_M1")]
     partial class M1
     {
         /// <inheritdoc />
@@ -1268,20 +1268,6 @@ namespace Librebooks.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -1290,6 +1276,11 @@ namespace Librebooks.Migrations
 
                     b.Property<string>("LoginHash")
                         .HasMaxLength(155)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
@@ -1309,8 +1300,8 @@ namespace Librebooks.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("Photo")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RefreshLoginHash")
                         .HasMaxLength(155)
@@ -1321,6 +1312,11 @@ namespace Librebooks.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -3075,9 +3071,6 @@ namespace Librebooks.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Tax");
                 });

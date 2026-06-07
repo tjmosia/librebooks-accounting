@@ -12,11 +12,15 @@
 
     &_label {
         font-size: var(--font-size-sm);
-        color: var(--text-color-secondary);
+        color: var(--text-primary);
         font-weight: var(--font-weight-bold);
         line-height: 1em;
         margin: 0;
         padding: 0;
+
+        &_required {
+            color: var(--error);
+        }
     }
 
     &_control {
@@ -24,8 +28,13 @@
     }
 
     &_validation-message {
-        color: var(--color-intent-danger);
+        color: var(--error);
         font-size: var(--font-size-sm);
+    }
+
+    &_helper-text {
+        font-size: var(--font-size-sm);
+        opacity: 0.5;
     }
 
     .wx-error {

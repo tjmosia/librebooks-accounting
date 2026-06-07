@@ -7,8 +7,8 @@ public class UpdatePersonalInfoModel
 {
 	public class Request
 	{
-		public string? FirstName { get; set; }
-		public string? LastName { get; set; }
+		public string? Name { get; set; }
+		public string? Surname { get; set; }
 		public string? Gender { get; set; }
 	}
 
@@ -19,10 +19,10 @@ public class UpdatePersonalInfoModel
 	{
 		public Validator ()
 		{
-			RuleFor(p => p.FirstName)
+			RuleFor(p => p.Name)
 				.NotEmpty().WithMessage("First name is required.");
 
-			RuleFor(p => p.LastName)
+			RuleFor(p => p.Surname)
 				.NotEmpty().WithMessage("Last name is required.");
 
 			RuleFor(p => p.Gender)

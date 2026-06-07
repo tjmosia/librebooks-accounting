@@ -8,7 +8,8 @@ type onSuccessFunc = (response: IClaimsPrincipal) => void
 type onFailureFunc = (error: AjaxError) => void
 
 export function useIdentityService() {
-    const { claimsPrincipal, setClaimsPrincipal } = useContext(IdentityContext)
+    const { getClaimsPrincipal, setClaimsPrincipal } = useContext(IdentityContext)
+    const claimsPrincipal = getClaimsPrincipal()
 
     function confirmLogin({ next, error }:
         { next?: onSuccessFunc, error?: onFailureFunc } = {}) {
@@ -35,7 +36,7 @@ export function useIdentityService() {
     }
 
     function logout() {
-        ajax<IUser>({
+        ajax({
             url: serverData.route("/auth/logout"),
             method: "POST",
             headers: {
@@ -59,7 +60,13 @@ export function useIdentityService() {
         logout,
         login: (claimsPrincipal: IClaimsPrincipal) => setClaimsPrincipal(claimsPrincipal),
         confirmServerLogin: confirmLogin,
-        getUser: () => claimsPrincipal?.user,
+        getUser: () => {
+            if (claimsPrincipal === undefined)
+                return undefined
+            else if (claimsPrincipal === null)
+                return null
+            return claimsPrincipal.user
+        },
         getRoles: () => claimsPrincipal?.roles,
         getClaims: () => claimsPrincipal?.claims,
         isInRole: (role: IRole) => {

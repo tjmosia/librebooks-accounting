@@ -1265,20 +1265,6 @@ namespace Librebooks.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -1287,6 +1273,11 @@ namespace Librebooks.Migrations
 
                     b.Property<string>("LoginHash")
                         .HasMaxLength(155)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
@@ -1306,8 +1297,8 @@ namespace Librebooks.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("Photo")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RefreshLoginHash")
                         .HasMaxLength(155)
@@ -1318,6 +1309,11 @@ namespace Librebooks.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")

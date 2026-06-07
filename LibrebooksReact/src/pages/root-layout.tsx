@@ -1,6 +1,6 @@
 import { type FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
-import './root-layout.css'
+import './root-layout.scss'
 import { Caption2Strong } from "@fluentui/react-components";
 
 export const RootLayout: FC = () => {

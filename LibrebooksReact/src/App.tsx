@@ -1,19 +1,19 @@
-import { FluentProvider } from '@fluentui/react-components';
+import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 import { useState } from "react";
 import { RouterProvider, createBrowserRouter } from 'react-router';
 import { IdentityContext, type IIdentityContext } from "./contexts/identity-context.ts";
 import type { IClaimsPrincipal } from "./core/identity";
 import { routes } from "./routes.ts";
-import { lightTheme } from "./strings/theme.ts";
-import './styles/App.css';
+import './styles/App.scss';
+import { lightTheme } from './strings/theme.ts';
 
 const router = createBrowserRouter(routes)
 
 function App() {
-  const [claimsPrincipal, setClaimsPrincipal] = useState<IClaimsPrincipal | undefined>(undefined)
+  const [claimsPrincipal, setClaimsPrincipal] = useState<IClaimsPrincipal | null | undefined>(undefined)
 
   const identityContext: IIdentityContext = {
-    claimsPrincipal: claimsPrincipal,
+    getClaimsPrincipal: () => claimsPrincipal,
     setClaimsPrincipal: setClaimsPrincipal
   }
 

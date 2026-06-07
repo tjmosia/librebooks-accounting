@@ -11,7 +11,6 @@
     margin-top: auto;
     border-top: thin solid var(--colors-grey4-light);
     text-align: center;
-    /* background-color: var(--colors-grey6-light); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +19,7 @@
 }
 
 .footer-disclaimer {
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 .rootLayout__content {

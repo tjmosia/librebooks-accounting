@@ -9,6 +9,7 @@
     --text-color-secondary: #9ca3af;
     --text-color-onAccent: #1d1d1e;
 
+    --radius-xs: 0.25rem;
     --radius-sm: 0.375rem;
     --radius-md: 0.5rem;
     --radius-lg: 0.75rem;
@@ -32,10 +33,48 @@
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 
     --transition-duration: 0.3s;
-    --transition-timing: ease;
+    --transition-timing: ease-in-out;
 
     --color-intent-danger: #FF6B6B;
     --color-intent-success: #52C41A;
     --color-intent-warning: #FAAD14;
     --color-intent-info: #1890FF;
+    /* --- Backgrounds --- */
+    --bg-primary: #f8fafc;
+    /* Clean, soft off-white for main app background */
+    --bg-secondary: #ffffff;
+    /* Pure white for cards, sidebars, and containers */
+    --bg-tertiary: #f1f5f9;
+    /* Light gray for hovered states or nested UI elements */
+
+    /* --- Borders & Dividers --- */
+    --border-color: #d5dbe4;
+    /* Subtle gray border to separate components */
+    --border-focus: #3b82f6;
+    /* Vibrant blue for focused inputs or active states */
+
+    /* --- Typography --- */
+    --text-primary: #0f172a;
+    /* Deep slate/black for headings and primary text */
+    --text-secondary: #475569;
+    /* Muted slate for secondary text, labels, and captions */
+    --text-disabled: #94a3b8;
+    /* Faded gray for disabled elements */
+
+    /* --- Accent & Brand Colors --- */
+    --accent-primary: #3b82f6;
+    /* Electric blue for primary buttons, links, and highlights */
+    --accent-hover: #1d4ed8;
+    /* Slightly darker blue for light mode hover contrast */
+    --accent-text: #ffffff;
+    /* White text to be used on top of accent backgrounds */
+
+    /* --- Feedback / Status --- */
+    --success: #15803d;
+    /* Darker green for readable success states on light backgrounds */
+    --error: #b91c1c;
+    /* Darker red for readable error text and alerts */
+    --warning: #b45309;
+    /* Darker amber for readable warnings */
+    --info: #0369a1;
 }

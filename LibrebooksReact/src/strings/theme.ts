@@ -24,7 +24,9 @@ const lightTheme: Theme = {
     borderRadiusSmall: "0px",
     borderRadiusMedium: "4px",
     borderRadiusCircular: "99999px",
-    fontFamilyBase: " 'Inter','Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif",
+    fontFamilyBase: " 'Avenir','Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif",
+    fontSizeBase300: "14px",
+    fontSizeBase400: "14px",
 };
 
 const darkTheme: Theme = {

@@ -8,8 +8,8 @@
     transition: all var(--transition-duration) var(--transition-timing);
 
     &.wx--primary {
-        background-color: var(--color-accent);
-        color: var(--text-color-onAccent);
+        background-color: var(--accent-primary);
+        color: var(--accent-text);
     }
 
     &.wx--minimal {
@@ -23,7 +23,7 @@
         border: 1px solid var(--border-color);
 
         &:hover {
-            background-color: var(--border-color);
+            background-color: var(--bg-primary);
             color: var(--color-text-color-onAccent);
         }
     }

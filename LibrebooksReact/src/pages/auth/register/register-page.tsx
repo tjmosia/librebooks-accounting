@@ -1,4 +1,4 @@
-import { Button, Caption1, Caption2, Divider, Field, Input, MessageBar, Select, Spinner } from "@fluentui/react-components"
+import { Button, Caption1, Caption2, Divider, Field, Input, MessageBar, Spinner } from "@fluentui/react-components"
 import { useContext, useEffect, useState, type ChangeEvent, type SubmitEvent } from "react"
 import { MdLock, MdLockOpen } from "react-icons/md"
 import { useNavigate } from "react-router"
@@ -7,14 +7,13 @@ import { FormValidators, type IFormField } from "../../../core/forms"
 import { type ITransactionError, type ITransactionResult } from "../../../core/http"
 import { type IUser } from "../../../core/identity"
 import { serverData } from "../../../strings"
-import { AuthLayoutContext } from "../auth-layout-contexts"
 import { lowerFirstLetter } from "../../../utils"
 import { sendEmailVerificationCode } from "../auth-funcs"
+import { AuthLayoutContext } from "../auth-layout-contexts"
 
 interface IRegisterPageModel {
-    firstName: IFormField<string>
-    lastName: IFormField<string>
-    gender: IFormField<string>
+    name: IFormField<string>
+    surname: IFormField<string>
     password: IFormField<string>
     code: IFormField<string>
     isValid?: () => boolean
@@ -22,13 +21,10 @@ interface IRegisterPageModel {
 
 
 const initialModel: IRegisterPageModel = {
-    firstName: {
+    name: {
         value: ""
     },
-    lastName: {
-        value: ""
-    },
-    gender: {
+    surname: {
         value: ""
     },
     password: {
@@ -85,15 +81,6 @@ export default function RegisterPage() {
         }
     }, [setFormTitle])
 
-    function onGenderSelect(event: ChangeEvent<HTMLSelectElement>) {
-        setModel((prev) => ({
-            ...prev,
-            gender: {
-                value: event.target.value
-            }
-        }))
-    }
-
     function onPasswordInputBlur() {
         if (model.password.value && !FormValidators.validatePassword(model.password.value)) {
             setModel((prev) => ({
@@ -124,9 +111,8 @@ export default function RegisterPage() {
             method: "POST",
             body: JSON.stringify({
                 email: email,
-                firstName: model.firstName.value,
-                lastName: model.firstName.value,
-                gender: model.gender.value,
+                name: model.name.value,
+                surname: model.surname.value,
                 password: model.password.value,
                 code: model.code.value
             })
@@ -165,6 +151,7 @@ export default function RegisterPage() {
                         intent: "error"
                     })
                 }
+
                 if (error.status === 400) {
                     const errors = error.response as ITransactionError[]
                     if (errors && errors.length > 0) {
@@ -208,106 +195,104 @@ export default function RegisterPage() {
         })
     }
 
-    return (<form className="register-form animate__animated animate__fadeIn" onSubmit={onSubmit}>
+    return (
+        <>
+            <title>Register</title>
+            <form className="register-form animate__animated animate__fadeIn" onSubmit={onSubmit}>
 
-        <div className="field">
-            <Divider>Personal Information</Divider>
-        </div>
-        <div className="field">
-            <Field label="First name" size="small" required
-                validationState={model.firstName.erred ? "error" : "none"}>
-                <Input disabled={loading} placeholder="First Name" onChange={onInputChange} value={model.firstName.value} name="firstName" />
-            </Field>
-        </div>
-        <div className="field">
-            <Field label="Last name" size="small" required
-                validationState={model.lastName.erred ? "error" : "none"}>
-                <Input disabled={loading} placeholder="Last Name" onChange={onInputChange} value={model.lastName.value} name="lastName" />
-            </Field>
-        </div>
-        <div className="field">
-            <Field label="Gender" size="small" required
-                validationState={model.gender.erred ? "error" : "none"}>
-                <Select value={model.gender.value}
-                    onChange={onGenderSelect}>
-                    <option value="" hidden>Select your gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </Select>
-            </Field>
-        </div>
-        <div className="field">
-            <Divider>Create your Password</Divider>
-        </div>
-        <div className="field">
-            <MessageBar intent="info" icon={null}>
-                <Caption2>Password must be at least 8 characters long and include a mix of uppercase letters,
-                    lowercase letters, numbers, and special characters.</Caption2>
-            </MessageBar>
-        </div>
-        <div className="field">
-            <Field label="Password" size="small" required
-                validationMessage={model.password.errorMessage}
-                validationState={model.password.erred ? "error" : "none"}>
-                <Input disabled={loading} placeholder="Password" onBlur={onPasswordInputBlur}
-                    type={showPassword ? "text" : "password"}
-                    contentAfter={
-                        <Button size="small" onClick={() => setShowPassword(prev => !prev)}
-                            appearance="subtle" icon={
-                                showPassword ? <MdLockOpen /> : <MdLock />
-                            } />
-                    }
-                    onChange={onInputChange} value={model.password.value} name="password" />
-            </Field>
-        </div>
-        <div className="field">
-            <Divider>Verification</Divider>
-        </div>
-        <div className="field">
-            <Caption1>Enter the verification code sent to your mailbox.</Caption1>
-        </div>
-        <div className="field">
-            <Field label="Verification Code" required size="small"
-                validationMessage={model.code.errorMessage}
-                validationState={model.code.erred ? "error" : "none"}>
-                <Input disabled={loading} onChange={onCodeChange}
-                    placeholder="Verification Code"
-                    maxLength={6}
-                    value={model.code.value}
-                    contentAfter={<Button onClick={() => sendEmailVerificationCode(email!, setRootMessage, setResendingCode, "/auth/register")} appearance="subtle" size="small">
-                        {resendingCode ? <Spinner size="extra-tiny" /> : "Request"}
-                    </Button>}
-                    name="code" />
-            </Field>
-        </div>
-        <div className="field">
-            <Button type="submit" className="submit-button" appearance="primary" disabled={loading}>
-                {loading ? <Spinner size="extra-tiny" /> : "Register"}
-            </Button>
-        </div>
-        <div className="field">
-            <Button appearance="subtle" className="submit-button" onClick={() => navigate("/auth")}>
-                Change Email
-            </Button>
-        </div>
-    </form >)
+                <div className="field">
+                    <Divider>Personal Information</Divider>
+                </div>
+                <div className="field">
+                    <Field label="Name" size="small" required
+                        validationMessage={model.name.errorMessage}
+                        validationState={model.name.erred ? "error" : "none"}>
+                        <Input disabled={loading} placeholder="Name" onChange={onInputChange} value={model.name.value} name="name" />
+                    </Field>
+                </div>
+                <div className="field">
+                    <Field label="Surname" size="small" required
+                        validationMessage={model.surname.errorMessage}
+                        validationState={model.surname.erred ? "error" : "none"}>
+                        <Input disabled={loading} placeholder="Surname" onChange={onInputChange} value={model.surname.value} name="surname" />
+                    </Field>
+                </div>
+                <div className="field">
+                    <Divider>Create your Password</Divider>
+                </div>
+                <div className="field">
+                    <MessageBar intent="info" icon={null}>
+                        <Caption2>Min 8 characters mixed-case letters, numbers, and special characters.</Caption2>
+                    </MessageBar>
+                </div>
+                <div className="field">
+                    <Field label="Password" size="small" required
+                        validationMessage={model.password.errorMessage}
+                        validationState={model.password.erred ? "error" : "none"}>
+                        <Input disabled={loading} placeholder="Password" onBlur={onPasswordInputBlur}
+                            type={showPassword ? "text" : "password"}
+                            contentAfter={
+                                <Button size="small" onClick={() => setShowPassword(prev => !prev)}
+                                    appearance="subtle" icon={
+                                        showPassword ? <MdLockOpen /> : <MdLock />
+                                    } />
+                            }
+                            onChange={onInputChange} value={model.password.value} name="password" />
+                    </Field>
+                </div>
+                <div className="field">
+                    <Divider>Verification</Divider>
+                </div>
+                <div className="field">
+                    <Caption1>Enter the verification code sent to your mailbox.</Caption1>
+                </div>
+                <div className="field">
+                    <Field label="Verification Code" required size="small"
+                        validationMessage={model.code.errorMessage}
+                        validationState={model.code.erred ? "error" : "none"}>
+                        <Input disabled={loading} onChange={onCodeChange}
+                            placeholder="Verification Code"
+                            maxLength={6}
+                            value={model.code.value}
+                            contentAfter={<Button onClick={() => sendEmailVerificationCode({
+                                email: email!,
+                                reason: "REGISTRATION",
+                                setRootMessage,
+                                setResendingCode,
+                                targetRoute: "/auth/register"
+                            })} appearance="subtle" size="small">
+                                {resendingCode ? <Spinner size="extra-tiny" /> : "Request"}
+                            </Button>}
+                            name="code" />
+                    </Field>
+                </div>
+                <div className="field">
+                    <Button type="submit" className="submit-button" appearance="primary" disabled={loading}>
+                        {loading ? <Spinner size="extra-tiny" /> : "Register"}
+                    </Button>
+                </div>
+                <div className="field">
+                    <Button appearance="subtle" className="submit-button" onClick={() => navigate("/auth")}>
+                        Change Email
+                    </Button>
+                </div>
+            </form >
+        </>)
 }
 
 function validateModel(model: IRegisterPageModel, setModel: React.Dispatch<React.SetStateAction<IRegisterPageModel>>,
     setRootError?: React.Dispatch<React.SetStateAction<string | undefined>>): boolean {
     const _model = { ...model }
 
-    if (!model.firstName.value)
-        _model.firstName.erred = true
+    if (!model.name.value)
+        _model.name.erred = true
 
-    if (!model.lastName.value)
-        _model.lastName.erred = true
-
-    if (!model.gender.value)
-        _model.gender.erred = true
+    if (!model.surname.value)
+        _model.surname.erred = true
 
     if (!model.password.value)
         _model.password.erred = true
+
     else if (!FormValidators.validatePassword(model.password.value))
         _model.password.errorMessage = "Password is too weak."
 
@@ -317,7 +302,7 @@ function validateModel(model: IRegisterPageModel, setModel: React.Dispatch<React
     else if (_model.code.value!.length !== 6)
         _model.code.errorMessage = "Please check your code."
 
-    if (_model.firstName.erred || _model.lastName.erred || _model.gender.erred || _model.password.erred || _model.code.erred) {
+    if (_model.name.erred || _model.surname.erred || _model.password.erred || _model.code.erred) {
         setModel(_model)
         setRootError?.("Please ensure all fields are correctly filled.")
         return false

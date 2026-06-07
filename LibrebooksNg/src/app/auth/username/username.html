@@ -1,9 +1,7 @@
 <form class="auth-form" (submit)="handleSubmit($event)">
-    <wx-form-group [label]="'Email Address'" 
-        [validationMessage]="model().error"
+    <wx-form-group [label]="'Email Address'" [validationMessage]="model().error"
         [validationState]="getValidationStateClass()">
-        <wx-input-group type="email" [required]="true" 
-            [value]="model().value" (onChange)="handleChange($event)"
+        <wx-input-group type="email" size="small" [value]="model().value" (onChange)="handleChange($event)"
             name="username" />
     </wx-form-group>
     <wx-button type="submit" text="Continue" variant="primary" size="medium" />

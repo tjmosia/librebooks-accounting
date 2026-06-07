@@ -60,9 +60,9 @@ namespace Librebooks.Areas.Identity.Services
 			=> new
 			{
 				Email = user.Email!,
-				FirstName = user.FirstName!,
-				LastName = user.LastName!,
-				Photo = user.GetPhotoAsBase64()
+				FirstName = user.Name!,
+				LastName = user.Surname!,
+				Photo = user.Photo
 			};
 	}
 }

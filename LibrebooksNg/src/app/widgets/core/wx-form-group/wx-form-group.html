@@ -5,7 +5,9 @@
         <span class="wx-form-field_label_required">*</span>
         }
     </span>
-    <span class="wx-form-field_helper-text"></span>
+    @if(helperText()){
+    <span class="wx-form-field_helper-text">{{helperText()}}</span>
+    }
     <span class="wx-form-field_control">
         <ng-content></ng-content>
     </span>

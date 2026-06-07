@@ -1,3 +1,3 @@
 
 
-export {type ICompany} from './company-type.ts'
+export { type ICompany } from './company-type.ts'

@@ -50,9 +50,8 @@ export function AuthEntryPage() {
         setLoading(true);
 
         ajax<IUser>({
-            method: "POST",
-            url: serverData.route("/auth"),
-            body: JSON.stringify({ email: emailModel.value }),
+            method: "GET",
+            url: serverData.route("/auth?email=" + emailModel.value),
             headers: { "Content-Type": "application/json" },
         }).subscribe({
             next: (response) => {
@@ -98,6 +97,7 @@ export function AuthEntryPage() {
     }, []);
 
     return (<>
+        <title>Login or Register</title>
         <form onSubmit={onSubmit} className="fields authForm animate__animated animate__fadeIn">
             <div className="field">
                 <Field

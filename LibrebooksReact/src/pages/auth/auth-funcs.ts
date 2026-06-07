@@ -3,14 +3,17 @@ import type { ITransactionResult } from "../../core/http"
 import { serverData } from "../../strings"
 import type { IAuthRootMessage } from "./auth-layout-contexts"
 
-export function sendEmailVerificationCode(
-
+interface ISendEmailVerificationCodeProps {
     email: string,
+    reason: string,
+    targetRoute?: string,
     setRootMessage?: (message?: IAuthRootMessage) => void,
     setResendingCode?: React.Dispatch<React.SetStateAction<boolean>>,
-    targetRoute?: string,
     callbackOnSuccess?: () => void,
-    callbackOnError?: () => void) {
+    callbackOnError?: () => void,
+}
+
+export function sendEmailVerificationCode({ email, reason, targetRoute, setRootMessage, setResendingCode, callbackOnSuccess, callbackOnError }: ISendEmailVerificationCodeProps) {
     if (setResendingCode) setResendingCode(true)
 
     ajax<ITransactionResult<null>>({
@@ -21,7 +24,7 @@ export function sendEmailVerificationCode(
         },
         body: JSON.stringify({
             email: email,
-            reason: serverData.verificationReasons.passwordReset
+            reason: reason
         })
     }).subscribe({
         next(response) {

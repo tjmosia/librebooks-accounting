@@ -1,12 +1,18 @@
 import { useContext } from "react";
-import { CompanyContext } from "../contexts/company-context.ts";
+import { IdentityContext } from "../contexts/identity-context.ts";
+import type { ICompany } from "../core/companies/company-type.ts";
 
 export function useCompanyService() {
-    const { company, setCompany, removeCompany } = useContext(CompanyContext);
-
+    const { getClaimsPrincipal, setClaimsPrincipal } = useContext(IdentityContext);
+    const claimsPrincipal = getClaimsPrincipal()
+    const company = claimsPrincipal?.company
     return {
-        company: Object.freeze(company),
-        setCompany,
-        removeCompany,
+        getCompany: () => company,
+        setCompany: (company: ICompany | null) => {
+            if (claimsPrincipal) setClaimsPrincipal({
+                ...claimsPrincipal,
+                company
+            })
+        }
     }
 }

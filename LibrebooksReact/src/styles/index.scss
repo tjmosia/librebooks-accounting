@@ -1,5 +1,5 @@
-@import '_root.css';
-@import 'animate.css/animate.css';
+@forward './_root.scss';
+@forward 'animate.css/animate.css';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

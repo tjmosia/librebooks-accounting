@@ -4,9 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { WxButton, WxFormGroup, WxInputGroup } from '../../widgets/core';
 import { formValidators, IFormFieldProps } from '../../core/forms';
+import { HttpClient } from '@angular/common/http';
+import { ServerService } from '../../providers/server-service';
+import { AjaxError } from 'rxjs/ajax';
+import { StatusCodes } from 'http-status-codes';
 
-interface IRegisterModel{
+interface IRegisterModel {
   [key: string]: IFormFieldProps<string>
+  code: IFormFieldProps<string>
   name: IFormFieldProps<string>
   surname: IFormFieldProps<string>
   password: IFormFieldProps<string>
@@ -14,10 +19,11 @@ interface IRegisterModel{
 }
 
 const initial_model: IRegisterModel = {
-  name: {value: ""},
-  surname: {value: ""},
-  password: {value: ""},
-  confirmPassword: {value:""}
+  code: { value: "" },
+  name: { value: "" },
+  surname: { value: "" },
+  password: { value: "" },
+  confirmPassword: { value: "" }
 }
 
 @Component({
@@ -30,45 +36,64 @@ export class Register implements OnInit {
   authLayout = inject(AuthLayoutService)
   router = inject(Router)
   route = inject(ActivatedRoute)
-  email = signal<string>("");
   model = signal<IRegisterModel>(initial_model)
+  http = inject(HttpClient)
+  server = inject(ServerService)
 
   constructor(private titleService: Title) {
     this.titleService.setTitle("Sign up")
   }
 
   ngOnInit(): void {
-    this.email.set(this.route.snapshot.queryParams['email'] ?? "")
-
-    if (!this.email()) {
+    if (!this.authLayout.getEmail()) {
       this.router.navigate(['auth'])
       return
     }
-
     this.authLayout.setFormTitle("Create your account")
     this.authLayout.setFormMessage("Enter your information to create an account")
   }
 
-  modelHasErrors(model: IRegisterModel){
-    const str =  model.name.error || model.surname.error || model.password.error || model.confirmPassword.error
+  handleSubmit(event: Event) {
+    event.preventDefault()
+    if (!this.isValidModel())
+      return
+    this.http.post(this.server.getApiLink("/auth/register"), {
+      email: this.authLayout.getEmail(),
+      name: this.model().name.value,
+      surname: this.model().surname.value,
+      password: this.model().password.value,
+      code: this.route.snapshot.params["code"]
+    }).subscribe({
+      next: () => {
+        this.router.navigate(['/'])
+      },
+      error: (error: AjaxError) => {
+        if (error.status === StatusCodes.BAD_REQUEST) {
 
-    if(str === undefined)
-      return false
-    return true
-  }
-
-  handleInputChange(event: Event){
-    const {name, value} = event.target as HTMLInputElement
-    this.model.set({
-      ...this.model(),
-      [name]: {
-        value: value.replaceAll(" ","")
+        }
       }
     })
   }
 
-  getModelValidationClass(field: IFormFieldProps<string>){
-    if(field.error)
+  modelHasErrors(model: IRegisterModel) {
+    const str = model.name.error || model.surname.error || model.password.error || model.confirmPassword.error
+    if (str === undefined)
+      return false
+    return true
+  }
+
+  handleInputChange(event: Event) {
+    const { name, value } = event.target as HTMLInputElement
+    this.model.set({
+      ...this.model(),
+      [name]: {
+        value: value.replaceAll(" ", "")
+      }
+    })
+  }
+
+  getModelValidationClass(field: IFormFieldProps<string>) {
+    if (field.error)
       return "error"
     else
       return null
@@ -78,34 +103,33 @@ export class Register implements OnInit {
     this.router.navigate(["auth"])
   }
 
-  isValidModel(){
+  isValidModel() {
     const _model = this.model()
 
-    if(!_model.name.value)
+    if (!_model.name.value)
       _model.name.error = "Name is required."
 
-    if(!_model.surname.value)
+    if (!_model.surname.value)
       _model.surname.error = "Surname is required."
 
-    if(!_model.password.value)
+    if (!_model.password.value)
       _model.password.error = "Password is required."
 
-    if(!_model.confirmPassword.error)
+    if (!_model.confirmPassword.error)
       _model.confirmPassword.error = "Confirm password is required."
 
-    if(this.modelHasErrors(_model)){
+    if (this.modelHasErrors(_model)) {
       this.model.set(_model)
       return false
     }
 
-    if(_model.password.value !== _model.confirmPassword.value)
+    if (_model.password.value !== _model.confirmPassword.value)
       _model.confirmPassword.error = "Passwords do not match."
 
-    if(!_model.confirmPassword.error && !formValidators.isValidPassword(_model.password.value))
+    if (!_model.confirmPassword.error && !formValidators.isValidPassword(_model.password.value))
       _model.password.error = "Your password doesn't meet requirements."
 
-    if(_model.password.error || _model.confirmPassword.error)
-    {
+    if (_model.password.error || _model.confirmPassword.error) {
       this.model.set({
         ..._model,
         password: {

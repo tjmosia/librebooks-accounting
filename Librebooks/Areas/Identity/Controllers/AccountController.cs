@@ -19,6 +19,7 @@ public class AccountController (
 		ILogger<SessionControllerBase> logger,
 		SignInManagerExtension signInManager,
 		IOptions<JwtParams> jwtParameters
+
 	) : SessionControllerBase(
 		userManager: userManager,
 		signInManager: signInManager,
@@ -76,11 +77,10 @@ public class AccountController (
 
 		return Ok(new
 		{
-			user.FirstName,
-			user.LastName,
+			user.Name,
+			user.Surname,
 			user.Email,
 			user.PhoneNumber,
-			user.Gender,
 			user.DateRegistered,
 			user.Photo
 		});
@@ -103,9 +103,8 @@ public class AccountController (
 
 		try
 		{
-			user.FirstName = input.FirstName;
-			user.LastName = input.LastName;
-			user.Gender = input.Gender;
+			user.Name = input.Name;
+			user.Surname = input.Surname;
 
 			await userManager.UpdateAsync(user);
 
@@ -242,11 +241,10 @@ public class AccountController (
 	{
 		return new
 		{
-			user.FirstName,
-			user.LastName,
+			user.Name,
+			user.Surname,
 			user.Email,
-			user.Gender,
-			user.DateRegistered,
+			user.Photo
 		};
 	}
 

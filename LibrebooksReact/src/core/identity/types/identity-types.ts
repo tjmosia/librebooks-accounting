@@ -1,3 +1,5 @@
+import type { ICompany } from "../../companies";
+
 export interface IUser {
     readonly email: string;
     readonly firstName: string;
@@ -18,7 +20,8 @@ export interface IRole {
 export interface IClaimsPrincipal {
     user: IUser
     claims: IClaim[],
-    roles: IRole[]
+    roles: IRole[],
+    company: ICompany | null
 }
 
 export interface IIdentity {

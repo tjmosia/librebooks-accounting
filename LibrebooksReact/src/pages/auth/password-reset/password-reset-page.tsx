@@ -244,7 +244,12 @@ export default function PasswordResetPage() {
                         placeholder="Verification Code"
                         maxLength={6}
                         value={model.code.value}
-                        contentAfter={<Button onClick={() => sendEmailVerificationCode(user?.email!, setRootMessage, setResendingCode)} appearance="subtle" size="small">
+                        contentAfter={<Button onClick={() => sendEmailVerificationCode({
+                            email: user?.email!,
+                            reason: "RESET_PASSWORD",
+                            setRootMessage,
+                            setResendingCode
+                        })} appearance="subtle" size="small">
                             {resendingCode ? <Spinner size="extra-tiny" /> : "Request Code"}
                         </Button>}
                         name="code" />

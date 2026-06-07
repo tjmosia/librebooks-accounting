@@ -4,17 +4,22 @@
 
 .wx-input-group {
     display: flex;
-    box-sizing: border-box;
     border: thin solid var(--border-color);
-    background-color: var(--color-bg);
-    color: var(--text-color);
-    border-radius: var(--radius-sm);
+    // background-color: var(--bg-primary);
+    background-color: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius-xs);
     overflow: hidden;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 0;
     padding: 0;
+    transition: all var(--transition-duration) var(--transition-timing);
+
+    &:focus-within {
+        border-color: var(--border-focus);
+    }
 
     input[type] {
         flex: 1;
@@ -28,7 +33,7 @@
     }
 
     &.wx--small input[type] {
-        padding: 0.375em 0.5em;
+        padding: 0.25em 0.375em;
     }
 
     &.wx--medium input[type] {

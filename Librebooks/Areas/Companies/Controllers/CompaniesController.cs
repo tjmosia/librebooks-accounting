@@ -63,10 +63,9 @@ public class CompaniesController
 			VATNumber = input.VATNumber,
 			TradingName = input.TradingName,
 			LegalName = input.LegalName,
+
 			RegionalSetup = new()
 			{
-				CurrencyId = input.CurrencyId,
-				CountryId = input.CountryId,
 				DateFormatId = input.DateFormatId,
 				DecimalMark = ".",
 				RoundToNearest = 2,

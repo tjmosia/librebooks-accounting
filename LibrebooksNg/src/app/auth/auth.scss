@@ -7,7 +7,7 @@
     align-items: center;
 
     .auth-form-wrapper {
-        background-color: var(--color-bg-surface);
+        background-color: var(--bg-secondary);
         border-radius: var(--radius-sm);
         display: flex;
         flex-direction: column;
@@ -16,6 +16,7 @@
         padding: var(--space-lg);
         max-width: 300px;
         width: 100%;
+        border: thin solid var(--border-color);
 
         ::deep form {
             display: flex;

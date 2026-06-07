@@ -3,5 +3,5 @@ export {
     type IClaim,
     type IRole,
     type IClaimsPrincipal,
-    type IIdentity
+    type IIdentity,
 } from './types/identity-types.ts'

@@ -1,15 +1,14 @@
 import { useIdentityService } from "../hooks";
 import { useNavigate, Outlet } from "react-router";
 import { useEffect } from "react";
-import { pageWasReloaded } from "../utils";
 
 export function AuthenticatedRoute() {
-    const { isLoggedIn, confirmServerLogin } = useIdentityService();
+    const { isLoggedIn, confirmServerLogin, getUser } = useIdentityService();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!isLoggedIn()) {
-            if (pageWasReloaded()) {
+            if (getUser() === undefined) {
                 confirmServerLogin({
                     error: (error) => {
                         if (error.status == 401 || error.status == 0)
@@ -22,8 +21,5 @@ export function AuthenticatedRoute() {
         }
     }, [isLoggedIn]);
 
-    if (isLoggedIn())
-        return <Outlet />;
-
-    return isLoggedIn() ? <Outlet /> : <div>Loading User...</div>;
+    return isLoggedIn() ? <Outlet /> : <div>Loading. Please wait...</div>;
 }

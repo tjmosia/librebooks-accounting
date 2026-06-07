@@ -17,20 +17,38 @@ export class AuthLayoutService {
     this.email.set(sessionStorage.getItem("AUTH_EMAIL") ?? "")
   }
 
-  getFormTitle(): string {
+  getFormTitle() {
     return this.formTitle()
   }
 
-  getFormMessage(): string {
+  getFormMessage() {
     return this.formMessage()
   }
 
-  isLoading(): boolean {
+  isLoading() {
     return this.loading()
   }
 
-  getUser(): FindUserDto | null {
-    return this.user()
+  getEmail(persistValue = true) {
+    const val = this.email()
+    if (!persistValue) {
+      try {
+        sessionStorage.removeItem("AUTH_EMAIL")
+      } catch { }
+      this.setEmail("")
+    }
+    return val
+  }
+
+  getUser(persistValue = true) {
+    const val = this.user()
+    if (!persistValue) {
+      try {
+        sessionStorage.removeItem("AUTH_USER")
+      } catch { }
+      this.setUser(null)
+    }
+    return val
   }
 
   setFormTitle(title: string) {

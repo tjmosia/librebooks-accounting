@@ -142,13 +142,19 @@ export default function LoginPage() {
     }, [rootError]);
 
     function handleResetPasswordButtonClick() {
-        sendEmailVerificationCode(user!.email!, undefined, undefined, "/auth/reset-password", () => {
-            SessionData.addItem(AuthSessionVars.NextUrl, "/auth/reset-password")
-            navigate("/auth/reset-password")
+        sendEmailVerificationCode({
+            email: user!.email!,
+            reason: "RESET_PASSWORD",
+            targetRoute: "/auth/reset-password",
+            callbackOnSuccess: () => {
+                SessionData.addItem(AuthSessionVars.NextUrl, "/auth/reset-password")
+                navigate("/auth/reset-password")
+            }
         })
     }
 
     return (<>
+        <title>Login</title>
         {!user ? <div><Spinner /></div> :
             <form className="login-form animate__animated animate__fadeIn" onSubmit={onSubmit}>
                 {
