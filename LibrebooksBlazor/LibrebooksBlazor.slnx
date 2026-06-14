@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LibrebooksBlazor/LibrebooksBlazor.Client/LibrebooksBlazor.Client.csproj" />
+  <Project Path="LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor.csproj" />
+  <Project Path="WxWidgets/WxWidgets.csproj" />
+</Solution>

@@ -1,80 +1,125 @@
-:root {
-    --color-bg: #0b0f19;
-    --color-bg-surface: #161f30;
-    --color-accent: #06b6d4;
-    --color-accent-secondary: #8b5cf6;
-    --border-color: #24324d;
-    --font-family: "DM Sans";
-    --text-color: #D0D2D6;
-    --text-color-secondary: #9ca3af;
-    --text-color-onAccent: #1d1d1e;
+:root, [data-theme="light"] {
+  --font-family-base: "Inter";
+  /* Border Radius */
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
+  --border-radius-xlg: 8px;
+  --border-radius-2xlg: 12px;
+  --border-radius-3xlg: 16px;
+  --border-radius-4xlg: 24px;
+  --border-radius-5xlg: 32px;
+  --border-radius-6xlg: 40px;
+  --border-radius-circular: 10000px;
+  --border-radius: var(--border-radius-lg);
+  /* Component Box Shadows */
+  --shadow-2: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
+  --shadow-4: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+  --shadow-8: 0 0 2px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.14);
+  --shadow-16: 0 0 2px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.14);
+  --shadow-28: 0 0 8px rgba(0, 0, 0, 0.12), 0 14px 28px rgba(0, 0, 0, 0.14);
+  --shadow-64: 0 0 8px rgba(0, 0, 0, 0.12), 0 32px 64px rgba(0, 0, 0, 0.14);
+  --shadow-2-brand: 0 0 2px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-4-brand: 0 0 2px rgba(0, 0, 0, 0.30), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-8-brand: 0 0 2px rgba(0, 0, 0, 0.30), 0 4px 8px rgba(0, 0, 0, 0.25);
+  --shadow-16-brand: 0 0 2px rgba(0, 0, 0, 0.30), 0 8px 16px rgba(0, 0, 0, 0.25);
+  --shadow-28-brand: 0 0 8px rgba(0, 0, 0, 0.30), 0 14px 28px rgba(0, 0, 0, 0.25);
+  --shadow-64-brand: 0 0 8px rgba(0, 0, 0, 0.30), 0 32px 64px rgba(0, 0, 0, 0.25);
+  ///* ==========================================
+  // PALETTE 1: Professional & Trustworthy
+  // ========================================== */
+  //--bg-main: #f8f9fa;
+  //--bg-secondary: #e2e8f0;
+  //--bg-sidebar: #2c3e50;
+  //--text-sidebar: #ffffff;
+  //--primary: #3498db;
+  //--success: #27ae60;
+  //--warning: #f39c12;
+  //--error: #e74c3c;
+  //--text-main: #2c3e50;
+  //--accent-primary: #2563eb;
+  //--accent-primary-hover: #1d4ed8;
+  //--accent-secondary: #4f46e5;
+  //--accent-focus: rgba(37, 99, 235, 0.2);
+  //--access-text: #fff;
+  ///* ==========================================
+  // NEUTRAL BORDERS (Cards, Table Rows, Inputs)
+  // ========================================== */
+  //--border: #e2e8f0;
+  //--border-hover: #cbd5e1;
+  //--border-active: #94a3b8;
+  /* ==========================================
+   INTERACTIVE FOCUS STATES (Accessibility)
+   ========================================== */
+  --focus-ring-color: #2563eb;
+  --focus-ring-glow: rgba(37, 99, 235, 0.25);
+  --neutral-muted-bg: #f1f5f9;
+  --neutral-muted-hover: #e2e8f0;
+  --neutral-muted-active: #cbd5e1;
+  --text-muted: #475569;
+  /* ==========================================
+   INTENT BACKGROUNDS & TEXT
+   ========================================== */
+  --space-xs: 0.15rem;
+  --space-sm: 0.25rem;
+  --space-md: 0.5rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --font-s14: 1rem;
+  --font-s13: 0.92857rem;
+  --font-s12: 0.85714rem;
 
-    --radius-xs: 0.25rem;
-    --radius-sm: 0.375rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
+  --fontSize-xs: var(--font-s12);
+  --fontSize-sm: var(--font-s13);
+  --fontSize-md: var(--font-s14);
+  --fontSize-lg: 1.28571rem;
 
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
+  --accent-blue: #1A5A9E;
+  --accent-yellow: #FFF2A3;
+  --accent-green: #2E8B57;
+  --accent-red: #D9381E;
+  --accent-brown: #8B5A2B;
+  --accent-purple: #7D26CD;
+  --accent-beige: #F5F5DC;
+  --accent-primary: var(--accent-blue);
 
-    --font-size-sm: 0.875rem;
-    --font-size-md: 1rem;
-    --font-size-lg: 1.25rem;
-    --font-size-xl: 1.75rem;
-    --font-size-2xl: 2.5rem;
+  /********************************************
+   ** BG
+   *******************************************/
+  --bg: #fff;
+  --bg-primary: var(--accent-blue);
+  --bg-primary-hover: #123F6F;
+  --bg-surface: #F5F5F5;
+  --bg-error: #fef2f2;
+  --bg-success: #f0fdf4;
+  --bg-warning: #fffbeb;
+  --bg-info: #f0f9ff;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  /********************************************
+   ** BORDER
+   *******************************************/
+  --border: #D0D0D0;
+  --border-hover: #1A5A9E;
+  --border-focus: #F06C02;
+  --focus-ring: rgba(240, 108, 2, 0.25);
+  --border-error: #fee2e2;
+  --border-success: #dcfce7;
+  --border-warning: #fef3c7;
+  --border-info: #e0f2fe;
 
-    --transition-duration: 0.3s;
-    --transition-timing: ease-in-out;
-
-    --color-intent-danger: #FF6B6B;
-    --color-intent-success: #52C41A;
-    --color-intent-warning: #FAAD14;
-    --color-intent-info: #1890FF;
-    /* --- Backgrounds --- */
-    --bg-primary: #f8fafc;
-    /* Clean, soft off-white for main app background */
-    --bg-secondary: #ffffff;
-    /* Pure white for cards, sidebars, and containers */
-    --bg-tertiary: #f1f5f9;
-    /* Light gray for hovered states or nested UI elements */
-
-    /* --- Borders & Dividers --- */
-    --border-color: #d5dbe4;
-    /* Subtle gray border to separate components */
-    --border-focus: #3b82f6;
-    /* Vibrant blue for focused inputs or active states */
-
-    /* --- Typography --- */
-    --text-primary: #0f172a;
-    /* Deep slate/black for headings and primary text */
-    --text-secondary: #475569;
-    /* Muted slate for secondary text, labels, and captions */
-    --text-disabled: #94a3b8;
-    /* Faded gray for disabled elements */
-
-    /* --- Accent & Brand Colors --- */
-    --accent-primary: #3b82f6;
-    /* Electric blue for primary buttons, links, and highlights */
-    --accent-hover: #1d4ed8;
-    /* Slightly darker blue for light mode hover contrast */
-    --accent-text: #ffffff;
-    /* White text to be used on top of accent backgrounds */
-
-    /* --- Feedback / Status --- */
-    --success: #15803d;
-    /* Darker green for readable success states on light backgrounds */
-    --error: #b91c1c;
-    /* Darker red for readable error text and alerts */
-    --warning: #b45309;
-    /* Darker amber for readable warnings */
-    --info: #0369a1;
+  /********************************************
+   ** BORDER
+   *******************************************/
+  --text: #111111;
+  --text-primary: #fff;
+  --text-secondary: #555555;
+  --text-error: #991b1b;
+  --text-warning: #92400e;
+  --text-success: #166534;
+  --text-info: #075985;
+  /********************************************
+   ** TRANSITION
+   *******************************************/
+  --transition-duration: 200ms;
+  --transition-timing: ease-in-out;
 }

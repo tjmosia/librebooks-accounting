@@ -1,0 +1,18 @@
+<section [class]="`wx-section ${computeContainerClassName()}`">
+    @if (title != undefined || subTitle != undefined)
+    {
+      <div  [class]="`wx-section_header ${computeHeaderClassName()}`">
+          @if (title != null)
+          {
+          <h6 class="wx-section_header_title">{{title()}}</h6>
+          }
+          @if (subTitle != undefined)
+          {
+          <span class="wx-section_header_subTitle">{{subTitle()}}</span>
+          }
+      </div>
+    }
+    <div class="wx-section_body">
+        <ng-content></ng-content>
+    </div>
+</section>

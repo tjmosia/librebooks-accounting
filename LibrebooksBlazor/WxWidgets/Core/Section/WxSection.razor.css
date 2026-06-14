@@ -1,0 +1,64 @@
+﻿.WxSection {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-radius: var(--ui-border-radius-md);
+	overflow: hidden;
+
+	&:not(.Wx--Compact) {
+		.WxSection_Header {
+			padding: 1rem 1.5rem 0.75rem;
+		}
+
+		.WxSection_Body {
+			padding: 1rem 1.5rem 1.5rem;
+		}
+	}
+
+	&.Wx--Compact {
+		.WxSection_Header {
+			padding: 0.55rem 0.85rem 0.5rem;
+		}
+
+		.WxSection_Body {
+			padding: 0.85rem;
+		}
+	}
+
+	&.Wx--Outlined {
+		border: thin solid var(--ui-border);
+	}
+
+	.WxSection_Header {
+		display: flex;
+		flex-direction: column;
+		border-bottom: thin solid var(--ui-border);
+		background-color: var(--ui-surface);
+
+		&.Wx--AlignLeft {
+			align-items: flex-start;
+		}
+
+		&.Wx--AlignCenter {
+			align-items: center;
+		}
+
+		&.Wx--AlignRight {
+			align-items: flex-end;
+		}
+	}
+
+	.WxSection_Header_Title {
+		font-weight: bold;
+		font-size: var(--ui-fontSize-lg);
+		margin: 0;
+		opacity: 0.85;
+		display: flex;
+	}
+
+	.WxSection_Header_Description {
+		font-size: var(--fontSize-sm);
+		opacity: 0.75;
+	}
+}

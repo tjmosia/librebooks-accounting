@@ -3,9 +3,9 @@
 @forward 'normalize.css/normalize.css';
 
 html {
-    font-family: var(--font-family);
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    font-family: Calibri, "Source Sans 3", "Clear Sans", sans-serif;
+    background-color: var(--bg-surface);
+    color: var(--text);
     margin: 0;
     padding: 0;
     min-height: 100vh;

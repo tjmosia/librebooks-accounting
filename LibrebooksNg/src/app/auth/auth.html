@@ -1,13 +1,12 @@
 <div class="auth-layout">
     <div class="auth-form-wrapper">
-        <div class="auth-form-header">
-            @if(authLayout.getFormTitle()){
-            <span class="form-title">{{authLayout.getFormTitle()}}</span>
-            }
-            @if(authLayout.getFormMessage()){
-            <span class="form-message">{{authLayout.getFormMessage()}}</span>
-            }
-        </div>
+      <wx-section alignText="center" [title]="authLayout.getFormTitle()" [subTitle]="authLayout.getFormMessage()">
+        @if(authLayout.getAlert()){
+          <wx-alert intent="error" title="This is the title">
+            <span alert-message #alertMessage>This is the message</span>
+          </wx-alert>
+        }
         <router-outlet></router-outlet>
+      </wx-section>
     </div>
 </div>

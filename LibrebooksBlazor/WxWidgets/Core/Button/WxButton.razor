@@ -1,0 +1,88 @@
+﻿@if (string.IsNullOrEmpty(To))
+{
+    <button onclick="@HandleClickAsync"
+            class=@GetComputedButtonClassName()
+            type="@(Type.ToString().ToLower())">
+        <span class="WxButton_Text">
+            @ChildContent
+        </span>
+    </button>
+}
+else
+{
+    <a href=@To class=@GetComputedButtonClassName()
+            type="@(Type.ToString().ToLower())">
+        <span class="WxButton_Text">
+            @ChildContent
+        </span>
+    </a>
+}
+
+@code {
+    [Parameter] public EventCallback<string?> OnClick { get; set; }
+    [Parameter] public string? ClassName { get; set; }
+    [Parameter] public Types Type { get; set; } = Types.Button;
+    [Parameter] public Sizes Size { get; set; } = Sizes.Medium;
+    [Parameter] public bool Inline { get; set; } = false;
+    [Parameter] public string? To { get; set; }
+    [Parameter] public Appearances Appeareance { get; set; } = Appearances.Primary;
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private string GetComputedButtonClassName()
+    {
+        ClassName ??= " ";
+        ClassName += " WxButton";
+        ClassName += string.Join(" ", 
+            Wx( Size.ToString(), 
+                Appeareance.ToString(),
+                !Inline ? "Fill" : "Inline")
+        );
+
+        return ClassName;
+    }
+
+    private IEnumerable<string> Wx(params string?[] classNames)
+    {
+        foreach (var className in classNames)
+        {
+            if (ClassName != null)
+                yield return " Wx--" + className;
+            else
+                yield return "";
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    private async Task HandleClickAsync()
+    {
+        if (OnClick.HasDelegate)
+            await OnClick.InvokeAsync();
+    }
+
+    public enum Types
+    {
+        Button,
+        Submit,
+        Reset
+    }
+
+    public enum Appearances
+    {
+        Outlined,
+        Secondary,
+        Primary,
+        Minimal
+    }
+
+    public enum Sizes
+    {
+        Tiny,
+        Small, 
+        Medium,
+        Large
+    }
+}

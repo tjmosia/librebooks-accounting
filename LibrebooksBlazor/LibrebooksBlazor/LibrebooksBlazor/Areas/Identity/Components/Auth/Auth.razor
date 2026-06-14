@@ -1,0 +1,66 @@
+﻿@page "/auth"
+@layout AuthLayout
+@inject UserManager<User> UserManager
+
+<PageTitle>Login or Register</PageTitle>
+
+<EditForm Model="Input" OnSubmit="HandleSubmitAsync" FormName="AuthForm" method="post">
+    <WxFormGroup Label="Email" ValidationMessage="@GetPropValidation(nameof(Input.Email)).Message"
+        ValidationStatus="@GetPropValidation(nameof(Input.Email)).Status">
+        <WxInputGroup @bind-Value="@Input!.Email" Type=WxInputGroup.InputTypes.Email />
+    </WxFormGroup>
+    <WxButton Type="WxButton.Types.Submit">Continue</WxButton>
+</EditForm>
+
+@code {
+    [SupplyParameterFromQuery(Name = "returnUrl")]
+    public string? ReturnUrl { get; set; }
+
+    [SupplyParameterFromForm(FormName = "AuthForm")]
+    public FormModel? Input { get; set; }
+
+    public ValidationResult? ModelState { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ModelState ??= new();
+        Input ??= new();
+    }
+
+    private async Task HandleSubmitAsync()
+    {
+        ModelState = new Validator().Validate(Input!);
+
+        if (!ModelState.IsValid)
+            return;
+
+        var user = await UserManager.FindByEmailAsync(Input!.Email!);
+
+        if(user is null)
+            navigation.NavigateTo($"/auth/register?email={Input.Email}");
+        else
+            navigation.NavigateTo($"/auth/login?returnUrl={ReturnUrl}&email={Input.Email!.ToLower()}");
+    }
+
+    public (Intents Status, string? Message) GetPropValidation (string propName)
+    {
+        var message = ModelState!.Errors.Where(e => e.PropertyName == propName).FirstOrDefault()?.ErrorMessage;
+        return (message != null ? Intents.Danger : Intents.None, message);
+    }
+
+    public class FormModel
+    {
+        public string? Email { get; set; }
+    }
+
+    public class Validator : AbstractValidator<FormModel>
+    {
+        public Validator()
+        {
+            RuleFor(x => x.Email).Cascade(CascadeMode.Stop)
+            .NotEmpty().WithMessage("Email is required.")
+            .EmailAddress().WithMessage("Invalid email address.");
+        }
+    }
+}

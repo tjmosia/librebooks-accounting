@@ -1,10 +1,9 @@
-﻿using System.Text;
-using Librebooks.Areas.Companies.Data;
+﻿using Librebooks.Areas.Companies.Data;
 using Librebooks.Areas.Companies.Models;
 using Librebooks.Areas.Companies.Services;
 using Librebooks.Areas.Identity.Services;
 using Librebooks.Areas.Systems.Services;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Extensions.Mvc;
 using Librebooks.Models.Entity.CompanySpace;
 using Microsoft.AspNetCore.Authorization;
@@ -47,7 +46,7 @@ public class CompaniesController
 		var validationResult = CompaniesModels.Validate(input);
 
 		if (!validationResult.IsValid)
-			return BadRequest(Result.Failure([.. validationResult.Errors.Select(p => Error.Create(p.PropertyName, p.ErrorMessage))]));
+			return BadRequest(TransactionResult.Failure([.. validationResult.Errors.Select(p => TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
 		var taxes = await sysManager.GetTaxesAsync();
 
@@ -85,7 +84,7 @@ public class CompaniesController
 			{
 				Image = new CompanyImage
 				{
-					Data = Encoding.UTF8.GetBytes(input.Logo)
+					PathName = input.Logo
 				}
 			};
 		}
@@ -98,7 +97,7 @@ public class CompaniesController
 		}
 		else
 		{
-			return Ok(Result.Failure([.. result.Errors.Select(p => Error.Create(p.Code, p.Description))]));
+			return Ok(TransactionResult.Failure([.. result.Errors.Select(p => TransactionError.Create(p.Code, p.Description))]));
 		}
 	}
 }

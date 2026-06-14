@@ -1,0 +1,59 @@
+﻿<section class=@($"WxSection {GetComputeContainerClassName()}")>
+	@if (!string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(SubTitle))
+	{
+		<div class=@GetComputedHeaderClassName()>
+			@if (!string.IsNullOrEmpty(Title))
+			{
+				<h6 class="WxSection_Header_Title">@Title</h6>
+			}
+			@if (!string.IsNullOrEmpty(SubTitle))
+			{
+				<span class="WxSection_Header_Description">@SubTitle</span>
+			}
+		</div>
+	}
+	<div class="WxSection_Body">
+		@ChildContent
+	</div>
+</section>
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public string? Title { get; set; }
+	[Parameter] public string? SubTitle { get; set; }
+	[Parameter] public string? ClassName { get; set; }
+	[Parameter] public Appearances Appearance { get; set; } = Appearances.Outlined;
+	[Parameter] public bool Elevated { get; set; } = false;
+	[Parameter] public bool Compact { get; set; } = false;
+	[Parameter] public HeaderTextAlignments AlignHeaderText { get; set; } = HeaderTextAlignments.Center;
+
+	private string GetComputeContainerClassName ()
+	{
+		ClassName = "WxSection  Wx--" + Appearance;
+		if (Elevated) ClassName += " Wx--Elevated";
+		if (Compact) ClassName += " Wx--Compact";
+
+		return ClassName;
+	}
+
+	private string GetComputedHeaderClassName()
+		=> $"WxSection_Header Wx--Align{AlignHeaderText}";
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+	}
+
+	public enum Appearances
+	{
+		Minimal,
+		Outlined
+	}
+
+	public enum HeaderTextAlignments
+	{
+		Left,
+		Center,
+		Right
+	}
+}

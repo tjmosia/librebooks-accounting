@@ -1,6 +1,6 @@
 ﻿using Librebooks.Areas.Systems.Services.Stores;
 using Librebooks.Core.EFCore;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Data;
 using Librebooks.Models.Entity.CompanySpace;
 using Microsoft.EntityFrameworkCore;
@@ -35,30 +35,30 @@ public class SystemsStore (
 	public async Task<CompanySetup?> GetCompanySetupAsync (CancellationToken cancellationToken = default)
 		=> await context.CompanySetup!.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<Result<CompanySetup>> UpdateCompanySetupAsync (CompanySetup companySetup, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult<CompanySetup>> UpdateCompanySetupAsync (CompanySetup companySetup, CancellationToken cancellationToken = default)
 	{
 		companySetup.RefreshConcurrencyToken();
 		try
 		{
 			var result = context.CompanySetup!.Update(companySetup);
 			await context.SaveChangesAsync(cancellationToken);
-			return Result<CompanySetup>.Success(result.Entity);
+			return TransactionResult<CompanySetup>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
-			var errors = new List<Error>();
+			var errors = new List<TransactionError>();
 
 			if (ex is DbUpdateException)
 			{
-				errors.Add(Error.Create("", "Update unsuccessful. Please try again later."));
+				errors.Add(TransactionError.Create("", "Update unsuccessful. Please try again later."));
 			}
 
 			if (ex is DbUpdateConcurrencyException)
 			{
-				errors.Add(Error.Create("", "Update unsuccessful. Multiple users are editing the same data at the same time. Please try again."));
+				errors.Add(TransactionError.Create("", "Update unsuccessful. Multiple users are editing the same data at the same time. Please try again."));
 			}
 
-			return Result<CompanySetup>.Failure();
+			return TransactionResult<CompanySetup>.Failure();
 		}
 	}
 }

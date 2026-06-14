@@ -1,0 +1,50 @@
+﻿div.WxFormGroup {
+	display: flex;
+	height: auto;
+	flex-direction: column;
+}
+
+label.WxFormGroup_Label {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+span.WxFormGroup_Label_Text {
+	font-size: 0.9375rem;
+	font-weight: 500;
+}
+
+span.WxFormGroup_ValidationMessage {
+	font-size: var(--ui-fontSize-sm);
+	display: block;
+	margin: 0.125rem 0 0.25rem;
+
+	&.Wx--Danger {
+		color: var(--ui-danger-text);
+	}
+
+	&.Wx--Success {
+		color: var(--ui-success-text);
+	}
+
+	&.Wx--Warning {
+		color: var(--ui-warning-text);
+	}
+}
+
+.WxFormGroup_Content{
+	display: block;	
+	margin: 0.25rem 0 0.125rem 0;
+}
+
+.WxFormGroup_HelperText {
+	display: block;
+	font-size: var(--ui-fontSize-xs);
+	font-weight: normal;
+	color: var(--color-neutral-foreground-1);
+	opacity: 0.75;
+	pointer-events: none;
+	line-height: 1em;
+}

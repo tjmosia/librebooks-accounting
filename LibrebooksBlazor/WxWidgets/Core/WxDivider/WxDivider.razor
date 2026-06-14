@@ -1,0 +1,23 @@
+﻿<span class=@($"WxDivider Wx--{Direction}")>
+	@if (!string.IsNullOrEmpty(Text))
+	{
+		<span class="WxDivider_Text">@Text</span>
+	}
+</span>
+
+@code {
+	[Parameter] public string? Text { get; set; }
+	[Parameter] public Directions? Direction { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		Direction = Directions.Horizontal;
+	}
+
+	public enum Directions
+	{
+		Horizontal,
+		Vertical
+	}
+}

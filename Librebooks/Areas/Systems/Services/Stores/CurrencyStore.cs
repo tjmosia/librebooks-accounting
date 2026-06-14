@@ -1,5 +1,5 @@
 ﻿using Librebooks.Core.EFCore;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Data;
 using Librebooks.Models.Entity.SystemSpace;
 
@@ -21,18 +21,18 @@ public class CurrencyStore (AppDbContext context, ILogger<CurrencyStore> logger)
 		=> await context!.Currencies!.ToListAsync(cancellationToken);
 
 
-	public async Task<Result<Currency>> CreateAsync (Currency currency, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult<Currency>> CreateAsync (Currency currency, CancellationToken cancellationToken = default)
 	{
 		try
 		{
 			var result = await context!.Currencies!.AddAsync(currency, cancellationToken);
 			await context.SaveChangesAsync(cancellationToken);
 
-			return Result<Currency>.Success(result.Entity);
+			return TransactionResult<Currency>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
-			IList<Error> errors = [];
+			IList<TransactionError> errors = [];
 			if (IsUniqueKeyConstaint(ex))
 				errors.Add(new(nameof(Currency.Name), "Name is already taken."));
 
@@ -40,50 +40,50 @@ public class CurrencyStore (AppDbContext context, ILogger<CurrencyStore> logger)
 			if (errors.Any())
 				errors.Add(GeneralError);
 
-			return Result<Currency>.Failure([.. errors]);
+			return TransactionResult<Currency>.Failure([.. errors]);
 		}
 	}
 
-	public async Task<Result<Currency>> UpdateAsync (Currency currency, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult<Currency>> UpdateAsync (Currency currency, CancellationToken cancellationToken = default)
 	{
 		try
 		{
 			var result = context!.Currencies!.Update(currency);
 			await context.SaveChangesAsync(cancellationToken);
 
-			return Result<Currency>.Success(result.Entity);
+			return TransactionResult<Currency>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
-			IList<Error> errors = [];
+			IList<TransactionError> errors = [];
 			if (IsUniqueKeyConstaint(ex))
 				errors.Add(new(nameof(Currency.Name), "Name is already taken."));
 
 			if (errors.Any())
 				errors.Add(GeneralError);
 
-			return Result<Currency>.Failure([.. errors]);
+			return TransactionResult<Currency>.Failure([.. errors]);
 		}
 	}
 
-	public async Task<Result> DeleteAsync (Currency[] currencies, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult> DeleteAsync (Currency[] currencies, CancellationToken cancellationToken = default)
 	{
 		try
 		{
 			context!.Currencies!.RemoveRange(currencies);
 			await context.SaveChangesAsync(cancellationToken);
-			return Result.Success;
+			return TransactionResult.Success;
 		}
 		catch (Exception ex)
 		{
-			IList<Error> errors = [];
+			IList<TransactionError> errors = [];
 			if (IsForeignKeyViolation(ex))
 				errors.Add(new("", currencies.Length > 1 ? "One or more currencies are currently in use." : "Currency is currently in use."));
 
 			if (errors.Any())
 				errors.Add(GeneralError);
 
-			return Result.Failure([.. errors]);
+			return TransactionResult.Failure([.. errors]);
 		}
 	}
 }

@@ -1,0 +1,130 @@
+﻿:root {
+    --font-family-base: "Lato";
+    /* Border Radius */
+    --border-radius-sm: 2px;
+    --border-radius-md: 4px;
+    --border-radius-lg: 6px;
+    --border-radius-xlg: 8px;
+    --border-radius-2xlg: 12px;
+    --border-radius-3xlg: 16px;
+    --border-radius-4xlg: 24px;
+    --border-radius-5xlg: 32px;
+    --border-radius-6xlg: 40px;
+    --border-radius-circular: 10000px;
+    /* Component Box Shadows */
+    --shadow-2: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+    --shadow-4: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14);
+    --shadow-8: 0 0 2px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.14);
+    --shadow-16: 0 0 2px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.14);
+    --shadow-28: 0 0 8px rgba(0,0,0,0.12), 0 14px 28px rgba(0,0,0,0.14);
+    --shadow-64: 0 0 8px rgba(0,0,0,0.12), 0 32px 64px rgba(0,0,0,0.14);
+    --shadow-2-brand: 0 0 2px rgba(0,0,0,0.30), 0 1px 2px rgba(0,0,0,0.25);
+    --shadow-4-brand: 0 0 2px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.25);
+    --shadow-8-brand: 0 0 2px rgba(0,0,0,0.30), 0 4px 8px rgba(0,0,0,0.25);
+    --shadow-16-brand: 0 0 2px rgba(0,0,0,0.30), 0 8px 16px rgba(0,0,0,0.25);
+    --shadow-28-brand: 0 0 8px rgba(0,0,0,0.30), 0 14px 28px rgba(0,0,0,0.25);
+    --shadow-64-brand: 0 0 8px rgba(0,0,0,0.30), 0 32px 64px rgba(0,0,0,0.25);
+    /* ==========================================
+     PALETTE 1: Professional & Trustworthy
+     ========================================== */
+    --bg-main: #f8f9fa;
+    --bg-secondary: #e2e8f0;
+    --bg-sidebar: #2c3e50;
+    --text-sidebar: #ffffff;
+    --primary: #3498db;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --text-main: #2c3e50;
+    --accent-primary: #2563eb;
+    --accent-primary-hover: #1d4ed8;
+    --accent-secondary: #4f46e5;
+    --accent-focus: rgba(37, 99, 235, 0.2);
+    --access-text: #fff;
+    /* ==========================================
+     NEUTRAL BORDERS (Cards, Table Rows, Inputs)
+     ========================================== */
+    --border: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --border-active: #94a3b8;
+    /* ==========================================
+     INTERACTIVE FOCUS STATES (Accessibility)
+     ========================================== */
+    --focus-ring-color: #2563eb;
+    --focus-ring-glow: rgba(37, 99, 235, 0.25);
+    --neutral-muted-bg: #f1f5f9;
+    --neutral-muted-hover: #e2e8f0;
+    --neutral-muted-active: #cbd5e1;
+    --text-muted: #475569;
+    /* ==========================================
+     INTENT BACKGROUNDS & TEXT
+     ========================================== */
+    /* DANGER / CRITICAL (e.g., system faults, immediate shutdowns) */
+    --ui-danger-bg: #fef2f2; /* Extremely soft, light red */
+    --ui-danger-text: #991b1b; /* Deep dark crimson for sharp text contrast */
+    --ui-danger-border: #fee2e2; /* Supporting subtle inner border */
+    /* SUCCESS / NOMINAL (e.g., machine online, backup completed) */
+    --ui-success-bg: #f0fdf4; /* Soft light green */
+    --ui-success-text: #166534; /* Deep forest green for legible text */
+    --ui-success-border: #dcfce7; /* Supporting subtle green border */
+    /* WARNING / ATTENTION (e.g., service overdue, high telemetry line) */
+    --ui-warning-bg: #fffbeb; /* Soft light amber/yellow */
+    --ui-warning-text: #92400e; /* Deep burnt amber for clear readability */
+    --ui-warning-border: #fef3c7; /* Supporting subtle amber border */
+    --ui-info-bg: #f0f9ff; /* Soft, crisp light sky blue */
+    --ui-info-text: #075985;
+    --ui-info-border: #e0f2fe;
+    --ui-space-sm: 0.25rem;
+    --ui-space-md: 0.5rem;
+    --ui-space-lg: 1rem;
+    --ui-space-xl: 1.5rem;
+    --ui-font-s14: 1rem;
+    --ui-font-s13: 0.92857rem;
+    --ui-font-s12: 0.85714rem;
+    --ui-fontSize-xs: var(--ui-font-s12);
+    --ui-fontSize-sm: var(--ui-font-s13);
+    --ui-fontSize-md: var(--font-s14);
+    --ui-fontSize-lg: 1.28571rem;
+    /* Core Interface Bases */
+    --ui-accent-blue: #1A5A9E; /* Approximate hex for UI structures */
+    --ui-accent-yellow: #FFF2A3; /* Approximate hex for UI containers */
+    /* Semantic Software Accents */
+    --ui-accent-green: #2E8B57; /* Process initiation / Run */
+    --ui-accent-red: #D9381E; /* Errors / Alerts */
+    --ui-accent-brown: #8B5A2B; /* Java Packages / Bundles */
+    --ui-accent-purple: #7D26CD; /* Web Infrastructure / Fragments */
+    --ui-accent-beige: #F5F5DC; /* Generic/Template placeholders */
+    /* Default Light Mode Neutrals */
+    --ui-bg: #FFFFFF;
+    --ui-surface: #F5F5F5;
+    --ui-border: #D0D0D0;
+    --ui-text-primary: #111111;
+    --ui-text-secondary: #555555;
+    --ui-border-hover: #1A5A9E; /* Solid Base Blue */
+    --ui-border-focus: #F06C02; /* Brand Orange for clear focus */
+    --ui-focus-ring: rgba(240, 108, 2, 0.25); /* Soft orange glow */
+}
+
+/* ==========================================================================
+   3. ECLIPSE IDE MODERN DARK THEME OVERRIDES
+   ========================================================================== */
+[data-theme="dark"] {
+    /* Core Interface Bases adjusted for low light */
+    --ui-accent-blue: #2A6AEE;
+    --ui-accent-yellow: #4D4625;
+    /* Semantic Software Accents tuned for dark contrast */
+    --ui-accent-green: #4CAF50;
+    --ui-accent-red: #F44336;
+    --ui-accent-brown: #A07040;
+    --ui-accent-purple: #B388FF;
+    --ui-accent-beige: #D2B48C;
+    /* Dark Mode Neutrals */
+    --ui-bg: #1A1A1A;
+    --ui-surface: #202020;
+    --ui-border: #333333;
+    --ui-text-primary: #D0D0D0;
+    --ui-text-secondary: #AAAAAA;
+    --ui-border-hover: #4B8DF8; /* Brighter, high-contrast Blue */
+    --ui-border-focus: #F06C02; /* Stays Orange for accessibility */
+    --ui-focus-ring: rgba(240, 108, 2, 0.4); /* Deeper glow for dark mode */
+}

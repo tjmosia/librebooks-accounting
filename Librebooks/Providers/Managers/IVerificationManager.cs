@@ -1,4 +1,4 @@
-﻿using Librebooks.CoreLib.Operations;
+﻿using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.GeneralSpace;
 
 namespace Librebooks.Providers.Managers
@@ -6,6 +6,6 @@ namespace Librebooks.Providers.Managers
 	public interface IVerificationManager
 	{
 		Task<(VerificationRequest? Request, string? Code)> AddAsync (VerificationRequest request);
-		Task<Result<VerificationRequest>> VerifyAsync (string subject, string reason, string code);
+		Task<TransactionResult<VerificationRequest>> VerifyAsync (string subject, string reason, string code);
 	}
 }

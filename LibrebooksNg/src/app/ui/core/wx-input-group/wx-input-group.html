@@ -1,0 +1,11 @@
+<span [class]="`${computeClassName()}`">
+    <input [disabled]="disabled()"
+           data-ng-trim="true"
+           [class]="`wx-input-group_control ${inputClass()}`"
+           [type]="type()" [name]="name()"
+           [attr.id]="inputId()"
+           [required]="required()"
+           [value]="value()"
+           [attr.placeholder]="placeholder()"
+           (input)="handleInput($event)" />
+</span>

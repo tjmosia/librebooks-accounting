@@ -1,9 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthLayoutService } from '../auth-layout-service';
-import { WxFormGroup, WxInputGroup, WxButton } from '../../widgets/core';
+import { WxFormGroup, WxInputGroup, WxButton } from '../../ui/core';
 import { Title } from '@angular/platform-browser';
 import { formValidators, IFormFieldProps } from '../../core/forms';
-import { intents } from '../../widgets/core/contants';
+import { intents } from '../../ui/core/contants';
 import { HttpClient } from '@angular/common/http';
 import { FindUserDto } from '../auth-dtos';
 import { AjaxError, AjaxResponse } from 'rxjs/ajax';
@@ -38,7 +38,7 @@ export class Username implements OnInit {
   }
 
   getValidationStateClass() {
-    return this.model().error ? intents.error : null;
+    return this.model().error ? intents.error : intents.none;
   }
 
   isValidModel() {

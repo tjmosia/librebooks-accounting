@@ -1,0 +1,84 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
+build_property._SupportedPlatformList = Linux,macOS,Windows,browser
+build_property.RootNamespace = WxWidgets
+build_property.RootNamespace = WxWidgets
+build_property.ProjectDir = C:\Users\TJmos\source\repos\Librebooks\LibrebooksBlazor\WxWidgets\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 10.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\TJmos\source\repos\Librebooks\LibrebooksBlazor\WxWidgets
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Forms/WxCheckbox.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxGb3Jtc1xXeENoZWNrYm94LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Icon/WxIcon.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxJY29uXFd4SWNvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Text/WxText.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxUZXh0XFd4VGV4dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/WxDivider/WxDivider.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxXeERpdmlkZXJcV3hEaXZpZGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Component1.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50MS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-47r3o2fiu1
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Alert/WxAlert.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxBbGVydFxXeEFsZXJ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-wfeykmi1u6
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Button/WxButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxCdXR0b25cV3hCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-c7vqdkenfr
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Button/WxButtonGroup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxCdXR0b25cV3hCdXR0b25Hcm91cC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-wx4x219fca
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/CardList/WxCardList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxDYXJkTGlzdFxXeENhcmRMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-omrqzg7pex
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Card/WxCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxDYXJkXFd4Q2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-fjuulxusoz
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Forms/WxFormGroup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxGb3Jtc1xXeEZvcm1Hcm91cC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-wtbosqwcmi
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Forms/WxInputGroup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxGb3Jtc1xXeElucHV0R3JvdXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-r7uaw23kke
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/WxWidgets/Core/Section/WxSection.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29yZVxTZWN0aW9uXFd4U2VjdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-c9uvooruup

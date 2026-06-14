@@ -1,7 +1,7 @@
 ﻿using Librebooks.Areas.Systems.Data;
 using Librebooks.Areas.Systems.Models;
 using Librebooks.Areas.Systems.Services;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Librebooks.Areas.Systems.Controllers;
@@ -22,8 +22,8 @@ public class DateFormatsController (ISystemsManager systemManager)
 		var modelState = DateFormatsAddModels.Validate(model);
 
 		if (!modelState.IsValid)
-			return BadRequest(Result.Failure([..modelState.Errors
-				.Select( p=> Error.Create(p.PropertyName, p.ErrorMessage))]));
+			return BadRequest(TransactionResult.Failure([..modelState.Errors
+				.Select( p=> TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
 		var result = Manager.AddDateFormatAsync(new()
 		{
@@ -39,8 +39,8 @@ public class DateFormatsController (ISystemsManager systemManager)
 		var modelState = DateFormatsAddModels.Validate(model);
 
 		if (!modelState.IsValid)
-			return BadRequest(Result.Failure([..modelState.Errors
-				.Select( p=> Error.Create(p.PropertyName, p.ErrorMessage))]));
+			return BadRequest(TransactionResult.Failure([..modelState.Errors
+				.Select( p=> TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
 		var format = Manager.FindDateFormatByIdAsync(id, cancellationToken);
 

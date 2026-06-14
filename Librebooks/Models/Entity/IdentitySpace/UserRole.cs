@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Models.Entity.IdentitySpace;
 
 public class UserRole : IdentityUserRole<int>
-
-
 {
 	[MaxLength(100)]
 	public virtual string? AssociatedTo { get; set; }

@@ -1,0 +1,48 @@
+﻿<span class=@($"WxText {Wx(TextWeights.Bold.ToString(), Size.ToString())}")>
+	@ChildContent
+</span>
+
+@code {
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public TextSizes Size { get; set; }
+
+	[Parameter]
+	public TextWeights Weight { get; set; }
+
+	public string Wx (params string[] propertyNames)
+	{
+		var className = "";
+
+		foreach(var propertyName in propertyNames)
+		{
+			className += "Wx--" + propertyName;
+		}
+
+		return className;
+	}
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		Weight = TextWeights.Regular;
+		Size = TextSizes.Normal;
+	}
+
+	public enum TextSizes
+	{
+		Small,
+		Normal,
+		Large
+	}
+
+	public enum TextWeights
+	{
+		Thin,
+		Regular,
+		Bold,
+		Bolder
+	}
+}

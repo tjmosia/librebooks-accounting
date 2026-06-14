@@ -1,0 +1,17 @@
+﻿@using LibrebooksBlazor.Client.Providers.Services
+@inject IIdentityService identityService
+@inject HttpClient http
+
+<h3>ClientRootLayout</h3>
+
+@code {
+	protected override async Task OnInitializedAsync()
+	{
+		return base.OnInitializedAsync();
+
+		if(identityService.GetUser() == null)
+		{
+			var request = await http.PostAsJsonAsync("")
+		}
+	}
+}

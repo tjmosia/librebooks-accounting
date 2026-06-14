@@ -1,8 +1,12 @@
 <form class="auth-form" (submit)="handleSubmit($event)">
-    <wx-form-group [validationMessage]="model().error" 
-        [validationState]="getValidationStateClass()" 
+    <wx-form-group [validationMessage]="model().error"
+        [validationState]="getValidationStateClass()"
         label="Password">
-        <wx-input-group />
+        <wx-input-group type="password" (onChange)="handleInputChange($event)" [(value)]="model().value" />
     </wx-form-group>
     <wx-button type="submit" text="Login" />
 </form>
+<wx-button-group>
+  <wx-button variant="minimal">Change Email</wx-button>
+  <wx-button variant="minimal">Reset Password</wx-button>
+</wx-button-group>

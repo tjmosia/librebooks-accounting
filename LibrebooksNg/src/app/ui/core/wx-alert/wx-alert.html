@@ -1,0 +1,19 @@
+@if(active()){
+  <div [class]="`${rootClassName} ${computeContainerClassName()}`">
+    <div [class]="`${rootClassName}_icon`">
+    </div>
+    <div [class]="`${rootClassName}_content`">
+      @if(title()){
+        <h5 [class]="`${rootClassName}_title`">{{ title() }}</h5>
+      }
+      @if(alertMessage){
+        <p [class]="`${rootClassName}_message`">
+          <ng-content select="[alert-message]" />
+        </p>
+      }
+    </div>
+    @if(togglable()){
+      <button [class]="`${rootClassName}_close-button`" onclick="handleClose()">&times;</button>
+    }
+  </div>
+}

@@ -1,0 +1,56 @@
+.wx-input-group {
+  display: flex;
+  width: 100%;
+  border: thin solid var(--border);
+  border-radius: var(--border-radius-md);
+  transition: all ease-in-out 250ms;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &:focus-within {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px var(--focus-ring);
+  }
+
+  &.wx--small {
+    padding: 0.20rem 0.5rem;
+  }
+
+  &.wx--medium {
+    padding: 0.375rem 0.5rem;
+  }
+
+  &.wx--large {
+    padding: 0.55rem 1rem;
+  }
+
+  &.wx--inline {
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  &.wx--fill {
+    width: 100%;
+  }
+
+  &_control {
+    outline: none;
+    border: none;
+    font-size: var(--fontSize-md);
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    line-height: 1em;
+
+    &[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }}

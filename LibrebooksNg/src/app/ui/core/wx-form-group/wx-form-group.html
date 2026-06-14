@@ -1,0 +1,19 @@
+<label [class]="`${computeContainerClassName()}`" [for]="htmlFor()" [attr.id]="id()">
+    <span [class]="`${rootClass}_label`">
+        {{label()}}
+        @if(required()){
+        <span [class]="`${rootClass}_label_required`">*</span>
+        }
+    </span>
+    @if(helperText()){
+    <span [class]="`${rootClass}_helper-text`">{{helperText()}}</span>
+    }
+    <span [class]="`${rootClass}_control`">
+        <ng-content></ng-content>
+    </span>
+    @if(validationMessage()){
+    <span [class]="`${rootClass}_validation-message`">
+        {{validationMessage()}}
+    </span>
+    }
+</label>

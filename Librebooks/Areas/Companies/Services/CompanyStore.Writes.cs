@@ -1,4 +1,4 @@
-﻿using Librebooks.CoreLib.Operations;
+﻿using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.GeneralSpace;
@@ -13,22 +13,22 @@ public partial class CompanyStore : ICompanyStore
 	****** INSERT TRANSACTIONS
 	***********************************************************************************************************************************/
 
-	public async Task<Result<Company>> CreateAsync (Company company)
+	public async Task<TransactionResult<Company>> CreateAsync (Company company)
 	{
 		try
 		{
 			var result = await context!.AddAsync(company);
 			context.SaveChanges();
-			return Result<Company>.Success(result.Entity);
+			return TransactionResult<Company>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error with Exception occurred while trying to create Company:*** \n\n{message}", ex.Message);
-			return Result<Company>.Failure();
+			return TransactionResult<Company>.Failure();
 		}
 	}
 
-	public async Task<Result<Tax>> CreateTaxTypeAsync (Company company, Tax taxType)
+	public async Task<TransactionResult<Tax>> CreateTaxTypeAsync (Company company, Tax taxType)
 	{
 		try
 		{
@@ -36,16 +36,16 @@ public partial class CompanyStore : ICompanyStore
 			await context.CompanyTaxes!.AddAsync(new CompanyTax(company.Id, taxType.Id));
 			await context.SaveChangesAsync();
 
-			return Result<Tax>.Success(result.Entity);
+			return TransactionResult<Tax>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occured with Exception while creating Company TaxType:*** \n\n{message}", ex.Message);
-			return Result<Tax>.Failure();
+			return TransactionResult<Tax>.Failure();
 		}
 	}
 
-	public async Task<Result<Contact>> CreateSalesPersonAsync (Company company, Contact contact)
+	public async Task<TransactionResult<Contact>> CreateSalesPersonAsync (Company company, Contact contact)
 	{
 		try
 		{
@@ -59,59 +59,59 @@ public partial class CompanyStore : ICompanyStore
 
 			await context.SaveChangesAsync();
 
-			return Result<Contact>.Success(result.Entity);
+			return TransactionResult<Contact>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occured with Exception while creating Company TaxType:*** \n\n{message}", ex.Message);
-			return Result<Contact>.Failure();
+			return TransactionResult<Contact>.Failure();
 		}
 	}
 
-	public async Task<Result<BankAccount>> CreateBankAccountAsync (Company company, BankAccount bankAccount)
+	public async Task<TransactionResult<BankAccount>> CreateBankAccountAsync (Company company, BankAccount bankAccount)
 	{
 		try
 		{
 			bankAccount.CompanyId = company.Id;
 			var result = await context.BankAccounts!.AddAsync(bankAccount);
 			await context.SaveChangesAsync();
-			return Result<BankAccount>.Success(result.Entity);
+			return TransactionResult<BankAccount>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occured with Exception while creating Company Bank Account:*** \n\n{message}", ex.Message);
-			return Result<BankAccount>.Failure();
+			return TransactionResult<BankAccount>.Failure();
 		}
 	}
 
-	public async Task<Result<BankAccount>> CreateDefaultBankAccountAsync (Company company, BankAccount bankAccount)
+	public async Task<TransactionResult<BankAccount>> CreateDefaultBankAccountAsync (Company company, BankAccount bankAccount)
 	{
 		try
 		{
 			var result = await context.CompanyDefaultBankAccounts!
 				.AddAsync(new CompanyBankAccount(company.Id, bankAccount.Id));
 			await context.SaveChangesAsync();
-			return Result<BankAccount>.Success(bankAccount);
+			return TransactionResult<BankAccount>.Success(bankAccount);
 		}
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occured with Exception while creating Company Default Bank Account:*** \n\n{message}", ex.Message);
-			return Result<BankAccount>.Failure();
+			return TransactionResult<BankAccount>.Failure();
 		}
 	}
 
-	public async Task<Result<CompanyImage>> CreateLogoAsync (Company company, CompanyImage image)
+	public async Task<TransactionResult<CompanyImage>> CreateLogoAsync (Company company, CompanyImage image)
 	{
 		try
 		{
 			var result = await context.CompanyImages!.AddAsync(image);
 			await context.SaveChangesAsync();
 			await UpdateLogoAsync(result.Entity);
-			return Result<CompanyImage>.Success(result.Entity);
+			return TransactionResult<CompanyImage>.Success(result.Entity);
 		}
 		catch (Exception)
 		{
-			return Result<CompanyImage>.Failure();
+			return TransactionResult<CompanyImage>.Failure();
 		}
 	}
 

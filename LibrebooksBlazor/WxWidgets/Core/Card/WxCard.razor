@@ -1,0 +1,28 @@
+﻿<div class="WxCard">
+	@if (CardHeader != null)
+	{
+		<div class="WxCard_Header">
+			@CardHeader
+		</div>
+	}
+	
+	@if (CardBody != null)
+	{
+		<div class="WxCard_Body">
+			@CardBody
+		</div>
+	}
+	@if(CardFooter != null)
+	{
+		<div class="WxCard_Footer">
+			@CardFooter
+		</div>
+	}
+</div>
+
+@code {
+	[Parameter] public string? Title { get; set; }
+	[Parameter] public RenderFragment? CardHeader { get; set; }
+	[Parameter] public RenderFragment? CardBody { get; set; }
+	[Parameter] public RenderFragment? CardFooter { get; set; }
+}

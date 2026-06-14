@@ -1,9 +1,8 @@
 ﻿using Librebooks.Core.EFCore;
+using Librebooks.Core.Operations;
 using Librebooks.Core.Util;
-using Librebooks.CoreLib.Operations;
 using Librebooks.Data;
 using Librebooks.Models.Entity.SystemSpace;
-
 using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Areas.Systems.Services.Stores
 {
@@ -30,61 +29,61 @@ namespace Librebooks.Areas.Systems.Services.Stores
 			=> await context.BusinessSectors!.Where(p => p.Name == name)
 				.FirstOrDefaultAsync(cancellationToken);
 
-		public async Task<Result<BusinessSector>> CreateAsync (BusinessSector sector, CancellationToken cancellationToken = default)
+		public async Task<TransactionResult<BusinessSector>> CreateAsync (BusinessSector sector, CancellationToken cancellationToken = default)
 		{
 			try
 			{
 				var result = await context!.BusinessSectors!.AddAsync(sector, cancellationToken);
 				await context.SaveChangesAsync(cancellationToken);
-				return Result<BusinessSector>.Success(result.Entity);
+				return TransactionResult<BusinessSector>.Success(result.Entity);
 			}
 			catch (Exception ex)
 			{
-				IList<Error> errors = [];
+				IList<TransactionError> errors = [];
 				if (IsUniqueKeyConstaint(ex))
 					errors.Add(new(nameof(BusinessSector.Name), "Name is already taken."));
 
 				if (errors.Any())
 					errors.Add(GeneralError);
 
-				return Result<BusinessSector>.Failure([.. errors]);
+				return TransactionResult<BusinessSector>.Failure([.. errors]);
 			}
 		}
 
-		public async Task<Result<BusinessSector>> UpdateAsync (BusinessSector sector, CancellationToken cancellationToken = default)
+		public async Task<TransactionResult<BusinessSector>> UpdateAsync (BusinessSector sector, CancellationToken cancellationToken = default)
 		{
 			try
 			{
 				sector.RefreshConcurrencyToken();
 				var result = context!.BusinessSectors!.Update(sector);
 				await context.SaveChangesAsync(cancellationToken);
-				return Result<BusinessSector>.Success(result.Entity);
+				return TransactionResult<BusinessSector>.Success(result.Entity);
 			}
 			catch (Exception ex)
 			{
-				IList<Error> errors = [];
+				IList<TransactionError> errors = [];
 				if (IsUniqueKeyConstaint(ex))
 					errors.Add(new(nameof(BusinessSector.Name), "Name is already taken."));
 
 				if (errors.Any())
 					errors.Add(GeneralError);
 
-				return Result<BusinessSector>.Failure([.. errors]);
+				return TransactionResult<BusinessSector>.Failure([.. errors]);
 			}
 		}
 
-		public async Task<Result> DeleteAsync (BusinessSector[] sectors, CancellationToken cancellationToken = default)
+		public async Task<TransactionResult> DeleteAsync (BusinessSector[] sectors, CancellationToken cancellationToken = default)
 		{
 			try
 			{
 				context!.BusinessSectors!.RemoveRange(sectors);
 				await context.SaveChangesAsync(cancellationToken);
 
-				return Result.Success;
+				return TransactionResult.Success;
 			}
 			catch (Exception ex)
 			{
-				IList<Error> errors = [];
+				IList<TransactionError> errors = [];
 
 				if (DbExceptionUtils.IsForeignKeyViolation(ex))
 					errors.Add(new(description: sectors.Length > 1 ? "One of more business sectors are currently in use." : "Business sector is currently in use."));
@@ -92,7 +91,7 @@ namespace Librebooks.Areas.Systems.Services.Stores
 				if (errors.Any())
 					errors.Add(GeneralError);
 
-				return Result.Failure([.. errors]);
+				return TransactionResult.Failure([.. errors]);
 			}
 		}
 	}

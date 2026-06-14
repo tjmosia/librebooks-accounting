@@ -77,6 +77,7 @@ builder.Services.AddSingleton<MailSender>();
 
 var app = builder.Build();
 
+
 if (app.Environment.IsDevelopment()) { }
 
 app.UseCookiePolicy();

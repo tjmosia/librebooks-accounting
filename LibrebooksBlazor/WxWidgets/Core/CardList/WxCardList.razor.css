@@ -1,0 +1,15 @@
+﻿.WxCardList
+{
+	border: thin solid var(--ui-border);
+	
+
+
+
+}
+
+.WxCardList_Content{
+	::deep .WxCard{
+		border-bottom: thin solid var(--ui-border);
+	}
+}
+

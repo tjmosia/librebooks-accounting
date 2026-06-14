@@ -1,10 +1,10 @@
-﻿using Librebooks.CoreLib.Operations;
+﻿using Librebooks.Core.Operations;
 
 namespace Librebooks.Core.EFCore
 {
     public class DbError
     {
         public int ErrorNumber { get; set; }
-        public Error? Error { get; set; }
+        public TransactionError? Error { get; set; }
     }
 }

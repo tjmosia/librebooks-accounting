@@ -1,0 +1,30 @@
+.app[b-a2vi9q79te]
+{
+	display: flex;
+	flex-direction: column;
+	min-height: inherit;
+	width: 100%;
+	min-width: 100%;
+}
+
+.app_content[b-a2vi9q79te] {
+	width: 100%;
+	margin-bottom: auto;
+	height: auto;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
+	min-height: 100vh;
+}
+/*
+.app_footer {
+	margin-top: auto;
+	height: auto;
+	width: 100%;
+	display: block;
+	font-size: 0.75rem;
+	border-top: thin solid var(--border);
+	text-align: center;
+	padding: 0.25rem;
+	height: 24px;
+}*/

@@ -1,0 +1,24 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using LibrebooksBlazor.Models.Entity;
+using Microsoft.EntityFrameworkCore;
+
+namespace LibrebooksBlazor.Models.Entity.SystemSpace;
+
+[Table(nameof(DateFormat))]
+[Index(nameof(Format), IsUnique = true)]
+public class DateFormat () : VersionedEntityBase()
+{
+	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	public virtual int Id { get; set; }
+
+	[Required, MaxLength(50)]
+	public virtual string? Format { get; set; }
+
+	public static void OnModelCreating (ModelBuilder builder)
+	{
+		builder.Entity<DateFormat>(options =>
+		{
+		});
+	}
+}

@@ -1,0 +1,11 @@
+<button [disabled]="disabled()"
+        [type]="type()"
+        [class]="`${computeButtonClassName()} wx-button`">
+  @if( text() && !loading()){
+    <span class="wx-button_text">{{text()}}</span>
+  } @else if(loading()){
+    <wx-spinner size="tiny"></wx-spinner>
+  } @else{
+    <ng-content></ng-content>
+  }
+</button>

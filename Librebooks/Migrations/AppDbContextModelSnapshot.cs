@@ -386,10 +386,11 @@ namespace Librebooks.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte[]>("Data")
-                        .HasColumnType("BLOB");
-
                     b.Property<DateOnly>("DateCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PathName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RowVersion")

@@ -1,0 +1,19 @@
+@import '../lib/normalize/normalize.min.css';
+@import './root.css';
+
+html {
+	font-family: 'Source Sans 3', Tahoma, Geneva, Verdana, sans-serif !important;
+	font-size: 14px;
+	min-height: 100vh;
+	color: var(--ui-text-primary);
+}
+
+body {
+	min-height: 100vh;
+	min-width: 100%;
+	background-color: var(--bg-main);
+}
+
+body * {
+	box-sizing: border-box;
+}

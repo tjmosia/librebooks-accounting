@@ -1,0 +1,99 @@
+﻿@page "/auth/login"
+@layout AuthLayout
+@using LibrebooksBlazor.Providers.Services
+@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+@inject IVerificationService verificationService
+@inject ILogger<Login> logger
+
+<PageTitle>Login</PageTitle>
+
+<EditForm method="post" class="login_form" FormName="LoginForm" Model="Input" OnSubmit="HandleSubmitAsync">
+    <WxFormGroup Label="Password" 
+        ValidationStatus="Intents.Danger" 
+        ValidationMessage="@ModelState?.Errors.Where(p => p.PropertyName == nameof(Input.Password)).FirstOrDefault()?.ErrorMessage">
+            <WxInputGroup Type="WxInputGroup.InputTypes.Password" @bind-Value="Input!.Password" />
+    </WxFormGroup>
+    <WxButton Type="WxButton.Types.Submit">Login</WxButton>
+</EditForm>
+<div class="alternative-links">
+	<form @formname="ResetPasswordForm" method="Post" @onsubmit="@HandleResetPasswordSubmitAsync">
+		<AntiforgeryToken />
+		<WxButtonGroup>
+			<WxButton Appeareance="WxButton.Appearances.Minimal" To=@($"/auth{(!string.IsNullOrEmpty(ReturnUrl) ? "?returnUrl=" + ReturnUrl : "")}")>Change Email</WxButton>
+			<WxButton Appeareance="WxButton.Appearances.Minimal" Type="WxButton.Types.Submit">Reset Password</WxButton>
+		</WxButtonGroup>
+	</form>
+</div>
+
+@code {
+	[SupplyParameterFromQuery(Name ="email")]
+	public string? Email { get; set; }
+
+	[SupplyParameterFromQuery(Name ="returnUrl")]
+	public string? ReturnUrl { get; set; }
+
+	[SupplyParameterFromForm(FormName = "LoginForm")]
+	private FormModel? Input { get; set; }
+
+	private User? user { get; set; }
+
+	private ValidationResult? ModelState  { get; set; }
+
+	protected override async Task OnInitializedAsync    ()
+	{
+		await base.OnInitializedAsync();
+		Input ??= new();
+		ModelState ??= new();
+
+		if (!string.IsNullOrEmpty(Email))
+		{
+			user = await userManager.FindByEmailAsync(Email!);
+			if (user != null)
+				return;
+		}
+
+		navigation.NavigateTo($"/auth{(string.IsNullOrEmpty(ReturnUrl) ? "" : $"returnUrl={ReturnUrl}")}", true);
+	}
+
+	private async Task HandleSubmitAsync()
+	{
+		ModelState = new Validator().Validate(Input!);
+
+		if (!ModelState.IsValid)
+			return;
+
+		user = await userManager.FindByEmailAsync(Email!);
+		var result = await signInManager.PasswordSignInAsync(user!, Input!.Password!, true, false);
+
+		if (result.Succeeded)
+		{
+			navigation.NavigateTo("/", true);
+			return;
+		}
+
+		ModelState.Errors.Add(new(nameof(Input.Password), "Invalid password."));
+	}
+
+	private async Task HandleResetPasswordSubmitAsync()
+	{
+		var result = await verificationService.AddAsync(new(Email!, VerificationService.PASSWORD_RESET));
+		logger.LogInformation("Verification created for {email} with code: {code}", Email!, result.Code);
+		navigation.NavigateTo($"/auth/reset-password?email={Email}{(string.IsNullOrEmpty(ReturnUrl) ? "" : $"&returnUrl={ReturnUrl}")}");
+    }
+
+    public class FormModel
+    {
+        public string? Password { get; set; }
+    }
+
+    public class Validator: AbstractValidator<FormModel>
+    {
+        public Validator()
+        {
+            RuleFor(p => p.Password)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Password is required.");
+        }
+    }
+}

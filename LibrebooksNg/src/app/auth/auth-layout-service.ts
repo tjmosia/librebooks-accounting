@@ -2,7 +2,11 @@ import { Injectable, Type, inject } from '@angular/core';
 import { Auth } from './auth';
 import { signal } from '@angular/core';
 import { FindUserDto } from './auth-dtos';
-
+import { Intent } from '../ui/core/contants';
+interface AuthLayoutAlert {
+  intent: Intent;
+  message: string;
+}
 @Injectable({
   providedIn: null
 })
@@ -12,6 +16,21 @@ export class AuthLayoutService {
   private email = signal("")
   private user = signal<FindUserDto | null>(null)
   private loading = signal(false)
+  private alert = signal<AuthLayoutAlert | null>(null)
+
+  getAlert(){
+    return this.alert;
+  }
+
+  setAlert(alert: AuthLayoutAlert, persist = false){
+    this.alert.set(alert);
+
+    if(!persist) {
+      setTimeout(() => {
+        this.alert.set(null)
+      },10000)
+    }
+  }
 
   constructor() {
     this.email.set(sessionStorage.getItem("AUTH_EMAIL") ?? "")

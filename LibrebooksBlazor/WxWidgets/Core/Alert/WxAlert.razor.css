@@ -1,0 +1,42 @@
+﻿.WxAlert {
+	padding: var(--space-sm) var(--space-md);
+	border-radius: var(--border-radius-md);
+	padding: var(--ui-space-md) var(--ui-space-lg);
+	font-size: var(--ui-fontSize-md);
+	margin: var(--ui-space-md) 0; 
+
+	.WxAlert_Message {
+		color: var(--color-status-danger-foreground-1);
+	}
+
+	&:not(.Wx--Danger),
+	&:not(.Wx--Success),
+	&:not(.Wx--Warning),
+	&:not(.Wx--Info) {
+		border: thin solid var(--border-default);
+	}
+
+	&.Wx--Danger {
+		color: var(--ui-danger-text);
+		background-color: var(--ui-danger-bg);
+		border: thin solid var(--ui-danger-border);
+	}
+
+	&.Wx--Success {
+		color: var(--ui-success-text);
+		background-color: var(--ui-success-bg);
+		border: thin solid var(--ui-success-border);
+	}
+
+	&.Wx--Info {
+		color: var(--ui-info-text);
+		background-color: var(--ui-info-bg);
+		border: thin solid var(--ui-info-border);
+	}
+
+	&.Wx--Warning {
+		color: var(--ui-warning-text);
+		background-color: var(--ui-warning-bg);
+		border: thin solid var(--ui-warning-border);
+	}
+}

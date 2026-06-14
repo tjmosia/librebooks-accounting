@@ -1,4 +1,4 @@
-﻿using Librebooks.CoreLib.Operations;
+﻿using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.SalesSpace;
@@ -7,7 +7,7 @@ namespace Librebooks.Areas.Companies.Services;
 
 public partial class CompanyStore : ICompanyStore
 {
-	public async Task<Result> DeleteSalesPersonAsync (SalesPerson salesPerson)
+	public async Task<TransactionResult> DeleteSalesPersonAsync (SalesPerson salesPerson)
 	{
 		try
 		{
@@ -15,16 +15,16 @@ public partial class CompanyStore : ICompanyStore
 			context.Contacts!.Remove(salesPerson.Contact!);
 			await context!.SaveChangesAsync();
 
-			return Result.Success;
+			return TransactionResult.Success;
 		}
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occurred with Exception while trying to remove Sales Person:*** \n\n{message}", ex.Message);
-			return Result.Failure();
+			return TransactionResult.Failure();
 		}
 	}
 
-	public async Task<Result> DeleteAsync (Company company)
+	public async Task<TransactionResult> DeleteAsync (Company company)
 	{
 
 		try
@@ -35,17 +35,17 @@ public partial class CompanyStore : ICompanyStore
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occurred with Exception while removing Company:*** \n\n{message}", ex.Message);
-			return Result.Failure();
+			return TransactionResult.Failure();
 		}
-		return Result.Success;
+		return TransactionResult.Success;
 	}
 
-	public async Task<Result> DeleteTaxTypeAsync (CompanyTax companyTaxType)
+	public async Task<TransactionResult> DeleteTaxTypeAsync (CompanyTax companyTaxType)
 	{
 		ArgumentNullException.ThrowIfNull(companyTaxType.TaxType, nameof(companyTaxType.TaxType));
 
 		if (companyTaxType.TaxType!.System)
-			return Result.Failure(Error.Create("", "Cannot remove a system tax type."));
+			return TransactionResult.Failure(TransactionError.Create("", "Cannot remove a system tax type."));
 
 		try
 		{
@@ -56,37 +56,37 @@ public partial class CompanyStore : ICompanyStore
 		catch (Exception ex)
 		{
 			logger!.LogError("***DB Error occurred with Exception while trying to remove Sales Person:*** \n\n{message}", ex.Message);
-			return Result.Failure();
+			return TransactionResult.Failure();
 		}
 
-		return Result.Success;
+		return TransactionResult.Success;
 	}
 
-	public async Task<Result> DeleteBankAccountAsync (BankAccount bankAccount)
+	public async Task<TransactionResult> DeleteBankAccountAsync (BankAccount bankAccount)
 	{
 		try
 		{
 			context.BankAccounts!.Remove(bankAccount);
 			await context.SaveChangesAsync();
-			return Result.Success;
+			return TransactionResult.Success;
 		}
 		catch (Exception)
 		{
-			return Result.Failure();
+			return TransactionResult.Failure();
 		}
 	}
 
-	public async Task<Result> DeleteLogoAsync (CompanyLogo companyLogo)
+	public async Task<TransactionResult> DeleteLogoAsync (CompanyLogo companyLogo)
 	{
 		try
 		{
 			context.CompanyLogos!.Remove(companyLogo);
 			await context.SaveChangesAsync();
-			return Result.Success;
+			return TransactionResult.Success;
 		}
 		catch (Exception)
 		{
-			return Result.Failure();
+			return TransactionResult.Failure();
 		}
 	}
 }

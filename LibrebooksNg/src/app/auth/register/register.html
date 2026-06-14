@@ -1,10 +1,10 @@
-<form class="auth-form">
-    <wx-form-group [label]="'First Name'" [validationMessage]="model().name.error" [required]="true"
+<form class="auth-form" (submit)="handleSubmit($event)">
+    <wx-form-group [label]="'Name'" [validationMessage]="model().name.error" [required]="true"
         [validationState]="getModelValidationClass(model().name)">
         <wx-input-group type="text" size="small" [required]="true" size="small" name="name" [value]="model().name.value"
             (input)=" handleInputChange($event)" />
     </wx-form-group>
-    <wx-form-group [label]="'Last Name'" [validationMessage]="model().surname.error" [required]="true"
+    <wx-form-group [label]="'Surname'" [validationMessage]="model().surname.error" [required]="true"
         [validationState]="getModelValidationClass(model().surname)">
         <wx-input-group type="text" size="small" [required]="true" name="surname" [value]="model().surname.value"
             (input)="handleInputChange($event)" />
@@ -15,13 +15,13 @@
         <wx-input-group type="password" size="small" [required]="true" name="password"
             (input)="handleInputChange($event)" [value]="model().password.value" />
     </wx-form-group>
-    <wx-form-group [label]="'Confirm Pasword'" [validationMessage]="model().confirmPassword.error" [required]="true"
+    <wx-form-group [label]="'Confirm Password'" [validationMessage]="model().confirmPassword.error" [required]="true"
         [validationState]="getModelValidationClass(model().confirmPassword)">
         <wx-input-group type="password" size="small" [required]="true" name="confirmPassword"
             (input)="handleInputChange($event)" [value]="model().confirmPassword.value" />
     </wx-form-group>
     <wx-button type="submit" text="Sign up" variant="primary" size="medium" />
-    <wx-button type="button" variant="minimal" (click)="goToAuth()">
+    <wx-button type="button" variant="minimal" (click)="router.navigate(['/auth'])">
         Change Email
     </wx-button>
 </form>

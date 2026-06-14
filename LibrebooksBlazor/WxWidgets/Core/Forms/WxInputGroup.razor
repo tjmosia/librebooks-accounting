@@ -1,0 +1,52 @@
+﻿@using System.Linq.Expressions
+
+<span class=@GetComputedContainerClassName()>
+    <InputText type=@Type.ToString().ToLower() class=@GetComputedInputClassName()
+        Value="@Value" 
+        maxlength=@MaxLength
+        ValueChanged="@ValueChanged" 
+        ValueExpression="@ValueExpression" />
+    @ContentAfter
+</span>
+
+@code
+{
+    [Parameter] public int? MaxLength { get; set; }
+    [Parameter] public InputTypes Type { get; set; } = InputTypes.Text;
+    [Parameter] public string? ClassName { get; set; }
+    [Parameter] public string? InputClassName { get; set; }
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public Expression<Func<string>>? ValueExpression { get; set; }
+    [Parameter] public RenderFragment? ContentAfter { get; set; }
+    [Parameter] public InputGroupSizes Size { get; set; } = InputGroupSizes.Medium;
+
+    private string GetComputedContainerClassName()
+    {
+        ClassName ??= "WxInputGroup";
+        ClassName += " Wx--" + Size;
+        return ClassName;
+    }
+
+    private string GetComputedInputClassName()
+    {
+        InputClassName = "WxInputGroup_Control ";
+        return InputClassName;
+    }
+
+    public enum InputTypes
+    {
+        Text,
+        Tel,
+        Email,
+        Number,
+        Password
+    }
+
+    public enum InputGroupSizes
+    {
+        Small,
+        Medium,
+        Large
+    }
+}

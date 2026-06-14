@@ -7,40 +7,20 @@
     align-items: center;
 
     .auth-form-wrapper {
-        background-color: var(--bg-secondary);
+        background-color: var(--bg-surface);
         border-radius: var(--radius-sm);
-        display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: var(--space-lg);
         max-width: 300px;
         width: 100%;
         border: thin solid var(--border-color);
-
-        ::deep form {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .auth-form-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-lg);
-            gap: var(--space-sm);
-
-            .form-title {
-                font-size: var(--font-size-lg);
-                font-weight: var(--font-weight-bold);
-            }
-
-            .form-message {
-                font-size: var(--font-size-sm);
-                color: var(--text-color-secondary);
-            }
-        }
     }
+}
+
+.auth-layout ::ng-deep .auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--space-md);
 }

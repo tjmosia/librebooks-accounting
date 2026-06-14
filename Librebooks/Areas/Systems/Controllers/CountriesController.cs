@@ -1,7 +1,7 @@
 ﻿using Librebooks.Areas.Systems.Data;
 using Librebooks.Areas.Systems.Models;
 using Librebooks.Areas.Systems.Services;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.SystemSpace;
 
 using Microsoft.AspNetCore.Mvc;
@@ -43,14 +43,14 @@ public class CountriesController (ISystemsManager systemManager, ILogger<Countri
 			country.DialingCode!.Equals(model.DialingCode, StringComparison.CurrentCultureIgnoreCase) &&
 			country.Code!.Equals(model.Code, StringComparison.CurrentCultureIgnoreCase))
 		{
-			return Ok(Result<CountryCountryData>.Success(new CountryCountryData(country)));
+			return Ok(TransactionResult<CountryCountryData>.Success(new CountryCountryData(country)));
 		}
 		var result = await Manager.UpdateCountryAsync(model.MapToCountry(country), cancellationToken);
 
 		if (result.Succeeded)
-			return Ok(Result<CountryCountryData>.Success(new CountryCountryData(result.Model!)));
+			return Ok(TransactionResult<CountryCountryData>.Success(new CountryCountryData(result.Model!)));
 		else
-			return Ok(Result.Failure(result.Errors));
+			return Ok(TransactionResult.Failure(result.Errors));
 	}
 
 	[HttpGet]
@@ -77,7 +77,7 @@ public class CountriesController (ISystemsManager systemManager, ILogger<Countri
 		var countries = await Manager.GetCountriesByIdsAsync(countryIds, cancellationToken);
 
 		if (!countries.Any())
-			return Ok(Result.Success);
+			return Ok(TransactionResult.Success);
 
 		var result = await Manager.DeleteCountryAsync([.. countries], cancellationToken);
 

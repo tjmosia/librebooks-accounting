@@ -1,0 +1,141 @@
+﻿@page "/auth/register"
+@layout AuthLayout
+@using LibrebooksBlazor.Models.Entity.IdentitySpace
+@using System.Security.Claims
+@inject UserManager<User> UserManager
+@inject SignInManager<User> SignInManager
+@using WxWidgets.Core.Alert
+@using WxWidgets.Core.Button
+@using WxWidgets.Core.Forms
+
+<PageTitle>Register</PageTitle>
+
+<EditForm OnSubmit="HandleSubmitAsync" Model="Input" FormName="RegisterForm">
+    @if (!string.IsNullOrEmpty(ValidationSummary))
+    {
+        <WxAlert Intent="Intents.Danger">
+            @ValidationSummary
+        </WxAlert>
+    }
+    <WxFormGroup Label="Name" ValidationMessage=@GetValidationFor(nameof(Input.Name)).Message ValidationStatus=@GetValidationFor(nameof(Input.Name)).Status>
+            <WxInputGroup @bind-Value="Input!.Name" />
+    </WxFormGroup>
+    <WxFormGroup Label="Surname" 
+        ValidationMessage=@GetValidationFor(nameof(Input.Surname)).Message 
+        ValidationStatus=@GetValidationFor(nameof(Input.Surname)).Status>
+        <WxInputGroup @bind-Value="Input!.Surname" />
+    </WxFormGroup>
+    <WxFormGroup Label="Password" 
+        ValidationMessage=@GetValidationFor(nameof(Input.Password)).Message
+        HelperText="(Min 8 characters of mixed-case letter and numbers.)"
+        ValidationStatus=@GetValidationFor(nameof(Input.Password)).Status>
+        <WxInputGroup Type="WxInputGroup.InputTypes.Password" @bind-Value="Input!.Password" />
+    </WxFormGroup>
+    <WxFormGroup Label="Confirm Password" 
+        ValidationMessage=@GetValidationFor(nameof(Input.ConfirmPassword)).Message 
+        ValidationStatus=@GetValidationFor(nameof(Input.ConfirmPassword)).Status>
+        <WxInputGroup Type="WxInputGroup.InputTypes.Password" @bind-Value="Input!.ConfirmPassword" />
+    </WxFormGroup>
+    <WxButton Type="WxButton.Types.Submit">Register</WxButton>
+</EditForm>
+<WxButton To="/auth">Change Email</WxButton>
+
+@code {
+    [SupplyParameterFromQuery(Name = "email")]
+    public string? Email { get; set; }
+
+    [SupplyParameterFromForm(FormName = "RegisterForm")]
+    public FormModel? Input { get; set; }
+
+    public ValidationResult? ModelState { get; set; }
+
+    public string? ValidationSummary { get; set; }
+
+    public async Task HandleSubmitAsync()
+    {
+        ModelState = new Validator().Validate(Input!);
+
+        if (!ModelState.IsValid)
+            return;
+
+        var user = new User
+            {
+                FirstName = Input!.Name,
+                LastName = Input.Surname,
+                Email = Email,
+                UserName = Email,
+                NormalizedEmail = UserManager.NormalizeEmail(Email),
+                NormalizedUserName = UserManager.NormalizeName(Email)
+            };
+        var result = await UserManager.CreateAsync(user, Input.Password!);
+
+        if (!result.Succeeded)
+        {
+            foreach(var error in result.Errors)
+            {
+                if(error.Code == nameof(UserManager.ErrorDescriber.DuplicateEmail) || error.Code == nameof(UserManager.ErrorDescriber.DuplicateEmail))
+                {
+                    ValidationSummary = "Your email is already registered. Try again with a different email";
+                    break;
+                }
+                else
+                {
+                    if (error.Code.Contains("Password"))                    
+                        ModelState.Errors.Add(new(nameof(Input.Password),"Password doesn't meet requirements."));
+                    else
+                        ValidationSummary = "Something went wrong. Please try again.";
+                }
+                return;
+            }    
+        }
+
+        var _user = await UserManager.FindByEmailAsync(Email!);
+
+        if(_user == null)
+        {
+            ValidationSummary = "Something went wrong. Please try again.";
+            return;
+        }
+
+        await UserManager.AddClaimAsync(_user, new Claim(ClaimTypes.Name, _user.Email!));
+        await SignInManager.SignInAsync(_user, false);
+        navigation.NavigateTo("/");
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (string.IsNullOrEmpty(Email))
+            navigation.NavigateTo($"/auth", true);
+        Input ??= new();
+        ModelState ??= new();
+    }
+
+    private (Intents Status, string? Message) GetValidationFor (string propertyName)
+    {
+        var message = ModelState?.Errors.Where(p => p.PropertyName == propertyName).FirstOrDefault()?.ErrorMessage;
+        return ( message != null ? Intents.Danger : Intents.None, message);
+    }
+
+    public class Validator : AbstractValidator<FormModel>
+    {
+        public Validator()
+        {
+            RuleFor(m => m.Name).NotEmpty().WithMessage("Name is required.");
+            RuleFor(m => m.Surname).NotEmpty().WithMessage("Surname is required.");
+            RuleFor(m => m.Password).NotEmpty().WithMessage("Password is required.");
+            RuleFor(m => m.ConfirmPassword).Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Confirm Password is required.")
+                .Equal(m => m.Password).WithMessage("Passwords do not match.");
+        }
+    }
+
+    public class FormModel
+    {
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
+        public string? Password { get; set; }
+        public string? ConfirmPassword { get; set; }
+        public string? Code { get; set; }
+    }
+}

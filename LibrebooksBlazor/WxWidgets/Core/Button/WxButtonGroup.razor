@@ -1,0 +1,25 @@
+﻿<div class=@GetComputedContainerClassName()>
+	@ChildContent
+</div>
+
+@code {
+	[Parameter]	public RenderFragment? ChildContent { get; set; }
+	[Parameter] public string? ClassName { get; set; }
+	[Parameter] public bool Fill { get; set; } = false;
+	[Parameter] public bool Compact { get; set; } = false;
+	[Parameter] public Directions Direction { get; set; } = Directions.Horizontal;
+
+	private string GetComputedContainerClassName()
+	{
+		ClassName += $" WxButtonGroup Wx--{Direction}";
+		ClassName += $" Wx--{(Compact ? "Compact" : "")} ";
+		ClassName += $" Wx--{(Fill ? "Fill" : "Inline")} ";
+		return ClassName;
+	}
+
+	public enum Directions
+	{
+		Horizontal, 
+		Vertical
+	}
+}

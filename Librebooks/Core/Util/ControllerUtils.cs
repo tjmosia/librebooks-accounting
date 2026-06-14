@@ -1,4 +1,4 @@
-﻿namespace Librebooks.CoreLib.Util
+﻿namespace Librebooks.Core.Util
 {
     public abstract class ControllerUtils
     {

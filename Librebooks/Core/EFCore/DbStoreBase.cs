@@ -1,5 +1,5 @@
 using Librebooks.Core.Constants;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +12,7 @@ namespace Librebooks.Core.EFCore
 		protected readonly ILogger? logger = logger;
 		protected readonly DbErrorDescriber? dbErrorDescriber = dbErrorDescriber;
 
-		protected readonly Error GeneralError = new(description: "Something went wrong. Please try agian.");
+		protected readonly TransactionError GeneralError = new(description: "Something went wrong. Please try agian.");
 		protected static bool IsForeignKeyViolation (Exception ex)
 			=> ex is DbUpdateException &&
 				ex.InnerException != null &&

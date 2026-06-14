@@ -1,0 +1,19 @@
+﻿@using WxWidgets.Primitives
+
+@if (Active)
+{
+	<div class=@($"WxAlert {GetStatus()}")>
+		<span class="WxAlert_Message">@ChildContent</span>
+	</div>
+}
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public string? Title { get; set; }
+	[Parameter] public Intents? Intent { get; set; }
+	[Parameter] public bool Active { get; set; } = true;
+
+
+	private string GetStatus ()
+		=> Intent != Intents.None ? $"Wx--{Intent.ToString()}" : "";
+}

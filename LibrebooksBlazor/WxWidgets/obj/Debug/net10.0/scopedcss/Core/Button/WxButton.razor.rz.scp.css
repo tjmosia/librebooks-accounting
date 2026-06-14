@@ -1,0 +1,80 @@
+.WxButton[b-c7vqdkenfr] {
+	display: flex;
+	border-radius: var(--border-radius-md);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	background-color: transparent;
+	transition: all ease 250ms;
+	cursor: pointer;
+	font-size: var(--ui-fontSize-md);
+	color: var(--ui-text-primary);
+
+	&[href] {
+		text-decoration: none !important;
+		color: var(--ui-text-primary);
+
+		span {
+			line-height: 1em;
+			margin: 0;
+		}
+	}
+
+	&.Wx--Tiny[b-c7vqdkenfr] {
+		padding: 0.15rem 0.25rem;
+		font-size: 0.85rem;
+	}
+
+	&.Wx--Small[b-c7vqdkenfr] {
+		padding: 0.375rem 0.5rem;
+	}
+
+	&.Wx--Medium[b-c7vqdkenfr] {
+		padding: 0.55rem 0.5rem;
+	}
+
+	&.Wx--Large[b-c7vqdkenfr] {
+		padding: 0.75rem 1rem;
+	}
+
+	&.Wx--Fill[b-c7vqdkenfr] {
+		width: 100%;
+	}
+
+	&.Wx--Primary[b-c7vqdkenfr] {
+		background-color: var(--ui-accent-blue);
+		color: var(--access-text);
+	}
+
+	&.Wx--Outlined[b-c7vqdkenfr] {
+		border: thin solid var(--color-neutral-stroke-1);
+		background-color: var(--color-neutral-background-2);
+	}
+
+	&.Wx--Secondary[b-c7vqdkenfr] {
+		background-color: var(--color-brand-background);
+		color: var(--color-neutral-background-1);
+	}
+
+	&.Wx--Minimal[b-c7vqdkenfr] {
+		&:hover {
+			background-color: var(--neutral-muted-hover);
+		}
+
+		&:active[b-c7vqdkenfr] {
+			background-color: var(--color-Minimal-background-pressed);
+		}
+
+		&:focus[b-c7vqdkenfr] {
+			background-color: var(--color-Minimal-background-selected);
+		}
+	}
+
+	.WxButton_Text[b-c7vqdkenfr] {
+		display: inline;
+		margin: 0;
+		margin-bottom: -0.10rem;
+	}
+}

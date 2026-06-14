@@ -1,0 +1,104 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFramework = net10.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.EntryPointFilePath = 
+build_property.RootNamespace = LibrebooksBlazor
+build_property.RootNamespace = LibrebooksBlazor
+build_property.ProjectDir = C:\Users\TJmos\source\repos\Librebooks\LibrebooksBlazor\LibrebooksBlazor\LibrebooksBlazor\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 10.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\TJmos\source\repos\Librebooks\LibrebooksBlazor\LibrebooksBlazor\LibrebooksBlazor
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Account/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBY2NvdW50XF9JbXBvcnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Auth/Auth.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBdXRoXEF1dGgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Auth/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBdXRoXExvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Auth/RedirectToAuth.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBdXRoXFJlZGlyZWN0VG9BdXRoLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Auth/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBdXRoXFJlZ2lzdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Pages/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Auth/AuthLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBdXRoXEF1dGhMYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-bdf6pae64f
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Areas/Identity/Components/Auth/ResetPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcQ29tcG9uZW50c1xBdXRoXFJlc2V0UGFzc3dvcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ysvyk2lwzx
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-l86auzou70
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-deqw4cswo0
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Layout/ReconnectModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-o71h3ih4lv
+
+[C:/Users/TJmos/source/repos/Librebooks/LibrebooksBlazor/LibrebooksBlazor/LibrebooksBlazor/Components/Layout/RootLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUm9vdExheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-a2vi9q79te

@@ -15,10 +15,8 @@ public class CompanyImage () : VersionedEntityBase()
 	public virtual int CompanyId { get; set; }
 	public virtual DateOnly DateCreated { get; set; }
 
-	public virtual byte[]? Data { get; set; }
-
-	[NotMapped]
-	public string? DataAsBase64 { get => (Data == null) ? null : Convert.ToBase64String(Data); }
+	[Required]
+	public virtual string? PathName { get; set; }
 
 	public void SetDateCreated (DateTime date)
 		=> DateCreated = DateOnly.FromDateTime(date);

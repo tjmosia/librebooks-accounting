@@ -1,0 +1,21 @@
+.wx-button-group {
+  display: flex;
+  width: 100%;
+  gap: var(--spacing-xs);
+
+  &.wx--vertical{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.wx--horizontal{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.wx-button-group ::ng-deep .wx-button{
+   flex: 1;
+}

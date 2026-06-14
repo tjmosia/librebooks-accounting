@@ -1,5 +1,0 @@
-export { WxInputGroup } from './wx-input-group/wx-input-group'
-export { WxFormGroup } from './wx-form-group/wx-form-group'
-export { WxButton } from './wx-button/wx-button'
-export { WxProgressBar } from './wx-progress-bar/wx-progress-bar'
-export { WxSpinner } from './wx-spinner/wx-spinner'

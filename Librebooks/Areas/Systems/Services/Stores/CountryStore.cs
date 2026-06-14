@@ -1,5 +1,5 @@
 ﻿using Librebooks.Core.EFCore;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Data;
 using Librebooks.Models.Entity.SystemSpace;
 using Microsoft.EntityFrameworkCore;
@@ -20,17 +20,17 @@ public class CountryStore (AppDbContext context, ILogger<CountryStore> logger) :
 	public async Task<IList<Country>> FindAllByIdAsync (int[] ids, CancellationToken cancellationToken = default)
 		=> [.. (await FindAllAsync(cancellationToken)).Where(c => ids.Contains(c.Id))];
 
-	public async Task<Result<Country>> CreateAsync (Country country, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult<Country>> CreateAsync (Country country, CancellationToken cancellationToken = default)
 	{
 		try
 		{
 			var result = await context!.Countries!.AddAsync(country, cancellationToken);
 			await context.SaveChangesAsync(cancellationToken);
-			return Result<Country>.Success(result.Entity);
+			return TransactionResult<Country>.Success(result.Entity);
 		}
 		catch (Exception ex)
 		{
-			IList<Error> errors = [];
+			IList<TransactionError> errors = [];
 
 			if (IsUniqueKeyConstaint(ex))
 				errors.Add(new(nameof(Country.Name), "Name is already taken."));
@@ -38,11 +38,11 @@ public class CountryStore (AppDbContext context, ILogger<CountryStore> logger) :
 			if (!errors.Any())
 				errors.Add(GeneralError);
 
-			return Result<Country>.Failure([.. errors]);
+			return TransactionResult<Country>.Failure([.. errors]);
 		}
 	}
 
-	public async Task<Result<Country>> UpdateAsync (Country country, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult<Country>> UpdateAsync (Country country, CancellationToken cancellationToken = default)
 	{
 		try
 		{
@@ -50,11 +50,11 @@ public class CountryStore (AppDbContext context, ILogger<CountryStore> logger) :
 			var result = context!.Countries!.Update(country);
 			await context.SaveChangesAsync(cancellationToken);
 
-			return Result<Country>.Success(result.Entity);
+			return TransactionResult<Country>.Success(result.Entity);
 		}
 		catch (DbUpdateException ex)
 		{
-			IList<Error> errors = [];
+			IList<TransactionError> errors = [];
 
 			if (IsUniqueKeyConstaint(ex))
 				errors.Add(new(nameof(Country.Name), "Name is already taken."));
@@ -62,21 +62,21 @@ public class CountryStore (AppDbContext context, ILogger<CountryStore> logger) :
 			if (!errors.Any())
 				errors.Add(GeneralError);
 
-			return Result<Country>.Failure([.. errors]);
+			return TransactionResult<Country>.Failure([.. errors]);
 		}
 	}
 
-	public async Task<Result> DeleteAsync (Country[] countries, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult> DeleteAsync (Country[] countries, CancellationToken cancellationToken = default)
 	{
 		try
 		{
 			context!.Countries!.RemoveRange(countries);
 			await context.SaveChangesAsync(cancellationToken);
-			return Result.Success;
+			return TransactionResult.Success;
 		}
 		catch (DbUpdateException ex)
 		{
-			IList<Error> errors = [];
+			IList<TransactionError> errors = [];
 
 			if (IsForeignKeyViolation(ex))
 				errors.Add(new(description: countries.Length > 1 ? "One or more countries are currently in use." : "Country is currently in use."));
@@ -84,7 +84,7 @@ public class CountryStore (AppDbContext context, ILogger<CountryStore> logger) :
 			if (!errors.Any())
 				errors.Add(GeneralError);
 
-			return Result.Failure([.. errors]);
+			return TransactionResult.Failure([.. errors]);
 		}
 	}
 

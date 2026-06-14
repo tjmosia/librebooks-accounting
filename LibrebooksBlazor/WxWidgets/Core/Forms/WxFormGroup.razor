@@ -1,0 +1,51 @@
+﻿@using WxWidgets.Primitives
+<div class="WxFormGroup @GetValidationStatus()">
+	<label class="WxFormGroup_Label">
+        @if (!string.IsNullOrEmpty(Label))
+        {
+            <span class="WxFormGroup_Label_Text">@Label</span>
+        }
+
+        @if (!string.IsNullOrEmpty(HelperText))
+        {
+            <span class="WxFormGroup_HelperText">@HelperText</span>
+        }
+        <span class="WxFormGroup_Content">
+            @ChildContent
+        </span>
+    </label>
+
+    @if (!string.IsNullOrEmpty(ValidationMessage))
+    {
+        <span class="WxFormGroup_ValidationMessage @GetValidationStatus()">@ValidationMessage</span>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? ValidationMessage { get; set; }
+
+    [Parameter]
+    public Intents? ValidationStatus { get; set; }
+
+    [Parameter]
+    public string? HelperText { get; set; }
+
+    [Parameter]
+    public string? Label { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private string GetValidationStatus()
+    {
+        if (ValidationStatus == null)
+            return "";
+        return $"Wx--{ValidationStatus.ToString()}";
+    }
+}

@@ -2,7 +2,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { formValidators, IFormFieldProps } from '../../core/forms';
 import { AuthLayoutService } from '../auth-layout-service';
 import { Router } from '@angular/router';
-import { WxButton, WxFormGroup, WxInputGroup } from "../../widgets/core";
+import { WxButton, WxFormGroup, WxInputGroup } from "../../ui/core";
+import { intents } from '../../ui/core/contants';
 
 interface IResetPasswordModel {
   [key: string]: IFormFieldProps<string>
@@ -33,20 +34,20 @@ export class ResetPassword implements OnInit {
 
   getModelValidationClass(field: IFormFieldProps<string>) {
     if (field.error)
-      return "error"
-    else 
-      return null
+      return intents.error;
+    else
+      return intents.none
   }
 
   handleInputChange(event: Event) {
-      const {value, name} = event.target as HTMLInputElement
+    const { value, name } = event.target as HTMLInputElement
 
-      this.model.update(model => ({
-        ...model,
-        [name]: {
-          value: value.replaceAll(" ", ""), 
-        }
-      }))
+    this.model.update(model => ({
+      ...model,
+      [name]: {
+        value: value.replaceAll(" ", ""),
+      }
+    }))
   }
 
   handleSubmit(event: Event) {
@@ -62,24 +63,24 @@ export class ResetPassword implements OnInit {
       isValid = false
     }
 
-    if(!_model.password.value) {
+    if (!_model.password.value) {
       _model.password.error = "Password is required."
       isValid = false
     }
 
-    if(isValid && !formValidators.isValidPassword(_model.password.value)) {
+    if (isValid && !formValidators.isValidPassword(_model.password.value)) {
       _model.password.error = "Password doesn't meet requirements."
       isValid = false
     }
 
-    if(!isValid) {
+    if (!isValid) {
       this.model.set(_model)
     }
 
     return isValid
   }
 
-  goToAuth(){
+  goToAuth() {
     this.authLayout.setEmail("")
     this.router.navigate(["auth"])
   }

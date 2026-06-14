@@ -1,0 +1,13 @@
+﻿@page "/"
+@attribute [Authorize]
+@inject NavigationManager navigationManager
+
+
+
+@code {
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		navigationManager.NavigateTo("/in/");	
+	}
+}

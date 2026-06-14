@@ -1,0 +1,50 @@
+div.WxFormGroup[b-wtbosqwcmi] {
+	display: flex;
+	height: auto;
+	flex-direction: column;
+}
+
+label.WxFormGroup_Label[b-wtbosqwcmi] {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+span.WxFormGroup_Label_Text[b-wtbosqwcmi] {
+	font-size: 0.9375rem;
+	font-weight: 500;
+}
+
+span.WxFormGroup_ValidationMessage[b-wtbosqwcmi] {
+	font-size: var(--ui-fontSize-sm);
+	display: block;
+	margin: 0.125rem 0 0.25rem;
+
+	&.Wx--Danger {
+		color: var(--ui-danger-text);
+	}
+
+	&.Wx--Success[b-wtbosqwcmi] {
+		color: var(--ui-success-text);
+	}
+
+	&.Wx--Warning[b-wtbosqwcmi] {
+		color: var(--ui-warning-text);
+	}
+}
+
+.WxFormGroup_Content[b-wtbosqwcmi]{
+	display: block;	
+	margin: 0.25rem 0 0.125rem 0;
+}
+
+.WxFormGroup_HelperText[b-wtbosqwcmi] {
+	display: block;
+	font-size: var(--ui-fontSize-xs);
+	font-weight: normal;
+	color: var(--color-neutral-foreground-1);
+	opacity: 0.75;
+	pointer-events: none;
+	line-height: 1em;
+}

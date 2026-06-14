@@ -1,5 +1,5 @@
 ﻿
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.PurchasesSpace;
 using Librebooks.Models.Entity.SupplierSpace;
@@ -8,12 +8,12 @@ namespace Librebooks.Areas.Suppliers.Services
 {
 	public class SupplierManager : ISupplierManager
 	{
-		public Task<Result> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchaseReturn purchaseReturn)
+		public Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchaseReturn purchaseReturn)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Result> AllocateReceiptToInvoiceAsync (PurchaseReceipt receipt, PurchaseInvoice invoice)
+		public Task<TransactionResult> AllocateReceiptToInvoiceAsync (PurchaseReceipt receipt, PurchaseInvoice invoice)
 		{
 			throw new NotImplementedException();
 		}
@@ -23,27 +23,27 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<Result<Supplier>> CreateAsync (Company company, Supplier supplier)
+		public Task<TransactionResult<Supplier>> CreateAsync (Company company, Supplier supplier)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Result<PurchaseOrder>> AddOrderAsync (Supplier supplier, PurchaseOrder order)
+		public Task<TransactionResult<PurchaseOrder>> AddOrderAsync (Supplier supplier, PurchaseOrder order)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Result<PurchaseInvoice>> AddInvoiceAsync (Supplier supplier, PurchaseOrder order)
+		public Task<TransactionResult<PurchaseInvoice>> AddInvoiceAsync (Supplier supplier, PurchaseOrder order)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Result<PurchaseReceipt>> AddReceiptAsync (Supplier supplier, PurchaseOrder order)
+		public Task<TransactionResult<PurchaseReceipt>> AddReceiptAsync (Supplier supplier, PurchaseOrder order)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Result<PurchaseReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn)
+		public Task<TransactionResult<PurchaseReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn)
 		{
 			throw new NotImplementedException();
 		}
@@ -98,12 +98,12 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<Result<Supplier>> UpdateAsync (Supplier supplier)
+		public Task<TransactionResult<Supplier>> UpdateAsync (Supplier supplier)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Result> DeleteAsync (Supplier supplier)
+		public Task<TransactionResult> DeleteAsync (Supplier supplier)
 		{
 			throw new NotImplementedException();
 		}

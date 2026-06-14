@@ -1,5 +1,5 @@
 ﻿using Librebooks.Core.Constants;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +10,7 @@ public abstract class StoreBase (AppDbContext context, ILogger<StoreBase>? logge
 	protected readonly AppDbContext context = context;
 	protected readonly ILogger<StoreBase>? logger = logger;
 
-	private readonly Error ConcurrencyError = new(description: "Something went wrong. Please try agian.");
+	private readonly TransactionError ConcurrencyError = new(description: "Something went wrong. Please try agian.");
 	public static bool IsForeignKeyViolation (Exception ex)
 		=> ex is DbUpdateException &&
 			ex.InnerException != null &&

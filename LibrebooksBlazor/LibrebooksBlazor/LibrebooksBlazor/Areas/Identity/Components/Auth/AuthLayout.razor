@@ -1,0 +1,44 @@
+﻿@using WxWidgets.Core.Section
+@inherits LayoutComponentBase
+@layout RootLayout
+
+<div class="auth-layout">
+    <div class="auth-layout_content">
+        <WxSection Title=@FormTitle SubTitle=@FormDescription>
+            @Body
+        </WxSection>
+    </div>
+</div>
+
+@code {
+    public string? FormTitle { get; set; }
+
+    public string? FormDescription { get; set; }
+
+    public void SetFormTitle (string title)
+        => FormTitle = title;
+
+    public void SetFormDescription (string description)
+        => FormDescription = description;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        var formHeader = GetFormHeader();
+        FormTitle = formHeader.Title;
+        FormDescription = formHeader.Description;
+    }
+
+    public (string Title, string Description) GetFormHeader()
+    {
+        return FormHeaders[@navigation.ToAbsoluteUri(navigation.Uri).LocalPath];
+    }
+
+    private Dictionary<string, (string Title, string Description)> FormHeaders = new()
+    {
+        {"/auth",("Login or Register", "Continue with your email address.")},
+        {"/auth/login",("Welcome Back", "Sign in with your password.")},
+        {"/auth/register",("Register", "Create your new account.")},
+        {"/auth/reset-password",("Reset your Password", "Create your new password and secure your account.")},
+    };
+}

@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\LibrebooksBlazor\\WxWidgets\\obj\\Debug\\net10.0\\scopedcss\\projectbundle\\WxWidgets.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WxWidgets.g7oesvxq9s.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\LibrebooksBlazor\\WxWidgets\\wwwroot\\background.png",
+      "PackagePath": "staticwebassets\\background.png"
+    },
+    {
+      "Id": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\LibrebooksBlazor\\WxWidgets\\wwwroot\\exampleJsInterop.js",
+      "PackagePath": "staticwebassets\\exampleJsInterop.js"
+    },
+    {
+      "Id": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\LibrebooksBlazor\\WxWidgets\\wwwroot\\root.css",
+      "PackagePath": "staticwebassets\\root.css"
+    },
+    {
+      "Id": "obj\\Debug\\net10.0\\staticwebassets\\msbuild.WxWidgets.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net10.0\\staticwebassets\\msbuild.WxWidgets.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net10.0\\staticwebassets\\msbuild.build.WxWidgets.props",
+      "PackagePath": "build\\WxWidgets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net10.0\\staticwebassets\\msbuild.buildMultiTargeting.WxWidgets.props",
+      "PackagePath": "buildMultiTargeting\\WxWidgets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net10.0\\staticwebassets\\msbuild.buildTransitive.WxWidgets.props",
+      "PackagePath": "buildTransitive\\WxWidgets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

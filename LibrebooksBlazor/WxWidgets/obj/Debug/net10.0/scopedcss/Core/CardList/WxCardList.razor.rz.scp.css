@@ -1,0 +1,15 @@
+.WxCardList[b-omrqzg7pex]
+{
+	border: thin solid var(--ui-border);
+	
+
+
+
+}
+
+.WxCardList_Content[b-omrqzg7pex]{
+	::deep .WxCard{
+		border-bottom: thin solid var(--ui-border);
+	}
+}
+

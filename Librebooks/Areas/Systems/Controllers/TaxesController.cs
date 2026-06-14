@@ -1,7 +1,7 @@
 ﻿using Librebooks.Areas.Systems.Data;
 using Librebooks.Areas.Systems.Models;
 using Librebooks.Areas.Systems.Services;
-using Librebooks.CoreLib.Operations;
+using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.SystemSpace;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +33,7 @@ public class TaxesController (ISystemsManager systemManager)
 		var modelState = TaxAddModel.Validate(model);
 
 		if (!modelState.IsValid)
-			return BadRequest(Result.Failure([.. modelState.Errors.Select(p => Error.Create(p.PropertyName, p.ErrorMessage))]));
+			return BadRequest(TransactionResult.Failure([.. modelState.Errors.Select(p => TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
 		var tax = new Tax
 		{
@@ -46,7 +46,7 @@ public class TaxesController (ISystemsManager systemManager)
 		var result = await Manager.AddTaxAsync(tax);
 
 		if (result.Succeeded)
-			return Ok(Result<TaxData>.Success(new TaxData(result.Model!)));
+			return Ok(TransactionResult<TaxData>.Success(new TaxData(result.Model!)));
 
 		return Ok(result);
 	}
@@ -57,7 +57,7 @@ public class TaxesController (ISystemsManager systemManager)
 		var modelState = TaxAddModel.Validate(model);
 
 		if (!modelState.IsValid)
-			return BadRequest(Result.Failure([.. modelState.Errors.Select(p => Error.Create(p.PropertyName, p.ErrorMessage))]));
+			return BadRequest(TransactionResult.Failure([.. modelState.Errors.Select(p => TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
 		var tax = await Manager.FindTaxByIdAsync(id);
 
@@ -65,7 +65,7 @@ public class TaxesController (ISystemsManager systemManager)
 			return NotFound();
 
 		if (tax.Rate == model.Rate && tax.Name == model.Name && tax.Type == model.Type && tax.System == model.System)
-			return Ok(Result<TaxData>.Success(new TaxData(tax)));
+			return Ok(TransactionResult<TaxData>.Success(new TaxData(tax)));
 
 		tax.Type = model.Type;
 		tax.Rate = model.Rate;
@@ -75,7 +75,7 @@ public class TaxesController (ISystemsManager systemManager)
 		var result = await Manager.UpdateTaxAsync(tax);
 
 		if (result.Succeeded)
-			return Ok(Result<TaxData>.Success(new TaxData(result.Model!)));
+			return Ok(TransactionResult<TaxData>.Success(new TaxData(result.Model!)));
 
 		return Ok(result);
 	}
@@ -104,7 +104,7 @@ public class TaxesController (ISystemsManager systemManager)
 					taxesToDelete.Add(tax);
 
 		if (taxesToDelete.Count == 0)
-			return Ok(Result.Success);
+			return Ok(TransactionResult.Success);
 
 		var result = await Manager.DeleteTaxesAsync([.. taxesToDelete]);
 		return Ok(result);
