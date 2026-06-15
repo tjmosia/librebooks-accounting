@@ -14,8 +14,8 @@ public class SalesInvoiceReceipt
     [Column(TypeName = ColumnTypes.MONETARY)]
     public virtual decimal Amount { get; set; }
 
-    public virtual SalesInvoice? Invoice { get; set; }
-    public virtual SalesReceipt? Receipt { get; set; }
+    public SalesInvoice? Invoice { get; set; }
+    public SalesReceipt? Receipt { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)
     {

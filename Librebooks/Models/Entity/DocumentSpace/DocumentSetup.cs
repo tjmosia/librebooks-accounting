@@ -36,9 +36,9 @@ public class DocumentSetup () : VersionedEntityBase()
 
 	public virtual int PrintTemplateId { get; set; }
 
-	public virtual DocumentPrintTemplate? PrintTemplate { get; set; }
-	public virtual DocumentType? Type { get; set; }
-
+	public DocumentPrintTemplate? PrintTemplate { get; set; }
+	public DocumentType? Type { get; set; }
+	public Company? Company { get; set; }
 	public static void OnModelCreating (ModelBuilder builder)
 		=> builder.Entity<DocumentSetup>(options =>
 		{
@@ -46,7 +46,7 @@ public class DocumentSetup () : VersionedEntityBase()
 				.IsUnique()
 				.IsClustered();
 
-			options.HasOne<Company>()
+			options.HasOne(p=>p.Company)
 				.WithMany(p => p.DocumentSetups)
 				.HasForeignKey(p => p.CompanyId)
 					.IsRequired(false)

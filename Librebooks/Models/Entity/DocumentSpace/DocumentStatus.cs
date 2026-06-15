@@ -17,7 +17,7 @@ public class DocumentStatus () : VersionedEntityBase()
     [Required, MaxLength(50)]
     public virtual string? Name { get; set; }
 
-    [Required, MaxLength(6)]
+    [MaxLength(6)]
     public virtual string? Color { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)

@@ -38,25 +38,27 @@ public class SalesDocument () : VersionedEntityBase()
 
 	public virtual bool TaxExempt { get; set; }
 	public virtual int CurrencyId { get; set; }
-	public virtual string? SalesPersonId { get; set; }
+	public string? SalesPersonId { get; set; }
 	public virtual int? ShippingTermId { get; set; }
 	public virtual int? ShippingMethodId { get; set; }
 	public virtual int CustomerId { get; set; }
 	public virtual bool Recorded { get; set; }
 	public virtual int StatusId { get; set; }
 	public virtual bool Printed { get; set; }
-	public virtual int? CreatorId { get; set; }
+	public int? CreatorId { get; set; }
+	public virtual int TypeId { get; set; }
 
-	public virtual Currency? Currency { get; set; }
-	public virtual DocumentStatus? Status { get; set; }
-	public virtual SalesPerson? SalesPerson { get; set; }
-	public virtual ShippingMethod? ShippingMethod { get; set; }
-	public virtual ShippingTerm? ShippingTerm { get; set; }
-	public virtual DocumentCustomerDetails? CustomerInfo { get; set; }
-	public virtual DocumentCompanyDetail? CompanyInfo { get; set; }
-	public virtual ICollection<SalesDocumentNote>? Notes { get; set; }
-	public virtual ICollection<SalesDocumentLine>? Lines { get; set; }
-	public virtual User? Creator { get; set; }
+	public DocumentType? Type { get; set; }
+	public Currency? Currency { get; set; }
+	public DocumentStatus? Status { get; set; }
+	public SalesPerson? SalesPerson { get; set; }
+	public ShippingMethod? ShippingMethod { get; set; }
+	public ShippingTerm? ShippingTerm { get; set; }
+	public DocumentCustomerDetails? CustomerInfo { get; set; }
+	public DocumentCompanyDetail? CompanyInfo { get; set; }
+	public ICollection<SalesDocumentNote>? Notes { get; set; }
+	public ICollection<SalesDocumentLine>? Lines { get; set; }
+	public	 User? Creator { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 		=> builder.Entity<SalesDocument>(options =>
@@ -82,6 +84,12 @@ public class SalesDocument () : VersionedEntityBase()
 			options.HasOne(p => p.Status)
 				.WithMany()
 				.HasForeignKey(p => p.StatusId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.Type)
+				.WithMany()
+				.HasForeignKey(p => p.TypeId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 		});

@@ -29,7 +29,7 @@ public class DocumentCustomerDetails
 
 	public virtual DateTime DateCreated { get; set; }
 	public virtual bool Active { get; set; }
-	public virtual Customer? Customer { get; set; }
+	public Customer? Customer { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

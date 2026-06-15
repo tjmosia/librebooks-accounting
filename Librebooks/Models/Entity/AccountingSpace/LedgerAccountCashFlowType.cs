@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.AccountingSpace;
 
-public class AccountCashFlowType () : VersionedEntityBase()
+public class LedgerAccountCashFlowType () : VersionedEntityBase()
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public virtual int Id { get; set; }
@@ -18,7 +18,7 @@ public class AccountCashFlowType () : VersionedEntityBase()
 
     public static void OnModelCreating (ModelBuilder builder)
     {
-        builder.Entity<AccountCashFlowType>(options =>
+        builder.Entity<LedgerAccountCashFlowType>(options =>
         {
 
         });

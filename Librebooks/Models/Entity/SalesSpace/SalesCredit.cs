@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Models.Entity.CompanySpace;
-
+using Librebooks.Models.Entity.DocumentSpace;
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.SalesSpace;
@@ -14,9 +14,9 @@ public class SalesCredit
     public virtual int CustomerId { get; set; }
     public virtual int CompanyId { get; set; }
 
-    public virtual Company? Company { get; set; }
-    public virtual SalesDocument? Document { get; set; }
-    public virtual ICollection<SalesInvoiceCredit>? CreditedInvoices { get; set; }
+    public Company? Company { get; set; }
+    public SalesDocument? Document { get; set; }
+    public ICollection<SalesInvoiceCredit>? CreditedInvoices { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)
         => builder.Entity<SalesCredit>(options =>

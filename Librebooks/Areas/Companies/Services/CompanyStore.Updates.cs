@@ -12,188 +12,183 @@ namespace Librebooks.Areas.Companies.Services;
 
 public partial class CompanyStore : ICompanyStore
 {
-	public async Task<TransactionResult<Company>> UpdateAsync (Company company, CancellationToken cancellation = default)
+	public async Task<Result<Company>> UpdateAsync(Company company)
 	{
 		company.RefreshConcurrencyToken();
 
 		try
 		{
 			var result = context.Companies!.Update(company);
-			await context.SaveChangesAsync(cancellation);
-			return TransactionResult<Company>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<Company>.Success(result.Entity);
 		}
-		catch (Exception ex)
+		catch (Exception)
 		{
-			IList<TransactionError> errors = [];
-
-			if (ex is DbUpdateConcurrencyException)
-			{
-				errors.Add(TransactionError.Create("", "Data has already changed. Please try again."));
-			}
-
-			if (ex is DbUpdateException)
-			{
-				errors.Add(TransactionError.Create("", "Unable to update company. Please try again later."));
-			}
-
-			return TransactionResult<Company>.Failure([.. errors]);
+			return Result<Company>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<CompanyRegionalSetup>> UpdateRegionalSettingsAsync (CompanyRegionalSetup regionalSettings, CancellationToken cancellationToken = default)
+	public async Task<Result<CompanyRegionalSetup>> UpdateRegionalSettingsAsync(CompanyRegionalSetup regionalSettings)
 	{
 		try
 		{
 			var result = context!.CompanyRegionalSettings!.Update(regionalSettings);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<CompanyRegionalSetup>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<CompanyRegionalSetup>.Success(result.Entity);
 		}
-		catch (Exception ex)
+		catch (Exception)
 		{
-			logger!.LogError("***DB Error occured with Exception while trying to update CompanyRegionalSettings:*** \n\n{message}", ex.Message);
-			return TransactionResult<CompanyRegionalSetup>.Failure();
+			return Result<CompanyRegionalSetup>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<CompanyBankAccount>> UpdateDefaultTaxTypeAsync (CompanyTax defaultTaxType, CancellationToken cancellationToken = default)
+	public async Task<Result<CompanyBankAccount>> UpdateDefaultTaxTypeAsync(CompanyTax defaultTaxType)
 	{
 		try
 		{
 			defaultTaxType.Default = true;
 			context!.CompanyTaxes!.Update(defaultTaxType);
-			await context!.SaveChangesAsync(cancellationToken);
-			return TransactionResult<CompanyBankAccount>.Success();
+			await context!.SaveChangesAsync();
+			return Result<CompanyBankAccount>.Success();
 		}
-		catch (Exception ex)
+		catch (Exception)
 		{
-			logger!.LogError("***DB Error occurred with Exception while trying to update CompanyDefaultTaxType:*** \n\n{message}", ex.Message);
-			return TransactionResult<CompanyBankAccount>.Failure();
+			return Result<CompanyBankAccount>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<Tax>> UpdateTaxAsync (Tax tax, CancellationToken cancellationToken = default)
+	public async Task<Result<Tax>> UpdateTaxAsync(Tax tax)
 	{
 		try
 		{
 			var result = context!.Taxes!.Update(tax);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<Tax>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<Tax>.Success(result.Entity);
 		}
-		catch (Exception ex)
+		catch (Exception)
 		{
-			logger!.LogError("***DB Error occurred with Exception while trying to update CompanyDefaultTaxType:*** \n\n{message}", ex.Message);
-			return TransactionResult<Tax>.Failure();
+			return Result<Tax>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<CompanyImage>> UpdateLogoAsync (CompanyImage companyImage, CancellationToken cancellationToken = default)
+	public async Task<Result<CompanyImage>> UpdateLogoAsync(Company company, CompanyImage companyImage)
 	{
 		try
 		{
-			var result = await context!.CompanyImages!.AddAsync(companyImage);
-			var companyLogo = await context.CompanyLogos!.FindAsync(companyImage.CompanyId!);
+			var image = await context!.CompanyImages!.AddAsync(companyImage);
+			var companyLogo = await context.CompanyLogos!.FindAsync(company.Id!);
 
 			if (companyLogo == null)
 			{
-				await context!.CompanyLogos!.AddAsync(new CompanyLogo(companyImage.CompanyId!, companyImage.Id));
+				await context!.CompanyLogos!.AddAsync(new CompanyLogo(company.Id!, image.Entity.Id));
 			}
 			else
 			{
-				companyLogo.ImageId = companyImage.CompanyId;
+				companyLogo.ImageId = image.Entity.CompanyId;
 				context!.CompanyLogos!.Update(companyLogo);
 			}
 
-			await context!.SaveChangesAsync(cancellationToken);
-			return TransactionResult<CompanyImage>.Success(result.Entity);
+			await context!.SaveChangesAsync();
+			return Result<CompanyImage>.Success(image.Entity);
 		}
-		catch (Exception ex)
+		catch (Exception)
 		{
-			logger!.LogError("***DB Error occurred with Exception while trying to Update Company Logo:*** \n\n{message}", ex.Message);
-			return TransactionResult<CompanyImage>.Failure();
+			return Result<CompanyImage>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult> UpdateMailSettingsAsync (CompanyMailSetup companyMailSettings, CancellationToken cancellationToken = default)
+	public async Task<Result> UpdateMailSettingsAsync(CompanyMailSetup companyMailSettings)
 	{
 		try
 		{
 			context!.CompanyMailSettings!.Update(companyMailSettings);
-			await context!.SaveChangesAsync(cancellationToken);
-			return TransactionResult.Success;
+			await context!.SaveChangesAsync();
+			return Result.Success;
 		}
 		catch (Exception)
 		{
-			return TransactionResult.Failure();
+			return Result.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<SupplierSetup>> UpdateSupplierSetupAsync (SupplierSetup supplierSetup, CancellationToken cancellationToken = default)
+	public async Task<Result<SupplierSetup>> UpdateSupplierSetupAsync(SupplierSetup supplierSetup)
 	{
 		try
 		{
 			var result = context.SupplierSetups!.Update(supplierSetup);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<SupplierSetup>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<SupplierSetup>.Success(result.Entity);
 		}
 		catch (Exception)
 		{
-			return TransactionResult<SupplierSetup>.Failure();
+			return Result<SupplierSetup>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<CustomerSetup>> UpdateCustomerSetupAsync (CustomerSetup customerSetup, CancellationToken cancellationToken = default)
+	public async Task<Result<CustomerSetup>> UpdateCustomerSetupAsync(CustomerSetup customerSetup)
 	{
 		try
 		{
 			var result = context.CustomerSetups!.Update(customerSetup);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<CustomerSetup>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<CustomerSetup>.Success(result.Entity);
 		}
 		catch (Exception)
 		{
-			return TransactionResult<CustomerSetup>.Failure();
+			return Result<CustomerSetup>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<ItemSetup>> UpdateItemSetupAsync (ItemSetup itemSetup, CancellationToken cancellationToken = default)
+	public async Task<Result<ItemSetup>> UpdateItemSetupAsync(ItemSetup itemSetup)
 	{
 		try
 		{
 			var result = context.ItemSetups!.Update(itemSetup);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<ItemSetup>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<ItemSetup>.Success(result.Entity);
 		}
 		catch (Exception)
 		{
-			return TransactionResult<ItemSetup>.Failure();
+			return Result<ItemSetup>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<DocumentSetup>> UpdateDocumentSetupAsync (DocumentSetup documentSetup, CancellationToken cancellationToken = default)
+	public async Task<Result<DocumentSetup>> UpdateDocumentSetupAsync(DocumentSetup documentSetup)
 	{
 		try
 		{
 			var result = context.DocumentSetups!.Update(documentSetup);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<DocumentSetup>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<DocumentSetup>.Success(result.Entity);
 		}
 		catch (Exception)
 		{
-			return TransactionResult<DocumentSetup>.Failure();
+			return Result<DocumentSetup>.Failure();
+			throw;
 		}
 	}
 
-	public async Task<TransactionResult<BankAccount>> UpdateBankAccountAsync (BankAccount bankAccount, CancellationToken cancellationToken = default)
+	public async Task<Result<BankAccount>> UpdateBankAccountAsync(BankAccount bankAccount)
 	{
 		try
 		{
 			var result = context.BankAccounts!.Update(bankAccount);
-			await context.SaveChangesAsync(cancellationToken);
-			return TransactionResult<BankAccount>.Success(result.Entity);
+			await context.SaveChangesAsync();
+			return Result<BankAccount>.Success(result.Entity);
 		}
 		catch (Exception)
 		{
-			return TransactionResult<BankAccount>.Failure();
+			return Result<BankAccount>.Failure();
+			throw;
 		}
 
 	}

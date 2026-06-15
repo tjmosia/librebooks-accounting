@@ -19,7 +19,7 @@ namespace Librebooks.Models.Entity.SystemSpace
         [MaxLength(75)]
         public virtual string? Name { get; set; }
 
-        public virtual ICollection<Company>? Companies { get; set; }
+        public ICollection<Company>? Companies { get; set; }
 
         public BusinessSector (string name) : this()
         {

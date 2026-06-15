@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.AccountingSpace;
 
-[Table(nameof(Account))]
-public class Account () : VersionedEntityBase()
+[Table(nameof(LedgerAccount))]
+public class LedgerAccount () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
@@ -24,27 +24,27 @@ public class Account () : VersionedEntityBase()
 
 	[MaxLength(255), Required]
 	public virtual string? Description { get; set; }
-	public virtual int? ParentAccountId { get; set; }
+	public virtual int? ParentId { get; set; }
 	public virtual bool Active { get; set; }
 	public virtual bool System { get; set; }
 	public virtual int? CompanyId { get; set; }
 	public virtual int CategoryId { get; set; }
 
-	public virtual Account? ParentAccount { get; set; }
-	public virtual AccountCategory? Category { get; set; }
+	public virtual LedgerAccount? Parent { get; set; }
+	public virtual LedgerAccountCategory? Category { get; set; }
 	public virtual CompanyTax? Tax { get; set; }
 
-	public virtual ICollection<Account>? SubAccounts { get; set; }
+	public virtual ICollection<LedgerAccount>? ChildAccounts { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
-		=> builder.Entity<Account>(options =>
+		=> builder.Entity<LedgerAccount>(options =>
 		{
 			options.HasIndex(p => new { p.CompanyId, p.CategoryId })
 				.IsClustered();
 
-			options.HasMany(p => p.SubAccounts)
-				.WithOne(p => p.ParentAccount)
-				.HasForeignKey(p => p.ParentAccountId)
+			options.HasMany(p => p.ChildAccounts)
+				.WithOne(p => p.Parent)
+				.HasForeignKey(p => p.ParentId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 

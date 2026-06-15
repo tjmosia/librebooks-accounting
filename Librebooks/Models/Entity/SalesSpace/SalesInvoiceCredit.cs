@@ -10,8 +10,8 @@ public class SalesInvoiceCredit
     public virtual int InvoiceId { get; set; }
     public virtual int CreditId { get; set; }
 
-    public virtual SalesCredit? Credit { get; set; }
-    public virtual SalesInvoice? Invoice { get; set; }
+    public SalesCredit? Credit { get; set; }
+    public SalesInvoice? Invoice { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)
     {

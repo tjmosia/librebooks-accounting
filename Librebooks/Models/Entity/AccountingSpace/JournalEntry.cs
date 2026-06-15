@@ -35,8 +35,8 @@ public class JournalEntry () : VersionedEntityBase()
 
 	public virtual Company? Company { get; set; }
 	public virtual CompanyTax? Tax { get; set; }
-	public virtual Account? DebitAccount { get; set; }
-	public virtual Account? CreditAccount { get; set; }
+	public virtual LedgerAccount? DebitAccount { get; set; }
+	public virtual LedgerAccount? CreditAccount { get; set; }
 	public virtual ICollection<JournalNote>? Notes { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)

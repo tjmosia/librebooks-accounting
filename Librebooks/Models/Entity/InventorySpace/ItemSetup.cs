@@ -19,12 +19,12 @@ public class ItemSetup () : VersionedEntityBase()
 	public virtual string? Suffix { get; set; }
 
 	public virtual int NextNumber { get; set; }
-
+	public Company? Company { get; set; }
 	public static void OnModelCreating (ModelBuilder builder)
 	{
 		builder.Entity<ItemSetup>(options =>
 		{
-			options.HasOne<Company>()
+			options.HasOne(p=>p.Company)
 				.WithOne()
 				.HasForeignKey<ItemSetup>(p => p.CompanyId)
 					.IsRequired()

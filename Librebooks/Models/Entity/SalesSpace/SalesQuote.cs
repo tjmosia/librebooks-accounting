@@ -14,9 +14,9 @@ public class SalesQuote
 	public virtual int CustomerId { get; set; }
 	public virtual int CompanyId { get; set; }
 
-	public virtual SalesDocument? Document { get; set; }
+	public SalesDocument? Document { get; set; }
 
-	public virtual ICollection<SalesQuoteOrder>? Orders { get; set; }
+	public ICollection<SalesQuoteOrder>? Orders { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
