@@ -58,7 +58,7 @@ public class SalesDocument () : VersionedEntityBase()
 	public DocumentCompanyDetail? CompanyInfo { get; set; }
 	public ICollection<SalesDocumentNote>? Notes { get; set; }
 	public ICollection<SalesDocumentLine>? Lines { get; set; }
-	public	 User? Creator { get; set; }
+	public User? Creator { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 		=> builder.Entity<SalesDocument>(options =>

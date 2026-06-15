@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.CompanySpace;
 
@@ -17,9 +16,6 @@ public class LedgerAccount () : VersionedEntityBase()
 	[Required, MaxLength(75)]
 	public virtual string? Name { get; set; }
 
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Balance { get; set; }
-
 	public virtual int TaxId { get; set; }
 
 	[MaxLength(255), Required]
@@ -27,21 +23,18 @@ public class LedgerAccount () : VersionedEntityBase()
 	public virtual int? ParentId { get; set; }
 	public virtual bool Active { get; set; }
 	public virtual bool System { get; set; }
-	public virtual int? CompanyId { get; set; }
 	public virtual int CategoryId { get; set; }
 
-	public virtual LedgerAccount? Parent { get; set; }
-	public virtual LedgerAccountCategory? Category { get; set; }
-	public virtual CompanyTax? Tax { get; set; }
+	public LedgerAccount? Parent { get; set; }
+	public LedgerAccountCategory? Category { get; set; }
+	public CompanyTax? Tax { get; set; }
 
-	public virtual ICollection<LedgerAccount>? ChildAccounts { get; set; }
+	public ICollection<LedgerAccount>? ChildAccounts { get; set; }
+	public ICollection<CompanyLedgerAccount>? CompanyAccounts { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 		=> builder.Entity<LedgerAccount>(options =>
 		{
-			options.HasIndex(p => new { p.CompanyId, p.CategoryId })
-				.IsClustered();
-
 			options.HasMany(p => p.ChildAccounts)
 				.WithOne(p => p.Parent)
 				.HasForeignKey(p => p.ParentId)
@@ -54,16 +47,16 @@ public class LedgerAccount () : VersionedEntityBase()
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
-			options.HasOne<Company>()
-				.WithMany(p => p.ChartOfAccounts)
-				.HasForeignKey(p => p.CompanyId)
-					.IsRequired()
-				.OnDelete(DeleteBehavior.Restrict);
-
 			options.HasOne(p => p.Tax)
 			   .WithMany()
 			   .HasForeignKey(p => p.TaxId)
 				   .IsRequired()
 			   .OnDelete(DeleteBehavior.Restrict);
+
+			options.HasMany(p => p.CompanyAccounts)
+				.WithOne(p => p.Account)
+				.HasForeignKey(p => p.AccountId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
 		});
 }

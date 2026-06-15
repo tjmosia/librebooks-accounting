@@ -14,7 +14,7 @@ public class JournalEntry () : VersionedEntityBase()
 	public virtual int Id { get; set; }
 
 	[Column(ColumnTypes.DATETIME)]
-	public virtual DateTime CreatedAt { get; set; }
+	public virtual DateTime DateCreated { get; set; }
 
 	[MaxLength(75)]
 	public virtual string? Reference { get; set; }
@@ -35,8 +35,8 @@ public class JournalEntry () : VersionedEntityBase()
 
 	public virtual Company? Company { get; set; }
 	public virtual CompanyTax? Tax { get; set; }
-	public virtual LedgerAccount? DebitAccount { get; set; }
-	public virtual LedgerAccount? CreditAccount { get; set; }
+	public virtual CompanyLedgerAccount? DebitAccount { get; set; }
+	public virtual CompanyLedgerAccount? CreditAccount { get; set; }
 	public virtual ICollection<JournalNote>? Notes { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
@@ -65,13 +65,13 @@ public class JournalEntry () : VersionedEntityBase()
 				.OnDelete(DeleteBehavior.Restrict);
 
 			options.HasOne(p => p.DebitAccount)
-				.WithMany()
+				.WithMany(p => p.JournalEntries)
 				.HasForeignKey(p => p.DebitAccountId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
 			options.HasOne(p => p.CreditAccount)
-				.WithMany()
+				.WithMany(p => p.JournalEntries)
 				.HasForeignKey(p => p.CreditAccountId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);

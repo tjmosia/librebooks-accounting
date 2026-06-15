@@ -25,6 +25,7 @@ public class DocumentSetup () : VersionedEntityBase()
 	public virtual string? Suffix { get; set; }
 
 	public virtual int NextNumber { get; set; }
+	public virtual bool System { get; set; }
 
 	[MaxLength(500)]
 	public virtual string? FooterMessage { get; set; }
@@ -46,7 +47,7 @@ public class DocumentSetup () : VersionedEntityBase()
 				.IsUnique()
 				.IsClustered();
 
-			options.HasOne(p=>p.Company)
+			options.HasOne(p => p.Company)
 				.WithMany(p => p.DocumentSetups)
 				.HasForeignKey(p => p.CompanyId)
 					.IsRequired(false)

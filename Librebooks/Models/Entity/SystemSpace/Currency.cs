@@ -22,6 +22,8 @@ public class Currency () : VersionedEntityBase()
 	[MaxLength(50)]
 	public virtual string? Symbol { get; set; }
 
+	public virtual bool Default { get; set; }
+
 	public static void OnModelCreating (ModelBuilder builder)
 	{
 		builder.Entity<Currency>(options =>

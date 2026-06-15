@@ -5,6 +5,7 @@ using Librebooks.Data;
 using Librebooks.Models.Entity.IdentitySpace;
 using Librebooks.Providers;
 using Librebooks.Providers.Managers;
+using Librebooks.Providers.Stores;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -74,6 +75,7 @@ AreaServices.ConfigureAll(builder.Services);
 builder.Services.AddScoped<VerificationStore>();
 builder.Services.AddScoped<IVerificationManager, VerificationManager>();
 builder.Services.AddSingleton<MailSender>();
+builder.Services.AddScoped<DocumentSetupStore>();
 
 var app = builder.Build();
 

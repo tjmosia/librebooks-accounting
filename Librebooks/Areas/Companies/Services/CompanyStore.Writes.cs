@@ -1,14 +1,10 @@
-﻿using Librebooks.Core.Operations;
+﻿using Librebooks.Core.EFCore;
+using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
-using Librebooks.Models.Entity.CustomerSpace;
-using Librebooks.Models.Entity.DocumentSpace;
 using Librebooks.Models.Entity.GeneralSpace;
-using Librebooks.Models.Entity.InventorySpace;
 using Librebooks.Models.Entity.SalesSpace;
-using Librebooks.Models.Entity.SupplierSpace;
 using Librebooks.Models.Entity.SystemSpace;
-using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Areas.Companies.Services;
 
@@ -18,81 +14,113 @@ public partial class CompanyStore : ICompanyStore
 	****** INSERT TRANSACTIONS
 	***********************************************************************************************************************************/
 
-	public async Task<Result<Company>> CreateAsync(Company company,
-		CompanyRegionalSetup regionalSetup,
-		SupplierSetup supplierSetup,
-		CustomerSetup customerSetup,
-		ItemSetup itemSetup,
-		DocumentSetup documentSetup)
+	public async Task<TransactionResult<Company>> CreateAsync (Company company)
 	{
-		var result = await context!.AddAsync(company);
-		regionalSetup.Company = result.Entity;
-		supplierSetup.Company = result.Entity;
-		customerSetup.Company = result.Entity;
-		itemSetup.Company = result.Entity;
-		documentSetup.Company = result.Entity;
-
-		var taxes = await context.Taxes!.Where(p => p.System)
-			.ToListAsync();
-
-		var companyTaxes = taxes.Select(p => new CompanyTax
+		try
 		{
-			CompanyId = result.Entity.Id,
-			TaxId = p.Id,
-			Default = false
-		}).ToList();
+			var result = await context!.AddAsync(company);
+			context.SaveChanges();
 
-		await context.AddRangeAsync(regionalSetup, supplierSetup, customerSetup, itemSetup, documentSetup, companyTaxes, companyTaxes);
-		context.SaveChanges();
-
-		return Result<Company>.Success(result.Entity);
-	}
-
-	public async Task<Result<Tax>> CreateTaxTypeAsync(Company company, Tax taxType)
-	{
-		var result = await context.Taxes!.AddAsync(taxType);
-		await context.CompanyTaxes!.AddAsync(new CompanyTax(company.Id, taxType.Id));
-		await context.SaveChangesAsync();
-
-		return Result<Tax>.Success(result.Entity);
-	}
-
-	public async Task<Result<Contact>> CreateSalesPersonAsync(Company company, Contact contact)
-	{
-		var result = await context.Contacts!.AddAsync(contact);
-
-		await context.SalesPeople!.AddAsync(new SalesPerson
+			return TransactionResult<Company>.Success(result.Entity);
+		}
+		catch (Exception ex)
 		{
-			CompanyId = company.Id,
-			ContactId = contact.Id,
-		});
 
-		await context.SaveChangesAsync();
-
-		return Result<Contact>.Success(result.Entity);
+			return TransactionResult<Company>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(CreateAsync), logger));
+		}
 	}
 
-	public async Task<Result<BankAccount>> CreateBankAccountAsync(Company company, BankAccount bankAccount)
+	public async Task<TransactionResult<CompanyTax>> AddTaxesAsync (Company company, Tax tax)
 	{
-		bankAccount.CompanyId = company.Id;
-		var result = await context.BankAccounts!.AddAsync(bankAccount);
-		await context.SaveChangesAsync();
-		return Result<BankAccount>.Success(result.Entity);
+		try
+		{
+			var result = await context.CompanyTaxes!.AddAsync(new CompanyTax(company.Id, tax.Id));
+			await context.SaveChangesAsync();
+
+			return TransactionResult<CompanyTax>.Success(result.Entity);
+		}
+		catch (Exception ex)
+		{
+			return TransactionResult<CompanyTax>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddTaxesAsync), logger));
+		}
 	}
 
-	public async Task<Result<BankAccount>> CreateDefaultBankAccountAsync(Company company, BankAccount bankAccount)
+	public async Task<TransactionResult<Contact>> AddSalesPersonAsync (Company company, Contact contact)
 	{
-		var result = await context.CompanyDefaultBankAccounts!
-			.AddAsync(new CompanyBankAccount(company.Id, bankAccount.Id));
-		await context.SaveChangesAsync();
-		return Result<BankAccount>.Success(bankAccount);
+		try
+		{
+			var result = await context.Contacts!.AddAsync(contact);
+
+			await context.SalesPeople!.AddAsync(new SalesPerson
+			{
+				CompanyId = company.Id,
+				ContactId = contact.Id,
+			});
+
+			await context.SaveChangesAsync();
+
+			return TransactionResult<Contact>.Success(result.Entity);
+		}
+		catch (Exception ex)
+		{
+
+			return TransactionResult<Contact>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddSalesPersonAsync), logger));
+		}
 	}
 
-	public async Task<Result<CompanyImage>> CreateLogoAsync(Company company, CompanyImage image)
+	public async Task<TransactionResult<BankAccount>> AddBankAccountAsync (Company company, BankAccount bankAccount)
 	{
-		var result = await context.CompanyImages!.AddAsync(image);
-		await context.SaveChangesAsync();
-		await UpdateLogoAsync(company, result.Entity);
-		return Result<CompanyImage>.Success(result.Entity);
+		try
+		{
+			bankAccount.CompanyId = company.Id;
+			var result = await context.BankAccounts!.AddAsync(bankAccount);
+			await context.SaveChangesAsync();
+			return TransactionResult<BankAccount>.Success(result.Entity);
+		}
+		catch (Exception ex)
+		{
+
+			return TransactionResult<BankAccount>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddBankAccountAsync), logger));
+		}
+	}
+
+	public async Task<TransactionResult<BankAccount>> AddDefaultBankAccountAsync (Company company, BankAccount bankAccount)
+	{
+		try
+		{
+
+
+			var result = await context.CompanyDefaultBankAccounts!
+				.AddAsync(new CompanyBankAccount(company.Id, bankAccount.Id));
+			await context.SaveChangesAsync();
+			return TransactionResult<BankAccount>.Success(bankAccount);
+		}
+		catch (Exception ex)
+		{
+
+			return TransactionResult<BankAccount>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddDefaultBankAccountAsync), logger));
+		}
+	}
+
+	public async Task<TransactionResult<CompanyImage>> AddLogoAsync (Company company, CompanyImage image)
+	{
+		try
+		{
+			var result = await context.CompanyImages!.AddAsync(image);
+			await context.SaveChangesAsync();
+			await UpdateLogoAsync(company, result.Entity);
+			return TransactionResult<CompanyImage>.Success(result.Entity);
+		}
+		catch (Exception ex)
+		{
+
+			return TransactionResult<CompanyImage>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddLogoAsync), logger));
+		}
 	}
 }

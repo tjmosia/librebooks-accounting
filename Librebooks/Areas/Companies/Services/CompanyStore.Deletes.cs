@@ -1,4 +1,5 @@
-﻿using Librebooks.Core.Operations;
+﻿using Librebooks.Core.EFCore;
+using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.SalesSpace;
@@ -19,8 +20,8 @@ public partial class CompanyStore : ICompanyStore
 		}
 		catch (Exception ex)
 		{
-			logger!.LogError("***DB Error occurred with Exception while trying to remove Sales Person:*** \n\n{message}", ex.Message);
-			return TransactionResult.Failure();
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteSalesPersonAsync), logger));
 		}
 	}
 
@@ -31,35 +32,29 @@ public partial class CompanyStore : ICompanyStore
 		{
 			context.Companies!.Remove(company);
 			await context.SaveChangesAsync();
+			return TransactionResult.Success;
 		}
 		catch (Exception ex)
 		{
-			logger!.LogError("***DB Error occurred with Exception while removing Company:*** \n\n{message}", ex.Message);
-			return TransactionResult.Failure();
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteAsync), logger));
 		}
-		return TransactionResult.Success;
 	}
 
 	public async Task<TransactionResult> DeleteTaxTypeAsync (CompanyTax companyTaxType)
 	{
-		ArgumentNullException.ThrowIfNull(companyTaxType.TaxType, nameof(companyTaxType.TaxType));
-
-		if (companyTaxType.TaxType!.System)
-			return TransactionResult.Failure(TransactionError.Create("", "Cannot remove a system tax type."));
-
 		try
 		{
 			context.CompanyTaxes!.Remove(companyTaxType);
-			context.Taxes!.Remove(companyTaxType.TaxType);
 			await context.SaveChangesAsync();
+
+			return TransactionResult.Success;
 		}
 		catch (Exception ex)
 		{
-			logger!.LogError("***DB Error occurred with Exception while trying to remove Sales Person:*** \n\n{message}", ex.Message);
-			return TransactionResult.Failure();
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteTaxTypeAsync), logger));
 		}
-
-		return TransactionResult.Success;
 	}
 
 	public async Task<TransactionResult> DeleteBankAccountAsync (BankAccount bankAccount)
@@ -70,9 +65,10 @@ public partial class CompanyStore : ICompanyStore
 			await context.SaveChangesAsync();
 			return TransactionResult.Success;
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return TransactionResult.Failure();
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteBankAccountAsync), logger));
 		}
 	}
 
@@ -84,9 +80,10 @@ public partial class CompanyStore : ICompanyStore
 			await context.SaveChangesAsync();
 			return TransactionResult.Success;
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return TransactionResult.Failure();
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteLogoAsync), logger));
 		}
 	}
 }

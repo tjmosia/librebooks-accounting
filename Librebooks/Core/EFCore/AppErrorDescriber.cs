@@ -1,25 +1,42 @@
 ﻿using Librebooks.Core.Operations;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
-namespace Librebooks.Core.EFCore
+namespace Librebooks.Core.EFCore;
+
+public class AppErrorDescriber
 {
-    public class AppErrorDescriber
-    {
-        public TransactionError DuplicateKey (string errorMessage = "")
-        {
-            return new TransactionError
-            {
-                Code = nameof(DuplicateKey),
-                Description = errorMessage
-            };
-        }
+	public static TransactionError GetErrorFromDbException (Exception ex, string location, ILogger? logger)
+	{
+		logger?.LogError("Exception Occured at {location}: \n {message}", location, ex.Message);
 
-        public TransactionError DuplicateIndex (string errorMessage = "")
-        {
-            return new TransactionError
-            {
-                Code = nameof(DuplicateIndex),
-                Description = errorMessage
-            };
-        }
-    }
+		var code = "";
+		if (ex is DbUpdateConcurrencyException)
+			code = nameof(AppErrorDescriber.Concurrency);
+		if (ex is DbUpdateException && ex.InnerException != null && ex.InnerException is SqlException sqlEx)
+		{
+			var message = sqlEx.Message.ToUpper();
+			if (message.Contains("UNIQUE_INDEX"))
+				code = nameof(AppErrorDescriber.UniqueKeyConstraint);
+			else if (message.Contains("FOREIGN_KEY"))
+				code = nameof(AppErrorDescriber.ForeignKeyConstraint);
+		}
+
+		return new TransactionError(code, "");
+	}
+
+	public static TransactionError Unknown (string message = "")
+		=> new(nameof(Unknown), message);
+
+	public static TransactionError DuplicateKey (string errorMessage = "")
+		=> new(nameof(DuplicateKey), errorMessage);
+
+	public static TransactionError UniqueKeyConstraint (string errorMessage = "")
+		=> new(nameof(UniqueKeyConstraint), errorMessage);
+
+	public static TransactionError ForeignKeyConstraint (string errorMessage = "")
+		=> new(nameof(ForeignKeyConstraint), errorMessage);
+
+	public static TransactionError Concurrency (string errorMessage = "")
+		=> new(nameof(Concurrency), errorMessage);
 }

@@ -17,28 +17,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Accounting\**" />
     <Compile Remove="Areas\Inventory\Data\**" />
     <Compile Remove="Areas\Suppliers\Controllers\**" />
     <Compile Remove="Areas\Suppliers\Data\**" />
     <Compile Remove="Areas\Suppliers\Models\**" />
     <Compile Remove="Extensions\Data\**" />
     <Compile Remove="Extensions\Identity\**" />
-    <Content Remove="Areas\Accounting\**" />
     <Content Remove="Areas\Inventory\Data\**" />
     <Content Remove="Areas\Suppliers\Controllers\**" />
     <Content Remove="Areas\Suppliers\Data\**" />
     <Content Remove="Areas\Suppliers\Models\**" />
     <Content Remove="Extensions\Data\**" />
     <Content Remove="Extensions\Identity\**" />
-    <EmbeddedResource Remove="Areas\Accounting\**" />
     <EmbeddedResource Remove="Areas\Inventory\Data\**" />
     <EmbeddedResource Remove="Areas\Suppliers\Controllers\**" />
     <EmbeddedResource Remove="Areas\Suppliers\Data\**" />
     <EmbeddedResource Remove="Areas\Suppliers\Models\**" />
     <EmbeddedResource Remove="Extensions\Data\**" />
     <EmbeddedResource Remove="Extensions\Identity\**" />
-    <None Remove="Areas\Accounting\**" />
     <None Remove="Areas\Inventory\Data\**" />
     <None Remove="Areas\Suppliers\Controllers\**" />
     <None Remove="Areas\Suppliers\Data\**" />
@@ -72,6 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Accounting\Controllers\" />
     <Folder Include="Areas\Identity\Models\Account\DataTransferObjects\" />
     <Folder Include="Test-Data\" />
   </ItemGroup>

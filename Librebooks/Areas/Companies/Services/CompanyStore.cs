@@ -1,4 +1,4 @@
-﻿using Librebooks.Areas.Systems.Services;
+﻿using Librebooks.Areas.Systems.Providers;
 using Librebooks.Data;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
@@ -9,6 +9,7 @@ using Librebooks.Models.Entity.SystemSpace;
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Areas.Companies.Services;
+
 public partial class CompanyStore (AppDbContext context, ILogger<CompanyStore> logger, ISystemsManager sysManager)
 	: ICompanyStore
 {
@@ -43,75 +44,75 @@ public partial class CompanyStore (AppDbContext context, ILogger<CompanyStore> l
 			.ToListAsync(cancellationToken);
 	}
 
-	public async Task<CompanyRegionalSetup?> FindRegionalSettingsAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<CompanyRegionalSetup?> GetRegionalSettingsAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.CompanyRegionalSettings!
-			.FindAsync([companyId], cancellationToken);
+			.FindAsync([company.Id], cancellationToken);
 
-	public async Task<CompanyImage?> FindLogoAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<CompanyImage?> GetLogoAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.CompanyLogos!
-			.Where(p => p.CompanyId == companyId)
+			.Where(p => p.CompanyId == company.Id)
 			.Include(p => p.Image)
 			.Select(p => p.Image)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<IList<Tax>> FindTaxTypesAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<IList<Tax>> GetTaxesAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.CompanyTaxes!
-			.Where(p => p.CompanyId == companyId)
-			.Include(p => p.TaxType)
-			.Select(p => p.TaxType!)
+			.Where(p => p.CompanyId == company.Id)
+			.Include(p => p.Tax)
+			.Select(p => p.Tax!)
 			.ToListAsync(cancellationToken);
 
-	public async Task<Tax?> FindTaxByIdAsync (int companyId, int taxTypeId, CancellationToken cancellationToken = default)
+	public async Task<Tax?> FindTaxByIdAsync (Company company, int taxTypeId, CancellationToken cancellationToken = default)
 		=> await context!.CompanyTaxes!
-			.Where(p => p.CompanyId == companyId && p.TaxId == taxTypeId)
-			.Include(p => p.TaxType)
-			.Select(p => p.TaxType)
+			.Where(p => p.CompanyId == company.Id && p.TaxId == taxTypeId)
+			.Include(p => p.Tax)
+			.Select(p => p.Tax)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<Tax?> FindDefaultTaxAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<Tax?> GetDefaultTaxAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.CompanyTaxes!
-			.Where(p => p.CompanyId == companyId && p.Default)
-			.Include(p => p.TaxType)
-			.Select(p => p.TaxType)
+			.Where(p => p.CompanyId == company.Id && p.Default)
+			.Include(p => p.Tax)
+			.Select(p => p.Tax)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<CompanyMailSetup?> FindMailSettingsAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<CompanyMailSetup?> GetMailSettingsAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.CompanyMailSettings!
-			.FindAsync([companyId], cancellationToken);
+			.FindAsync([company.Id], cancellationToken);
 
-	public async Task<BankAccount?> FindDefaultBankAccountAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<BankAccount?> GetDefaultBankAccountAsync (Company company, CancellationToken cancellationToken = default)
 	 => await context!.CompanyDefaultBankAccounts!
-			.Where(p => p.CompanyId == companyId)
+			.Where(p => p.CompanyId == company.Id)
 			.Include(p => p.BankAccount)
 			.Select(p => p.BankAccount)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<BankAccount?> FindBankAccountByIdAsync (int companyId, int bankAccountId, CancellationToken cancellationToken = default)
+	public async Task<BankAccount?> FindBankAccountByIdAsync (Company company, int bankAccountId, CancellationToken cancellationToken = default)
 		=> await context!.BankAccounts!
-			.Where(p => p.CompanyId == companyId && bankAccountId == p.Id)
+			.Where(p => p.CompanyId == company.Id && bankAccountId == p.Id)
 			.FirstOrDefaultAsync(cancellationToken);
-	public async Task<IList<BankAccount>> FindBankAccountsAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<IList<BankAccount>> GetBankAccountsAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.BankAccounts!
-			.Where(p => p.CompanyId == companyId)
+			.Where(p => p.CompanyId == company.Id)
 			.ToListAsync(cancellationToken);
 
-	public async Task<Contact?> FindSalesPersonByIdAsync (int companyId, int salesPersonId, CancellationToken cancellationToken = default)
+	public async Task<Contact?> FindSalesPersonByIdAsync (Company company, int salesPersonId, CancellationToken cancellationToken = default)
 		=> await context!.SalesPeople!
-			.Where(p => p.CompanyId == companyId && p.ContactId == salesPersonId)
+			.Where(p => p.CompanyId == company.Id && p.ContactId == salesPersonId)
 			.Include(p => p.Contact)
 			.Select(p => p.Contact)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<Contact?> FindSalesPersonByUserIdAsync (int companyId, int userId, CancellationToken cancellationToken = default)
+	public async Task<Contact?> FindSalesPersonByUserIdAsync (Company company, int userId, CancellationToken cancellationToken = default)
 		=> await context!.SalesPeople!
-			.Where(p => p.CompanyId == companyId && p.CompanyUserId == userId)
+			.Where(p => p.CompanyId == company.Id && p.CompanyUserId == userId)
 			.Include(p => p.Contact)
 			.Select(p => p.Contact)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<IList<User>> FindUsersAsync (int companyId, CancellationToken cancellationToken = default)
+	public async Task<IList<User>> GetUsersAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.CompanyUsers!
-			.Where(p => p.CompanyId == companyId)
+			.Where(p => p.CompanyId == company.Id)
 			.Include(p => p.User)
 			.Select(p => p.User!)
 			.ToListAsync(cancellationToken);

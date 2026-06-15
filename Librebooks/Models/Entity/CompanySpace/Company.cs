@@ -5,6 +5,7 @@ using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.CustomerSpace;
 using Librebooks.Models.Entity.DocumentSpace;
+using Librebooks.Models.Entity.InventorySpace;
 using Librebooks.Models.Entity.SupplierSpace;
 using Librebooks.Models.Entity.SystemSpace;
 
@@ -63,7 +64,8 @@ public class Company : VersionedEntityBase
 	public virtual SupplierSetup? SupplierSetup { get; set; }
 	public virtual ICollection<CompanyUser>? Users { get; set; }
 	public virtual ICollection<DocumentSetup>? DocumentSetups { get; set; }
-	public virtual ICollection<LedgerAccount>? ChartOfAccounts { get; set; }
+	public virtual ICollection<CompanyLedgerAccount>? ChartOfAccounts { get; set; }
+	public ItemSetup? ItemSetup { get; set; }
 
 	public Company () : base()
 	{

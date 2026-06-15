@@ -1,7 +1,8 @@
-﻿using Librebooks.Areas.Companies.Services;
-using Librebooks.Areas.Inventory.Services;
-using Librebooks.Areas.Systems.Services;
-using Librebooks.Areas.Systems.Services.Stores;
+﻿using Librebooks.Areas.Accounting.Providers;
+using Librebooks.Areas.Companies.Services;
+using Librebooks.Areas.Inventory.Providers;
+using Librebooks.Areas.Systems.Providers;
+using Librebooks.Areas.Systems.Providers.Stores;
 
 
 //using Librebooks.Areas.Accounting.Services;
@@ -32,5 +33,6 @@ public static class AreaServices
 		services.AddScoped<ICompanyStore, CompanyStore>();
 		services.AddScoped<ICompanyManager, CompanyManager>();
 
+		services.AddScoped<LedgerAccountStore>();
 	}
 }

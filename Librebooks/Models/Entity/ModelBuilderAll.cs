@@ -116,6 +116,7 @@ namespace Librebooks.Models.Entity
 			LedgerAccountCashFlowType.OnModelCreating(builder);
 			JournalEntry.OnModelCreating(builder);
 			JournalNote.OnModelCreating(builder);
+			CompanyLedgerAccount.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Supplier Space

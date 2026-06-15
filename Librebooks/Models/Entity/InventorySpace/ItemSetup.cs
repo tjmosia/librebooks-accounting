@@ -24,8 +24,8 @@ public class ItemSetup () : VersionedEntityBase()
 	{
 		builder.Entity<ItemSetup>(options =>
 		{
-			options.HasOne(p=>p.Company)
-				.WithOne()
+			options.HasOne(p => p.Company)
+				.WithOne(p => p.ItemSetup)
 				.HasForeignKey<ItemSetup>(p => p.CompanyId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);

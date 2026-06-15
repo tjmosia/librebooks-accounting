@@ -90,6 +90,7 @@ namespace Librebooks.Data
 		public DbSet<JournalEntry>? JournalEntries { get; set; }
 		public DbSet<JournalNote>? JournalNotes { get; set; }
 		public DbSet<LedgerAccountCashFlowType>? LedgerAccountCashFlowTypes { get; set; }
+		public DbSet<CompanyLedgerAccount>? CompanyLedgerAccounts { get; set; }
 
 		/************************************************************************************************
          * Banking Space

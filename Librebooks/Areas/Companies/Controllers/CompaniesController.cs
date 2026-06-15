@@ -2,7 +2,7 @@
 using Librebooks.Areas.Companies.Models;
 using Librebooks.Areas.Companies.Services;
 using Librebooks.Areas.Identity.Services;
-using Librebooks.Areas.Systems.Services;
+using Librebooks.Areas.Systems.Providers;
 using Librebooks.Core.Operations;
 using Librebooks.Extensions.Mvc;
 using Librebooks.Models.Entity.CompanySpace;
@@ -15,15 +15,12 @@ namespace Librebooks.Areas.Companies.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class CompaniesController
-	(ISystemsManager sysManager,
-	ICompanyManager companyManager,
+	(SystemsStore sysStore,
 	UserManagerExtension userManager,
 	ICompanyStore companyStore)
 	: SessionControllerBase(userManager)
 {
-	private readonly ISystemsManager sysManager = sysManager;
-	private readonly ICompanyManager companyManager = companyManager;
-	private readonly ICompanyStore companyStore = companyStore;
+	private readonly SystemsStore SystemsStore = sysStore;
 
 	[HttpGet]
 	[Route("{id}")]
@@ -48,7 +45,7 @@ public class CompaniesController
 		if (!validationResult.IsValid)
 			return BadRequest(TransactionResult.Failure([.. validationResult.Errors.Select(p => TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
-		var taxes = await sysManager.GetTaxesAsync();
+		var taxes = await SystemsStore.TaxTypesStore.FindAllAsync();
 
 		var company = new Company()
 		{
@@ -61,21 +58,7 @@ public class CompaniesController
 			EmailAddress = input.Email,
 			VATNumber = input.VATNumber,
 			TradingName = input.TradingName,
-			LegalName = input.LegalName,
-
-			RegionalSetup = new()
-			{
-				DateFormatId = input.DateFormatId,
-				DecimalMark = ".",
-				RoundToNearest = 2,
-				ThousandsSeperator = " "
-			},
-			Taxes = [..taxes.Select(p => new CompanyTax
-			{
-				TaxType = p,
-			})],
-
-
+			LegalName = input.LegalName
 		};
 
 		if (input.Logo != null)

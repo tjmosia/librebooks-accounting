@@ -14,6 +14,7 @@ public class DateFormat () : VersionedEntityBase()
 
 	[Required, MaxLength(50)]
 	public virtual string? Format { get; set; }
+	public virtual bool Default { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

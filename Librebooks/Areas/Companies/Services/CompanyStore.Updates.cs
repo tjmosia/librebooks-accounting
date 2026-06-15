@@ -1,18 +1,17 @@
-﻿using Librebooks.Core.Operations;
+﻿using Librebooks.Core.EFCore;
+using Librebooks.Core.Operations;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.CustomerSpace;
 using Librebooks.Models.Entity.DocumentSpace;
 using Librebooks.Models.Entity.InventorySpace;
 using Librebooks.Models.Entity.SupplierSpace;
-using Librebooks.Models.Entity.SystemSpace;
-using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Areas.Companies.Services;
 
 public partial class CompanyStore : ICompanyStore
 {
-	public async Task<Result<Company>> UpdateAsync(Company company)
+	public async Task<TransactionResult<Company>> UpdateAsync (Company company)
 	{
 		company.RefreshConcurrencyToken();
 
@@ -20,62 +19,59 @@ public partial class CompanyStore : ICompanyStore
 		{
 			var result = context.Companies!.Update(company);
 			await context.SaveChangesAsync();
-			return Result<Company>.Success(result.Entity);
+			return TransactionResult<Company>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<Company>.Failure();
-			throw;
+			return TransactionResult<Company>.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateAsync), logger));
 		}
 	}
 
-	public async Task<Result<CompanyRegionalSetup>> UpdateRegionalSettingsAsync(CompanyRegionalSetup regionalSettings)
+	public async Task<TransactionResult<CompanyRegionalSetup>> UpdateRegionalSettingsAsync (CompanyRegionalSetup regionalSettings)
 	{
 		try
 		{
 			var result = context!.CompanyRegionalSettings!.Update(regionalSettings);
 			await context.SaveChangesAsync();
-			return Result<CompanyRegionalSetup>.Success(result.Entity);
+			return TransactionResult<CompanyRegionalSetup>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<CompanyRegionalSetup>.Failure();
-			throw;
+			return TransactionResult<CompanyRegionalSetup>.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateRegionalSettingsAsync), logger));
 		}
 	}
 
-	public async Task<Result<CompanyBankAccount>> UpdateDefaultTaxTypeAsync(CompanyTax defaultTaxType)
+	public async Task<TransactionResult<CompanyBankAccount>> UpdateDefaultTaxAsync (CompanyTax defaultTax)
 	{
 		try
 		{
-			defaultTaxType.Default = true;
-			context!.CompanyTaxes!.Update(defaultTaxType);
+			defaultTax.Default = true;
+			context!.CompanyTaxes!.Update(defaultTax);
 			await context!.SaveChangesAsync();
-			return Result<CompanyBankAccount>.Success();
+			return TransactionResult<CompanyBankAccount>.Success();
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<CompanyBankAccount>.Failure();
-			throw;
+			return TransactionResult<CompanyBankAccount>.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateDefaultTaxAsync), logger));
 		}
 	}
 
-	public async Task<Result<Tax>> UpdateTaxAsync(Tax tax)
+	public async Task<TransactionResult<CompanyTax>> UpdateTaxAsync (CompanyTax tax)
 	{
 		try
 		{
-			var result = context!.Taxes!.Update(tax);
+			var result = context!.CompanyTaxes!.Update(tax);
 			await context.SaveChangesAsync();
-			return Result<Tax>.Success(result.Entity);
+			return TransactionResult<CompanyTax>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<Tax>.Failure();
-			throw;
+			return TransactionResult<CompanyTax>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateTaxAsync), logger));
 		}
 	}
 
-	public async Task<Result<CompanyImage>> UpdateLogoAsync(Company company, CompanyImage companyImage)
+	public async Task<TransactionResult<CompanyImage>> UpdateLogoAsync (Company company, CompanyImage companyImage)
 	{
 		try
 		{
@@ -93,102 +89,102 @@ public partial class CompanyStore : ICompanyStore
 			}
 
 			await context!.SaveChangesAsync();
-			return Result<CompanyImage>.Success(image.Entity);
+			return TransactionResult<CompanyImage>.Success(image.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<CompanyImage>.Failure();
-			throw;
+			return TransactionResult<CompanyImage>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateLogoAsync), logger));
 		}
 	}
 
-	public async Task<Result> UpdateMailSettingsAsync(CompanyMailSetup companyMailSettings)
+	public async Task<TransactionResult> UpdateMailSettingsAsync (CompanyMailSetup companyMailSettings)
 	{
 		try
 		{
 			context!.CompanyMailSettings!.Update(companyMailSettings);
 			await context!.SaveChangesAsync();
-			return Result.Success;
+			return TransactionResult.Success;
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result.Failure();
-			throw;
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateMailSettingsAsync), logger));
 		}
 	}
 
-	public async Task<Result<SupplierSetup>> UpdateSupplierSetupAsync(SupplierSetup supplierSetup)
+	public async Task<TransactionResult<SupplierSetup>> UpdateSupplierSetupAsync (SupplierSetup supplierSetup)
 	{
 		try
 		{
 			var result = context.SupplierSetups!.Update(supplierSetup);
 			await context.SaveChangesAsync();
-			return Result<SupplierSetup>.Success(result.Entity);
+			return TransactionResult<SupplierSetup>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<SupplierSetup>.Failure();
-			throw;
+			return TransactionResult<SupplierSetup>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateSupplierSetupAsync), logger));
 		}
 	}
 
-	public async Task<Result<CustomerSetup>> UpdateCustomerSetupAsync(CustomerSetup customerSetup)
+	public async Task<TransactionResult<CustomerSetup>> UpdateCustomerSetupAsync (CustomerSetup customerSetup)
 	{
 		try
 		{
 			var result = context.CustomerSetups!.Update(customerSetup);
 			await context.SaveChangesAsync();
-			return Result<CustomerSetup>.Success(result.Entity);
+			return TransactionResult<CustomerSetup>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<CustomerSetup>.Failure();
-			throw;
+			return TransactionResult<CustomerSetup>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateCustomerSetupAsync), logger));
 		}
 	}
 
-	public async Task<Result<ItemSetup>> UpdateItemSetupAsync(ItemSetup itemSetup)
+	public async Task<TransactionResult<ItemSetup>> UpdateItemSetupAsync (ItemSetup itemSetup)
 	{
 		try
 		{
 			var result = context.ItemSetups!.Update(itemSetup);
 			await context.SaveChangesAsync();
-			return Result<ItemSetup>.Success(result.Entity);
+			return TransactionResult<ItemSetup>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<ItemSetup>.Failure();
-			throw;
+			return TransactionResult<ItemSetup>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateItemSetupAsync), logger));
 		}
 	}
 
-	public async Task<Result<DocumentSetup>> UpdateDocumentSetupAsync(DocumentSetup documentSetup)
+	public async Task<TransactionResult<DocumentSetup>> UpdateDocumentSetupAsync (DocumentSetup documentSetup)
 	{
 		try
 		{
 			var result = context.DocumentSetups!.Update(documentSetup);
 			await context.SaveChangesAsync();
-			return Result<DocumentSetup>.Success(result.Entity);
+			return TransactionResult<DocumentSetup>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<DocumentSetup>.Failure();
-			throw;
+			return TransactionResult<DocumentSetup>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateDocumentSetupAsync), logger));
 		}
 	}
 
-	public async Task<Result<BankAccount>> UpdateBankAccountAsync(BankAccount bankAccount)
+	public async Task<TransactionResult<BankAccount>> UpdateBankAccountAsync (BankAccount bankAccount)
 	{
 		try
 		{
 			var result = context.BankAccounts!.Update(bankAccount);
 			await context.SaveChangesAsync();
-			return Result<BankAccount>.Success(result.Entity);
+			return TransactionResult<BankAccount>.Success(result.Entity);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return Result<BankAccount>.Failure();
-			throw;
+			return TransactionResult<BankAccount>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateBankAccountAsync), logger));
 		}
 
 	}
