@@ -11,8 +11,8 @@ public class SalesOrderInvoice
     public virtual int InvoiceId { get; set; }
 
 
-    public virtual SalesOrder? Order { get; set; }
-    public virtual SalesInvoice? Invoice { get; set; }
+    public SalesOrder? Order { get; set; }
+    public SalesInvoice? Invoice { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)
     {

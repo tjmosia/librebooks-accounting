@@ -5,8 +5,8 @@ namespace Librebooks.Models.Entity.IdentitySpace;
 
 public class Role : IdentityRole<int>
 {
-	public virtual ICollection<RoleClaim>? Claims { get; set; }
-	public virtual ICollection<UserRole>? Users { get; set; }
+	public ICollection<RoleClaim>? Claims { get; set; }
+	public ICollection<UserRole>? Users { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

@@ -68,6 +68,8 @@ namespace Librebooks.Data
 		public DbSet<DocumentCustomerDetails>? DocumentCustomerDetails { get; set; }
 		public DbSet<SalesInvoiceCredit>? SalesInvoiceCredits { get; set; }
 		public DbSet<SalesInvoiceWriteoff>? SalesInvoiceWriteoffs { get; set; }
+		public DbSet<SalesQuoteProForma>? SalesQuoteProFormas { get; set; }
+		public DbSet<SalesProForma>? SalesProFormas { get; set; }
 
 		/************************************************************************************************
          * Inventory Space
@@ -83,11 +85,11 @@ namespace Librebooks.Data
 		/************************************************************************************************
          * Accounting Space
          ************************************************************************************************/
-		public DbSet<Account>? Accounts { get; set; }
-		public DbSet<AccountCategory>? AccountCategories { get; set; }
+		public DbSet<LedgerAccount>? LedgerAccounts { get; set; }
+		public DbSet<LedgerAccountCategory>? LedgerAccountCategories { get; set; }
 		public DbSet<JournalEntry>? JournalEntries { get; set; }
 		public DbSet<JournalNote>? JournalNotes { get; set; }
-		public DbSet<AccountCashFlowType>? AccountCashFlowTypes { get; set; }
+		public DbSet<LedgerAccountCashFlowType>? LedgerAccountCashFlowTypes { get; set; }
 
 		/************************************************************************************************
          * Banking Space

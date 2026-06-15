@@ -9,13 +9,13 @@ using Librebooks.Models.Entity.SystemSpace;
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Areas.Companies.Services;
-
 public partial class CompanyStore (AppDbContext context, ILogger<CompanyStore> logger, ISystemsManager sysManager)
 	: ICompanyStore
 {
 	private readonly ISystemsManager systemManager = sysManager;
 	private readonly AppDbContext context = context;
 	private readonly ILogger<CompanyStore> logger = logger;
+
 	public async Task<Company?> FindByIdAsync (int companyId, CancellationToken cancellationToken = default)
 		=> await context!.Companies!
 			.Where(p => p.Id == companyId)

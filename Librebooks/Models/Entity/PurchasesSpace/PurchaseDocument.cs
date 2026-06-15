@@ -15,6 +15,7 @@ public class PurchaseDocument () : VersionedEntityBase()
 	public virtual int Id { get; set; }
 	public virtual DateOnly Date { get; set; }
 	public virtual DateOnly? DueDate { get; set; }
+	public virtual string? Title { get; set; }
 
 	[MaxLength(50)]
 	public virtual string? Number { get; set; }
@@ -33,12 +34,14 @@ public class PurchaseDocument () : VersionedEntityBase()
 	public virtual int? SupplierInfoId { get; set; }
 	public virtual int CompanyInfoId { get; set; }
 	public virtual int StatusId { get; set; }
+	public virtual int TypeId { get; set;  }
 
 	public virtual DocumentStatus? Status { get; set; }
 	public virtual ICollection<PurchaseDocumentLine>? Lines { get; set; }
 	public virtual ICollection<PurchaseDocumentNote>? Notes { get; set; }
 	public virtual DocumentSupplierDetail? SupplierInfo { get; set; }
 	public virtual DocumentCompanyDetail? CompanyInfo { get; set; }
+	public virtual DocumentType? Type { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
@@ -65,6 +68,12 @@ public class PurchaseDocument () : VersionedEntityBase()
 			options.HasOne(p => p.SupplierInfo)
 				.WithMany()
 				.HasForeignKey(p => p.SupplierInfoId)
+					.IsRequired(false)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.Type)
+				.WithMany()
+				.HasForeignKey(p => p.TypeId)
 					.IsRequired(false)
 				.OnDelete(DeleteBehavior.Restrict);
 

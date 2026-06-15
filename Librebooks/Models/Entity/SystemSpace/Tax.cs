@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
+using Librebooks.Models.Entity.CompanySpace;
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.SystemSpace;
@@ -22,6 +23,8 @@ public class Tax () : VersionedEntityBase()
 
 	[Required, MaxLength(100)]
 	public virtual string? Type { get; set; }
+
+	public CompanyTax? Company { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

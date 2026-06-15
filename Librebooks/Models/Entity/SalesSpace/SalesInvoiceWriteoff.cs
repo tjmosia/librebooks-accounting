@@ -18,8 +18,8 @@ public class SalesInvoiceWriteoff () : VersionedEntityBase()
 	[Column(TypeName = ColumnTypes.MONETARY)]
 	public virtual decimal Amount { get; set; }
 
-	public virtual CustomerWriteOff? WriteOff { get; set; }
-	public virtual SalesInvoice? Invoice { get; set; }
+	public CustomerWriteOff? WriteOff { get; set; }
+	public SalesInvoice? Invoice { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

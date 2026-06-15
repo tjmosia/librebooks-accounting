@@ -68,7 +68,8 @@ namespace Librebooks.Models.Entity
 			SalesQuote.OnModelCreating(builder);
 			SalesQuoteOrder.OnModelCreating(builder);
 			SalesReceipt.OnModelCreating(builder);
-
+			SalesProForma.OnModelCreating(builder);
+			SalesQuoteProForma.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Company Space
@@ -110,9 +111,9 @@ namespace Librebooks.Models.Entity
 			/************************************************************************************************
              * Accounting Space
              ************************************************************************************************/
-			Account.OnModelCreating(builder);
-			AccountCategory.OnModelCreating(builder);
-			AccountCashFlowType.OnModelCreating(builder);
+			LedgerAccount.OnModelCreating(builder);
+			LedgerAccountCategory.OnModelCreating(builder);
+			LedgerAccountCashFlowType.OnModelCreating(builder);
 			JournalEntry.OnModelCreating(builder);
 			JournalNote.OnModelCreating(builder);
 

@@ -41,9 +41,9 @@ public class SalesLine () : VersionedEntityBase()
 	[MaxLength(500)]
 	public virtual string? Comment { get; set; }
 
-	public virtual ICollection<SalesDocumentLine>? DocumentLines { get; set; }
-	public virtual Item? Item { get; set; }
-	public virtual CompanyTax? Tax { get; set; }
+	public ICollection<SalesDocumentLine>? DocumentLines { get; set; }
+	public Item? Item { get; set; }
+	public CompanyTax? Tax { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

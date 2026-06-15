@@ -10,67 +10,56 @@ namespace Librebooks.Models.Entity.IdentitySpace;
 
 public class User : IdentityUser<int>
 {
-	[Required]
-	[MaxLength(50)]
-	public virtual string? Name { get; set; }
+    [Required]
+    [MaxLength(50)]
+    public virtual string? Name { get; set; }
 
-	[Required]
-	[MaxLength(50)]
-	public virtual string? Surname { get; set; }
+    [Required]
+    [MaxLength(50)]
+    public virtual string? Surname { get; set; }
 
-	public virtual string? Photo { get; set; }
+    [MaxLength(155)]
+    public virtual string? Photo { get; set; }
 
-	public virtual DateOnly DateRegistered { get; set; }
-	public virtual DateOnly DateLastLoggedIn { get; set; }
+    public virtual DateOnly DateRegistered { get; set; }
+    public virtual DateOnly DateLastLoggedIn { get; set; }
 
-	[MaxLength(155)]
-	public virtual string? LoginHash { get; set; }
+    public ICollection<UserRole>? Roles { get; set; }
+    public ICollection<UserLogin>? Logins { get; set; }
+    public ICollection<UserToken>? Tokens { get; set; }
+    public ICollection<UserClaim>? Claims { get; set; }
+    public ICollection<CompanyUser>? Companies { get; set; }
 
-	[MaxLength(155)]
-	public virtual string? RefreshSecurityStamp { get; set; }
+    public static void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<User>(options =>
+        {
+            options.ToTable(nameof(User));
 
-	[MaxLength(155)]
-	public virtual string? RefreshLoginHash { get; set; }
+            options.HasMany(p => p.Roles)
+                .WithOne(p => p.User)
+                    .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-	public virtual ICollection<UserRole>? Roles { get; set; }
-	public virtual ICollection<UserLogin>? Logins { get; set; }
-	public virtual ICollection<UserToken>? Tokens { get; set; }
-	public virtual ICollection<UserClaim>? Claims { get; set; }
-	public virtual ICollection<CompanyUser>? Companies { get; set; }
+            options.HasMany(p => p.Logins)
+                .WithOne(p => p.User)
+                    .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-	[NotMapped]
-	public virtual string? FullName { get => $"{Name} + {Surname}"; }
+            options.HasMany(p => p.Tokens)
+                .WithOne(p => p.User)
+                    .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-	public static void OnModelCreating (ModelBuilder builder)
-	{
-		builder.Entity<User>(options =>
-		{
-			options.ToTable(nameof(User));
+            options.HasMany(p => p.Claims)
+                .WithOne(p => p.User)
+                    .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-			options.HasMany(p => p.Roles)
-				.WithOne(p => p.User)
-					.HasForeignKey(p => p.UserId)
-				.OnDelete(DeleteBehavior.Cascade);
-
-			options.HasMany(p => p.Logins)
-				.WithOne(p => p.User)
-					.HasForeignKey(p => p.UserId)
-				.OnDelete(DeleteBehavior.Cascade);
-
-			options.HasMany(p => p.Tokens)
-				.WithOne(p => p.User)
-					.HasForeignKey(p => p.UserId)
-				.OnDelete(DeleteBehavior.Cascade);
-
-			options.HasMany(p => p.Claims)
-				.WithOne(p => p.User)
-					.HasForeignKey(p => p.UserId)
-				.OnDelete(DeleteBehavior.Cascade);
-
-			options.HasMany(p => p.Companies)
-				.WithOne(p => p.User)
-					.HasForeignKey(p => p.UserId)
-				.OnDelete(DeleteBehavior.Restrict);
-		});
-	}
+            options.HasMany(p => p.Companies)
+                .WithOne(p => p.User)
+                    .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+    }
 }

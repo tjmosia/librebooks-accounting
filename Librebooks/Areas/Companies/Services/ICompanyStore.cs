@@ -44,16 +44,16 @@ namespace Librebooks.Areas.Companies.Services
 		/***********************************************************************************************************************************
          ****** UPDATE TRANSACTIONS
          ***********************************************************************************************************************************/
-		Task<Result<CompanyRegionalSetup>> UpdateRegionalSettingsAsync (CompanyRegionalSetup regionalSettings, CancellationToken cancellationToken = default);
-		Task<Result<Tax>> UpdateTaxAsync (Tax tax, CancellationToken cancellationToken = default);
-		Task<Result<CompanyImage>> UpdateLogoAsync (CompanyImage companyImage, CancellationToken cancellationToken = default);
-		Task<Result> UpdateMailSettingsAsync (CompanyMailSetup mailSettings, CancellationToken cancellationToken = default);
-		Task<Result<SupplierSetup>> UpdateSupplierSetupAsync (SupplierSetup supplierSetup, CancellationToken cancellationToken = default);
-		Task<Result<CustomerSetup>> UpdateCustomerSetupAsync (CustomerSetup customerSetup, CancellationToken cancellationToken = default);
-		Task<Result<ItemSetup>> UpdateItemSetupAsync (ItemSetup itemSetup, CancellationToken cancellationToken = default);
-		Task<Result<DocumentSetup>> UpdateDocumentSetupAsync (DocumentSetup documentSetup, CancellationToken cancellationToken = default);
-		Task<Result<BankAccount>> UpdateBankAccountAsync (BankAccount bankAccount, CancellationToken cancellationToken = default);
-		Task<Result<Company>> UpdateAsync (Company company, CancellationToken cancellation = default);
+		Task<Result<CompanyRegionalSetup>> UpdateRegionalSettingsAsync (CompanyRegionalSetup regionalSettings);
+		Task<Result<Tax>> UpdateTaxAsync (Tax tax);
+		Task<Result<CompanyImage>> UpdateLogoAsync (Company company, CompanyImage companyImage);
+		Task<Result> UpdateMailSettingsAsync (CompanyMailSetup mailSettings);
+		Task<Result<SupplierSetup>> UpdateSupplierSetupAsync (SupplierSetup supplierSetup);
+		Task<Result<CustomerSetup>> UpdateCustomerSetupAsync (CustomerSetup customerSetup);
+		Task<Result<ItemSetup>> UpdateItemSetupAsync (ItemSetup itemSetup);
+		Task<Result<DocumentSetup>> UpdateDocumentSetupAsync (DocumentSetup documentSetup);
+		Task<Result<BankAccount>> UpdateBankAccountAsync (BankAccount bankAccount);
+		Task<Result<Company>> UpdateAsync (Company company);
 
 		/***********************************************************************************************************************************
          ****** DELETE TRANSACTIONS

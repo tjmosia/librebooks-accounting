@@ -63,7 +63,7 @@ public class Company : VersionedEntityBase
 	public virtual SupplierSetup? SupplierSetup { get; set; }
 	public virtual ICollection<CompanyUser>? Users { get; set; }
 	public virtual ICollection<DocumentSetup>? DocumentSetups { get; set; }
-	public virtual ICollection<Account>? ChartOfAccounts { get; set; }
+	public virtual ICollection<LedgerAccount>? ChartOfAccounts { get; set; }
 
 	public Company () : base()
 	{

@@ -26,7 +26,7 @@ public class CompanyTax ()
 		TaxId = taxTypeId;
 	}
 
-	public virtual Tax? TaxType { get; set; }
+	public virtual Tax? Tax { get; set; }
 
 	public static void BuildModel (ModelBuilder builder)
 	{
@@ -42,7 +42,7 @@ public class CompanyTax ()
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
-			options.HasOne(p => p.TaxType)
+			options.HasOne(p => p.Tax)
 				.WithOne()
 				.HasForeignKey<CompanyTax>(p => p.TaxId)
 				.IsRequired(true)
@@ -54,7 +54,7 @@ public class CompanyTax ()
 					.IsRequired(false)
 				.OnDelete(DeleteBehavior.SetNull);
 
-			options.HasMany<Account>()
+			options.HasMany<LedgerAccount>()
 				.WithOne(p => p.Tax)
 				.HasForeignKey(p => p.TaxId)
 					.IsRequired(false)

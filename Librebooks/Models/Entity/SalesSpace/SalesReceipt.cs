@@ -41,9 +41,9 @@ public class SalesReceipt () : VersionedEntityBase()
     public virtual int CustomerId { get; set; }
     public virtual int PaymentMethodId { get; set; }
 
-    public virtual BankAccount? BankAccount { get; set; }
-    public virtual PaymentMethod? PaymentMethod { get; set; }
-    public virtual ICollection<SalesInvoiceReceipt>? AllocatedInvoices { get; set; }
+    public BankAccount? BankAccount { get; set; }
+    public PaymentMethod? PaymentMethod { get; set; }
+    public ICollection<SalesInvoiceReceipt>? AllocatedInvoices { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)
     {

@@ -16,8 +16,8 @@ public class SalesPerson
 	public virtual int CompanyId { get; set; }
 	public virtual int? CompanyUserId { get; set; }
 
-	public virtual Contact? Contact { get; set; }
-	public virtual CompanyUser? CompanyUser { get; set; }
+	public Contact? Contact { get; set; }
+	public CompanyUser? CompanyUser { get; set; }
 
 	public SalesPerson () { }
 

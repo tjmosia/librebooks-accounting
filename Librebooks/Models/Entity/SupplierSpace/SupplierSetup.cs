@@ -23,11 +23,13 @@ namespace Librebooks.Models.Entity.SupplierSpace
 		[MaxLength(10)]
 		public virtual string? NumberFormat { get; set; }
 
+		public virtual Company? Company { get; set; }
+
 		public static void OnModelCreating (ModelBuilder builder)
 		{
 			builder.Entity<SupplierSetup>(options =>
 			   {
-				   options.HasOne<Company>()
+				   options.HasOne(p=>p.Company)
 					   .WithOne(p => p.SupplierSetup)
 					   .HasForeignKey<SupplierSetup>(p => p.CompanyId)
 						   .IsRequired()
