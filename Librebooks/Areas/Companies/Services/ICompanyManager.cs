@@ -7,5 +7,4 @@ namespace Librebooks.Areas.Companies.Services;
 public interface ICompanyManager
 {
 	Task<TransactionResult<Company>> CreateASync (Company company, User user);
-	Task<TransactionResult<Company>> UpdateAsync (Company company);
 }

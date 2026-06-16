@@ -7,6 +7,7 @@ namespace Librebooks.Models.Entity.SystemSpace;
 
 [Table(nameof(Country))]
 [Index(nameof(Name), IsUnique = true)]
+[Index(nameof(Code), IsUnique = true)]
 public class Country () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -23,7 +24,6 @@ public class Country () : VersionedEntityBase()
 
 	public void NormalizeCode ()
 		=> Code = Code?.ToUpper();
-
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

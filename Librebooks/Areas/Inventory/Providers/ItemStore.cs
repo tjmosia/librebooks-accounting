@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Areas.Inventory.Providers;
 
-public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger)
+public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) : IItemStore
 {
 	private readonly AppDbContext context = context;
 	private readonly ILogger<ItemStore> logger = logger;
 
+	/********************************************************************
+	 * ITEM OPERATIONS
+	 *******************************************************************/
 	public async Task<TransactionResult<Item>> CreateAsync (Company company, Item item)
 	{
 		try
@@ -44,17 +47,51 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger)
 		}
 	}
 
+	public async Task<Item?> FindByCodeAsync (Company company, string itemCode, CancellationToken cancellationToken = default)
+		=> await context!.Items!
+			.Where(p => p.Code == itemCode && p.CompanyId == company.Id)
+			.Include(p => p.Inventory)
+			.FirstOrDefaultAsync(cancellationToken);
+
+	public async Task<IList<Item>> FindAllAsync (Company company, CancellationToken cancellationToken = default)
+		=> await context!.Items!
+			.Where(p => p.CompanyId == company.Id)
+			.Include(p => p.Inventory)
+			.ToListAsync(cancellationToken);
+
 	public async Task<Item?> FindByIdAsync (Company company, int itemId, CancellationToken cancellationToken = default) =>
 		await context!.Items!.Where(p => p.Id == itemId && p.CompanyId == company.Id)
 			.Include(p => p.Inventory)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<IList<ItemAdjustment>> FindAdjustmentsByItemIdAsync (Company company, int itemId, CancellationToken cancellationToken = default)
+	public async Task<TransactionResult> DeleteItemAsync (Item item)
+	{
+		try
+		{
+			var adjustments = await FindAdjustmentsByItemAsync(item);
+			if (adjustments.Count > 0)
+				context!.RemoveRange(adjustments);
+			context!.RemoveRange(item);
+			await context!.SaveChangesAsync();
+			return TransactionResult.Success;
+		}
+		catch (Exception ex)
+		{
+			return TransactionResult
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteItemAsync), logger));
+		}
+	}
+
+
+	/********************************************************************
+	 * ITEM ADJUSTMENTS OPERATIONS
+	 *******************************************************************/
+
+	public async Task<IList<ItemAdjustment>> FindAdjustmentsByItemAsync (Item item, CancellationToken cancellationToken = default)
 		=> await context!.ItemAdjustments!
-			.Where(p => p.ItemId == itemId && p.CompanyId == company.Id)
+			.Where(p => p.CompanyId == item.CompanyId && p.ItemId == item.Id)
 			.Include(p => p.Item)
 			.ToListAsync(cancellationToken);
-
 	public async Task<IList<ItemAdjustment>> FindAdjustmentsAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.ItemAdjustments!
 			.Where(p => p.CompanyId == company.Id)
@@ -63,25 +100,16 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger)
 
 	public async Task<ItemAdjustment?> FindAdjustmentByIdAsync (Company company, int adjustmentId, CancellationToken cancellationToken = default)
 		=> await context!.ItemAdjustments!
-			.Where(p => p.Id == adjustmentId && p.CompanyId == company.Id)
+			.Where(p => p.CompanyId == company.Id && p.Id == adjustmentId)
 			.Include(p => p.Item)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<Item?> FindByCodeAsync (Company company, string itemCode, CancellationToken cancellationToken = default)
-		=> await context!.Items!
-			.Where(p => p.Code == itemCode && p.CompanyId == company.Id)
-			.FirstOrDefaultAsync(cancellationToken);
-
-	public async Task<IList<Item>> FindAllAsync (Company company, CancellationToken cancellationToken = default)
-		=> await context!.Items!
-			.Where(p => p.CompanyId == company.Id)
-			.ToListAsync(cancellationToken);
-
-	public async Task<TransactionResult<ItemAdjustment>> CreateAdjustmentAsync (Company company, ItemAdjustment adjustment)
+	public async Task<TransactionResult<ItemAdjustment>> CreateAdjustmentAsync (Item item, ItemAdjustment adjustment)
 	{
 		try
 		{
-			adjustment.CompanyId = company.Id;
+			adjustment.CompanyId = item.CompanyId;
+			adjustment.Id = item.Id;
 			var result = await context!.ItemAdjustments!.AddAsync(adjustment);
 			await context!.SaveChangesAsync();
 			return TransactionResult<ItemAdjustment>.Success(result.Entity);
@@ -94,21 +122,63 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger)
 		}
 	}
 
-	public async Task<TransactionResult> DeleteItemAsync (Company company, Item item)
+	public async Task<TransactionResult<ItemAdjustment>> UpdateAdjustmentAsync (ItemAdjustment adjustment)
 	{
 		try
 		{
-			var adjustments = await FindAdjustmentsByItemIdAsync(company, item.Id!);
-			if (adjustments.Count > 0)
-				context!.RemoveRange(adjustments);
-			context!.RemoveRange(item.Inventory!, item);
+			var update = context!.ItemAdjustments!.Update(adjustment);
+			await context!.SaveChangesAsync();
+			return TransactionResult<ItemAdjustment>.Success(update.Entity);
+
+		}
+		catch (Exception ex)
+		{
+			return TransactionResult<ItemAdjustment>
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateAdjustmentAsync), logger));
+		}
+	}
+
+	public async Task<TransactionResult> DeleteAdjustmentAsync (ItemAdjustment adjustment)
+	{
+		try
+		{
+			context!.ItemAdjustments!.RemoveRange(adjustment);
 			await context!.SaveChangesAsync();
 			return TransactionResult.Success;
 		}
 		catch (Exception ex)
 		{
 			return TransactionResult
-				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteItemAsync), logger));
+				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteAdjustmentAsync), logger));
 		}
+	}
+
+
+	/********************************************************************
+	 * ITEM CATEGORIES
+	 *******************************************************************/
+	public Task<IList<ItemCategory>> FindCategoriesAsync (Company company, CancellationToken cancellationToken = default)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<ItemCategory?> FindCategoryByIdAsync (Company company, int categoryId, CancellationToken cancellationToken = default)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<TransactionResult<ItemCategory>> CreateCategoryAsync (Company company, ItemCategory category)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<TransactionResult<ItemCategory>> UpdateCategoryAsync (ItemCategory category)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<TransactionResult> DeleteCategoryAsync (ItemCategory category)
+	{
+		throw new NotImplementedException();
 	}
 }

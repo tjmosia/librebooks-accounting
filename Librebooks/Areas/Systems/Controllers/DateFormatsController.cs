@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Librebooks.Areas.Systems.Controllers;
 
 [ApiController]
-public class DateFormatsController (ISystemsManager systemManager)
-	: SystemsControllerBase(systemManager)
+public class DateFormatsController (ISystemsStore store) : ControllerBase
 {
+	private readonly ISystemsStore store = store;
+
 	[HttpGet]
 	public async Task<IList<DateFormatData>> OnGetAsync ()
 	{
-		return [.. (await Manager.GetDateFormatsAsync()).Select(p => new DateFormatData(p))];
+		return [.. (await store.FindDateFormatsAsync()).Select(p => new DateFormatData(p))];
 	}
 
 	[HttpPost]
@@ -25,7 +26,7 @@ public class DateFormatsController (ISystemsManager systemManager)
 			return BadRequest(TransactionResult.Failure([..modelState.Errors
 				.Select( p=> TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
-		var result = Manager.AddDateFormatAsync(new()
+		var result = await store.CreateDateFormatAsync(new()
 		{
 			Format = model.Format,
 		});
@@ -42,13 +43,11 @@ public class DateFormatsController (ISystemsManager systemManager)
 			return BadRequest(TransactionResult.Failure([..modelState.Errors
 				.Select( p=> TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
-		var format = Manager.FindDateFormatByIdAsync(id, cancellationToken);
+		var format = await store.FindDateFormatByIdAsync(id, cancellationToken);
+		if (format == null)
+			return NotFound();
+		format.Format = model.Format;
 
-		var result = Manager.AddDateFormatAsync(new()
-		{
-			Format = model.Format,
-		});
-
-		return Ok(result);
+		return Ok(await store.UpdateDateFormatAsync(format, cancellationToken));
 	}
 }

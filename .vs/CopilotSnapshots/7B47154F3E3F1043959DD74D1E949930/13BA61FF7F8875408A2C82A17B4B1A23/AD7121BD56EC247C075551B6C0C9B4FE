@@ -1,0 +1,29 @@
+﻿using Librebooks.Core.Operations;
+using Librebooks.Models.Entity.CompanySpace;
+using Librebooks.Models.Entity.SystemSpace;
+
+namespace Librebooks.Areas.Systems.Providers
+{
+	public interface ISystemsStore
+	{
+		Task<TransactionResult<CompanySetup>> UpdateCompanySetupAsync (CompanySetup companySetup, CancellationToken cancellationToken = default);
+
+		/*****************************************************************
+		 * TAX OPERATIONS
+		 *****************************************************************/
+		Task<TransactionResult<Tax>> CreateTaxAsync (Tax vat, CancellationToken cancellationToken = default);
+		Task<TransactionResult<Tax>> UpdateTaxAsync (Tax vat, CancellationToken cancellationToken = default);
+		Task<Tax?> FindTaxByIdAsync (int id, CancellationToken cancellationToken = default);
+		Task<TransactionResult> DeleteTaxesAsync (Tax[] taxes, CancellationToken cancellationToken = default);
+		Task<IList<Tax>> FindTaxesAsync (CancellationToken cancellationToken = default);
+
+		/*****************************************************************
+		 * COUNTRY OPERATIONS
+		 *****************************************************************/
+		Task<Country?> FindByIdAsync (int id, CancellationToken cancellationToken = default);
+		Task<IList<Country>> FindCountriesAsync (CancellationToken cancellationToken = default);
+		Task<IList<Country>> FindCountryByIdsAsync (int[] ids, CancellationToken cancellationToken = default);
+		Task<TransactionResult<Country>> CreateAsync (Country country, CancellationToken cancellationToken = default);
+
+	}
+}

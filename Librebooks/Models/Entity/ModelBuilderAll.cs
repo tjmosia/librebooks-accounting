@@ -43,7 +43,7 @@ namespace Librebooks.Models.Entity
 			/************************************************************************************************
              * Document Space
              ************************************************************************************************/
-			DocumentCompanyDetail.OnModelCreating(builder);
+			DocumentCompanyDetails.OnModelCreating(builder);
 			DocumentPrintTemplate.OnModelCreating(builder);
 			DocumentSetup.OnModelCreating(builder);
 			DocumentStatus.OnModelCreating(builder);
@@ -52,7 +52,7 @@ namespace Librebooks.Models.Entity
 			/************************************************************************************************
              * Sales Space
              ************************************************************************************************/
-			DocumentCustomerDetails.OnModelCreating(builder);
+			SalesDocumentCustomerDetails.OnModelCreating(builder);
 			SalesCredit.OnModelCreating(builder);
 			SalesDocument.OnModelCreating(builder);
 			SalesDocumentLine.OnModelCreating(builder);
@@ -115,7 +115,6 @@ namespace Librebooks.Models.Entity
 			LedgerAccountCategory.OnModelCreating(builder);
 			LedgerAccountCashFlowType.OnModelCreating(builder);
 			JournalEntry.OnModelCreating(builder);
-			JournalNote.OnModelCreating(builder);
 			CompanyLedgerAccount.OnModelCreating(builder);
 
 			/************************************************************************************************

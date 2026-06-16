@@ -8,20 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace Librebooks.Areas.Systems.Controllers;
 
 [ApiController]
-public class TaxesController (ISystemsManager systemManager)
+public class TaxesController (SystemsStore systemsStore)
 	: SystemsControllerBase(systemManager)
 {
+	private readonly SystemsStore store = systemsStore;
 	[Route(""), HttpGet]
 	public async Task<IList<TaxData>> GetAsync ()
 	{
-		return [.. (await Manager.GetTaxesAsync())
+		return [.. (await store.GetTaxesAsync())
 			.Select(p => new TaxData(p))];
 	}
 
 	[Route("{id}"), HttpGet]
 	public async Task<IActionResult> GetAsync (int id)
 	{
-		var tax = await Manager.FindTaxByIdAsync(id);
+		var tax = await store.FindTaxByIdAsync(id);
 		if (tax == null)
 			return NotFound();
 		return Ok(new TaxData(tax));
@@ -43,7 +44,7 @@ public class TaxesController (ISystemsManager systemManager)
 			Type = model.Type
 		};
 
-		var result = await Manager.AddTaxAsync(tax);
+		var result = await store.AddTaxAsync(tax);
 
 		if (result.Succeeded)
 			return Ok(TransactionResult<TaxData>.Success(new TaxData(result.Model!)));
@@ -59,7 +60,7 @@ public class TaxesController (ISystemsManager systemManager)
 		if (!modelState.IsValid)
 			return BadRequest(TransactionResult.Failure([.. modelState.Errors.Select(p => TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
-		var tax = await Manager.FindTaxByIdAsync(id);
+		var tax = await store.FindTaxByIdAsync(id);
 
 		if (tax == null)
 			return NotFound();
@@ -72,7 +73,7 @@ public class TaxesController (ISystemsManager systemManager)
 		tax.System = model.System;
 		tax.Name = model.Name;
 
-		var result = await Manager.UpdateTaxAsync(tax);
+		var result = await store.UpdateTaxAsync(tax);
 
 		if (result.Succeeded)
 			return Ok(TransactionResult<TaxData>.Success(new TaxData(result.Model!)));
@@ -83,19 +84,19 @@ public class TaxesController (ISystemsManager systemManager)
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> DeleteAsync (int id)
 	{
-		var tax = await Manager.FindTaxByIdAsync(id);
+		var tax = await store.FindTaxByIdAsync(id);
 
 		if (tax == null)
 			return NotFound();
 
-		var result = await Manager.DeleteTaxesAsync([tax]);
+		var result = await store.DeleteTaxesAsync([tax]);
 		return Ok(result);
 	}
 
 	[HttpDelete]
 	public async Task<IActionResult> DeleteAsync ([FromBody] int[] ids)
 	{
-		var taxes = await Manager.GetTaxesAsync();
+		var taxes = await store.GetTaxesAsync();
 		var taxesToDelete = new List<Tax>();
 
 		foreach (var id in ids)
@@ -106,7 +107,7 @@ public class TaxesController (ISystemsManager systemManager)
 		if (taxesToDelete.Count == 0)
 			return Ok(TransactionResult.Success);
 
-		var result = await Manager.DeleteTaxesAsync([.. taxesToDelete]);
+		var result = await store.DeleteTaxesAsync([.. taxesToDelete]);
 		return Ok(result);
 	}
 }

@@ -186,7 +186,5 @@ public partial class CompanyStore : ICompanyStore
 			return TransactionResult<BankAccount>
 				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateBankAccountAsync), logger));
 		}
-
 	}
-
 }

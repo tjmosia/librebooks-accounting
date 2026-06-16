@@ -43,7 +43,7 @@ public class ItemAdjustment () : VersionedEntityBase()
 	{
 		builder.Entity<ItemAdjustment>(options =>
 		{
-			options.HasIndex(p => new { p.CompanyId, p.ItemId })
+			options.HasIndex(p => new { p.CompanyId, p.ItemId, p.Id })
 				.IsClustered();
 
 			options.HasOne(p => p.Company)

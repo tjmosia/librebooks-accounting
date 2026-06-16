@@ -40,7 +40,7 @@ public class PurchaseDocument () : VersionedEntityBase()
 	public virtual ICollection<PurchaseDocumentLine>? Lines { get; set; }
 	public virtual ICollection<PurchaseDocumentNote>? Notes { get; set; }
 	public virtual DocumentSupplierDetail? SupplierInfo { get; set; }
-	public virtual DocumentCompanyDetail? CompanyInfo { get; set; }
+	public virtual DocumentCompanyDetails? CompanyInfo { get; set; }
 	public virtual DocumentType? Type { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)

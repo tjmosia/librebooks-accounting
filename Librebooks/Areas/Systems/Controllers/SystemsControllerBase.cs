@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Librebooks.Areas.Systems.Controllers;
 
-[Route("systems/[controller]")]
+[Route("sys/[controller]")]
 [ApiController]
 public abstract class SystemsControllerBase (ISystemsManager sysManager, AppDbContext? context = null, ILogger<SystemsControllerBase>? logger = null) : ControllerBase
 {

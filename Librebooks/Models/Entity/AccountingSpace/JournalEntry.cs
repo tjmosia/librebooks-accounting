@@ -33,11 +33,13 @@ public class JournalEntry () : VersionedEntityBase()
 	public virtual int TaxId { get; set; }
 	public virtual int CompanyId { get; set; }
 
+	[MaxLength(400)]
+	public virtual string? Note { get; set; }
+
 	public virtual Company? Company { get; set; }
 	public virtual CompanyTax? Tax { get; set; }
 	public virtual CompanyLedgerAccount? DebitAccount { get; set; }
 	public virtual CompanyLedgerAccount? CreditAccount { get; set; }
-	public virtual ICollection<JournalNote>? Notes { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
@@ -45,12 +47,6 @@ public class JournalEntry () : VersionedEntityBase()
 		{
 			options.HasIndex(p => new { p.CompanyId, p.Id })
 				.IsClustered();
-
-			options.HasMany(p => p.Notes)
-				.WithOne()
-				.HasForeignKey(p => p.JournalEntryId)
-					.IsRequired()
-				.OnDelete(DeleteBehavior.Restrict);
 
 			options.HasOne(p => p.Company)
 				.WithMany()

@@ -11,6 +11,7 @@ public class AppErrorDescriber
 		logger?.LogError("Exception Occured at {location}: \n {message}", location, ex.Message);
 
 		var code = "";
+
 		if (ex is DbUpdateConcurrencyException)
 			code = nameof(AppErrorDescriber.Concurrency);
 		if (ex is DbUpdateException && ex.InnerException != null && ex.InnerException is SqlException sqlEx)

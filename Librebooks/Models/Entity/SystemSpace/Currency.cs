@@ -8,6 +8,7 @@ namespace Librebooks.Models.Entity.SystemSpace;
 
 [Table(nameof(Currency))]
 [Index(nameof(Name), IsUnique = true)]
+[Index(nameof(Code), IsUnique = true)]
 public class Currency () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

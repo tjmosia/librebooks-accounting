@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Models.Entity.AccountingSpace;
 
 [Table(nameof(LedgerAccountCategory))]
+[Index(nameof(Name), IsUnique = true)]
 public class LedgerAccountCategory () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

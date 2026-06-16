@@ -8,6 +8,12 @@ namespace Librebooks.Core.Operations
 	{
 		public TransactionError () { }
 
+		public TransactionError (string message)
+		{
+			Code = "";
+			Description = message;
+		}
+
 		public TransactionError (string code = "", string description = "")
 		{
 			Code = code;
@@ -34,5 +40,8 @@ namespace Librebooks.Core.Operations
 
 		public static TransactionError Create (string code, string description = "")
 			=> new(code, description);
+
+		public static TransactionError Create (string description = "")
+			=> new("", description);
 	}
 }

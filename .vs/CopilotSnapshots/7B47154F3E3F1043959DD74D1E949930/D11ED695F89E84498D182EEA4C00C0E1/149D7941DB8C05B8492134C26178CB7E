@@ -1,0 +1,7 @@
+﻿namespace Librebooks.Areas.Inventory.Providers
+{
+	public interface IItemStore
+	{
+
+	}
+}

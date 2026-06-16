@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Librebooks")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b5a9681b6395a02dce2594ae4b1cb982ef267b4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+858d5bc7b7d559b34fc355a78040dbb7a8c211cd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Librebooks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Librebooks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

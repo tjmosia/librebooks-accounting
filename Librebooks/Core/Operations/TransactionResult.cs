@@ -25,9 +25,14 @@ namespace Librebooks.Core.Operations
 		public static TransactionResult<TModel> Failure (params TransactionError[] errors)
 			=> new(false, errors, null);
 
-		internal void Deconstruct (out object Confirmed, out object Request)
+		public static TransactionResult<TModel> Failure (Func<TransactionError> ErrorsExpression)
+			=> new(false, [ErrorsExpression()], null);
+
+		internal void Deconstruct (out object Succeeded, out TModel? Model, out TransactionError[] Errors)
 		{
-			throw new NotImplementedException();
+			Succeeded = this.Succeeded;
+			Model = this.Model;
+			Errors = this.Errors;
 		}
 	}
 
@@ -48,5 +53,8 @@ namespace Librebooks.Core.Operations
 
 		public static TransactionResult Failure (params TransactionError[] errors)
 			=> new(false, errors);
+
+		public static TransactionResult Failure (Func<TransactionError> ErrorsExpression)
+			=> new(false, [ErrorsExpression()]);
 	}
 }

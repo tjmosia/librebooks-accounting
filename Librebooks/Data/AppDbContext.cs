@@ -1,5 +1,3 @@
-using Librebooks
-	.Models.Entity;
 using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.BankingSpace;
 using Librebooks.Models.Entity.CompanySpace;
@@ -65,7 +63,7 @@ namespace Librebooks.Data
 		public DbSet<SalesCredit>? SalesCredits { get; set; }
 		public DbSet<SalesReceipt>? SalesReceipts { get; set; }
 		public DbSet<SalesLine>? SalesLines { get; set; }
-		public DbSet<DocumentCustomerDetails>? DocumentCustomerDetails { get; set; }
+		public DbSet<SalesDocumentCustomerDetails>? SalesDocumentCustomerDetails { get; set; }
 		public DbSet<SalesInvoiceCredit>? SalesInvoiceCredits { get; set; }
 		public DbSet<SalesInvoiceWriteoff>? SalesInvoiceWriteoffs { get; set; }
 		public DbSet<SalesQuoteProForma>? SalesQuoteProFormas { get; set; }
@@ -88,7 +86,6 @@ namespace Librebooks.Data
 		public DbSet<LedgerAccount>? LedgerAccounts { get; set; }
 		public DbSet<LedgerAccountCategory>? LedgerAccountCategories { get; set; }
 		public DbSet<JournalEntry>? JournalEntries { get; set; }
-		public DbSet<JournalNote>? JournalNotes { get; set; }
 		public DbSet<LedgerAccountCashFlowType>? LedgerAccountCashFlowTypes { get; set; }
 		public DbSet<CompanyLedgerAccount>? CompanyLedgerAccounts { get; set; }
 
@@ -104,7 +101,7 @@ namespace Librebooks.Data
 		public DbSet<DocumentSetup>? DocumentSetups { get; set; }
 		public DbSet<DocumentStatus>? DocumentStatuses { get; set; }
 		public DbSet<DocumentPrintTemplate>? DocumentPrintTemplates { get; set; }
-		public DbSet<DocumentCompanyDetail>? DocumentCompanyDetails { get; set; }
+		public DbSet<DocumentCompanyDetails>? DocumentCompanyDetails { get; set; }
 		public DbSet<DocumentType>? DocumentTypes { get; set; }
 
 		/************************************************************************************************
@@ -118,7 +115,7 @@ namespace Librebooks.Data
 		public DbSet<Tax>? Taxes { get; set; }
 		public DbSet<PaymentMethod>? PaymentMethods { get; set; }
 		public DbSet<PaymentTerm>? PaymentTerms { get; set; }
-		public DbSet<CompanySetup>? CompanySetup { get; set; }
+		public DbSet<CompanySetup>? CompanySetups { get; set; }
 		public DbSet<BusinessSector>? BusinessSectors { get; set; }
 
 		/************************************************************************************************
@@ -160,7 +157,147 @@ namespace Librebooks.Data
 		protected override void OnModelCreating (ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
-			ModelsBuilderAll.BuildModels(builder);
+
+
+			/************************************************************************************************
+             * User Space
+             ************************************************************************************************/
+			User.OnModelCreating(builder);
+			Role.OnModelCreating(builder);
+			RoleClaim.OnModelCreating(builder);
+			UserRole.OnModelCreating(builder);
+			UserToken.OnModelCreating(builder);
+			UserLogin.OnModelCreating(builder);
+			UserClaim.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Inventory Space
+             ************************************************************************************************/
+			Item.OnModelCreating(builder);
+			ItemCategory.OnModelCreating(builder);
+			ItemInventory.OnModelCreating(builder);
+			ItemAdjustment.OnModelCreating(builder);
+			ItemSetup.OnModelCreating(builder);
+			ItemInfo.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Document Space
+             ************************************************************************************************/
+			Models.Entity.DocumentSpace.DocumentCompanyDetails.OnModelCreating(builder);
+			DocumentPrintTemplate.OnModelCreating(builder);
+			DocumentSetup.OnModelCreating(builder);
+			DocumentStatus.OnModelCreating(builder);
+			DocumentType.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Sales Space
+             ************************************************************************************************/
+			Models.Entity.SalesSpace.SalesDocumentCustomerDetails.OnModelCreating(builder);
+			SalesCredit.OnModelCreating(builder);
+			SalesDocument.OnModelCreating(builder);
+			SalesDocumentLine.OnModelCreating(builder);
+			SalesDocumentNote.OnModelCreating(builder);
+			SalesInvoice.OnModelCreating(builder);
+			SalesInvoiceCredit.OnModelCreating(builder);
+			SalesInvoiceReceipt.OnModelCreating(builder);
+			SalesInvoiceWriteoff.OnModelCreating(builder);
+			SalesLine.OnModelCreating(builder);
+			SalesOrder.OnModelCreating(builder);
+			SalesOrderInvoice.OnModelCreating(builder);
+			SalesPerson.OnModelCreating(builder);
+			SalesQuote.OnModelCreating(builder);
+			SalesQuoteOrder.OnModelCreating(builder);
+			SalesReceipt.OnModelCreating(builder);
+			SalesProForma.OnModelCreating(builder);
+			SalesQuoteProForma.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Company Space
+             ************************************************************************************************/
+			Company.OnModelCreating(builder);
+			CompanyBankAccount.OnModelCreating(builder);
+			CompanyImage.OnModelCreating(builder);
+			CompanyLogo.OnModelCreating(builder);
+			CompanyMailSetup.OnModelCreating(builder);
+			CompanyRegionalSetup.OnModelCreating(builder);
+			CompanySetup.OnModelCreating(builder);
+			CompanyTax.BuildModel(builder);
+			CompanyUser.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * System Space
+             ************************************************************************************************/
+			Country.OnModelCreating(builder);
+			Currency.OnModelCreating(builder);
+			DateFormat.OnModelCreating(builder);
+			Tax.OnModelCreating(builder);
+			ShippingMethod.OnModelCreating(builder);
+			ShippingTerm.OnModelCreating(builder);
+			PaymentMethod.OnModelCreating(builder);
+			BusinessSector.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Customer Space
+             ************************************************************************************************/
+			Customer.OnModelCreating(builder);
+			CustomerAccountsContact.OnModelCreating(builder);
+			CustomerAdjustment.OnModelCreating(builder);
+			CustomerCategory.OnModelCreating(builder);
+			CustomerContact.BuildModel(builder);
+			CustomerNote.OnModelCreating(builder);
+			CustomerSetup.OnModelCreating(builder);
+			CustomerWriteOff.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Accounting Space
+             ************************************************************************************************/
+			LedgerAccount.OnModelCreating(builder);
+			LedgerAccountCategory.OnModelCreating(builder);
+			LedgerAccountCashFlowType.OnModelCreating(builder);
+			JournalEntry.OnModelCreating(builder);
+			CompanyLedgerAccount.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Supplier Space
+             ************************************************************************************************/
+			Supplier.OnModelCreating(builder);
+			SupplierNote.OnModelCreating(builder);
+			SupplierAdjustment.OnModelCreating(builder);
+			SupplierContact.OnModelCreating(builder);
+			SupplierAccountsContact.OnModelCreating(builder);
+			SupplierCategory.OnModelCreating(builder);
+			SupplierSetup.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Purchasing Space
+             ************************************************************************************************/
+			DocumentSupplierDetail.OnModelCreating(builder);
+			PurchaseBuyer.OnModelCreating(builder);
+			PurchaseDocument.OnModelCreating(builder);
+			PurchaseDocumentLine.OnModelCreating(builder);
+			PurchaseDocumentNote.OnModelCreating(builder);
+			PurchaseInvoice.OnModelCreating(builder);
+			PurchaseInvoiceReceipt.OnModelCreating(builder);
+			PurchaseInvoiceReturn.OnModelCreating(builder);
+			PurchaseLine.OnModelCreating(builder);
+			PurchaseOrder.OnModelCreating(builder);
+			PurchaseOrderInvoice.OnModelCreating(builder);
+			PurchaseReceipt.OnModelCreating(builder);
+			PurchaseRequestForQuote.OnModelCreating(builder);
+			PurchaseReturn.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * Banking Space
+             ************************************************************************************************/
+			BankAccount.OnModelCreating(builder);
+			BankAccountCategory.OnModelCreating(builder);
+
+			/************************************************************************************************
+             * General Space
+             ************************************************************************************************/
+			Contact.OnModelCreating(builder);
+			Note.OnModelCreating(builder);
+			VerificationRequest.OnModelCreating(builder);
 		}
 	}
 }

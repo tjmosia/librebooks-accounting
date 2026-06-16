@@ -12,9 +12,6 @@ public class ItemInventory () : VersionedEntityBase()
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
 	public virtual int ItemId { get; set; }
 
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Price { get; set; }
-
 	[Column(TypeName = ColumnTypes.NUMBER)]
 	public virtual decimal QuantityOnHand { get; set; }
 
@@ -30,20 +27,6 @@ public class ItemInventory () : VersionedEntityBase()
 	{
 		builder.Entity<ItemInventory>(options =>
 		{
-			options.ToTable(nameof(ItemInventory))
-				.HasKey(p => p.ItemId);
-
-			options.Property(p => p.QuantityOnHand)
-				.HasColumnType(ColumnTypes.NUMBER);
-
-			options.Property(p => p.Price)
-				.HasColumnType(ColumnTypes.MONETARY);
-
-			options.Property(p => p.MinQuantity)
-				.HasColumnType(ColumnTypes.NUMBER);
-
-			options.Property(p => p.MaxQuantity)
-				.HasColumnType(ColumnTypes.NUMBER);
 		});
 	}
 }

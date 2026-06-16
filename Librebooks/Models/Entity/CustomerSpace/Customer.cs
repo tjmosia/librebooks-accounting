@@ -66,7 +66,7 @@ public class Customer () : VersionedEntityBase()
 			options.HasIndex(p => new { p.CompanyId, p.CategoryId })
 				.IsClustered();
 
-			options.HasMany<DocumentCustomerDetails>()
+			options.HasMany<SalesDocumentCustomerDetails>()
 				.WithOne(p => p.Customer)
 				.HasForeignKey(p => p.CustomerId)
 				.OnDelete(DeleteBehavior.Restrict)

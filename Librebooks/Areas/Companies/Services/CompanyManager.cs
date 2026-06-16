@@ -13,12 +13,12 @@ using Librebooks.Providers.Stores;
 
 namespace Librebooks.Areas.Companies.Services;
 
-public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, DocumentSetupStore documentSetupStore, LedgerAccountStore? ledgerAccountStore) : ICompanyManager
+public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, DocumentSetupStore documentSetupStore, IAccountsStore? ledgerAccountStore) : ICompanyManager
 {
 	private readonly ICompanyStore store = store;
 	private readonly SystemsStore systemsStore = systemsStore;
 	private readonly DocumentSetupStore documentSetupStore = documentSetupStore;
-	private readonly LedgerAccountStore? ledgerAccountStore = ledgerAccountStore;
+	private readonly IAccountsStore? ledgerAccountStore = ledgerAccountStore;
 	public async Task<TransactionResult<Company>> CreateASync (Company company, User user)
 	{
 		company.CustomerSetup = new CustomerSetup
@@ -72,7 +72,7 @@ public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, Doc
 			Default = company.VATNumber == null && p.Type!.Equals(TaxCodeTypes.ZeroVAT) || p.Type!.Equals(TaxCodeTypes.StandardVAT)
 		})];
 
-		company.ChartOfAccounts = [.. (await ledgerAccountStore!.GetSystemLedgerAccountsAsync()).Select(p=> new CompanyLedgerAccount {
+		company.ChartOfAccounts = [.. (await ledgerAccountStore!.FindBySysAsync()).Select(p=> new CompanyLedgerAccount {
 			Account = p,
 			Balance = 0
 		})];

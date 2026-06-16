@@ -54,8 +54,8 @@ public class SalesDocument () : VersionedEntityBase()
 	public SalesPerson? SalesPerson { get; set; }
 	public ShippingMethod? ShippingMethod { get; set; }
 	public ShippingTerm? ShippingTerm { get; set; }
-	public DocumentCustomerDetails? CustomerInfo { get; set; }
-	public DocumentCompanyDetail? CompanyInfo { get; set; }
+	public SalesDocumentCustomerDetails? CustomerInfo { get; set; }
+	public DocumentCompanyDetails? CompanyInfo { get; set; }
 	public ICollection<SalesDocumentNote>? Notes { get; set; }
 	public ICollection<SalesDocumentLine>? Lines { get; set; }
 	public User? Creator { get; set; }

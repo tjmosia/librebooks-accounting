@@ -20,17 +20,17 @@ public interface ICompanyStore
 	Task<Company?> FindByIdAsync (int id, CancellationToken cancellationToken = default);
 	Task<Company?> FindByIdAsync (int companyId, int userId, CancellationToken cancellationToken = default);
 	Task<IList<Company?>> FindByUserIdAsync (int userId, CancellationToken cancellationToken = default);
-	Task<CompanyRegionalSetup?> GetRegionalSettingsAsync (Company company, CancellationToken cancellationToken = default);
-	Task<CompanyImage?> GetLogoAsync (Company company, CancellationToken cancellationToken = default);
-	Task<IList<Tax>> GetTaxesAsync (Company company, CancellationToken cancellationToken = default);
+	Task<CompanyRegionalSetup?> FindRegionalSettingsAsync (Company company, CancellationToken cancellationToken = default);
+	Task<CompanyImage?> FindLogoAsync (Company company, CancellationToken cancellationToken = default);
+	Task<IList<Tax>> FindTaxesAsync (Company company, CancellationToken cancellationToken = default);
 	Task<Tax?> FindTaxByIdAsync (Company company, int taxId, CancellationToken cancellationToken = default);
-	Task<Tax?> GetDefaultTaxAsync (Company company, CancellationToken cancellationToken = default);
-	Task<CompanyMailSetup?> GetMailSettingsAsync (Company company, CancellationToken cancellationToken = default);
-	Task<BankAccount?> GetDefaultBankAccountAsync (Company company, CancellationToken cancellationToken = default);
+	Task<Tax?> FindDefaultTaxAsync (Company company, CancellationToken cancellationToken = default);
+	Task<CompanyMailSetup?> FindMailSettingsAsync (Company company, CancellationToken cancellationToken = default);
+	Task<BankAccount?> FindDefaultBankAccountAsync (Company company, CancellationToken cancellationToken = default);
 	Task<BankAccount?> FindBankAccountByIdAsync (Company company, int bankAccountId, CancellationToken cancellationToken = default);
 	Task<Contact?> FindSalesPersonByIdAsync (Company company, int salesPersonId, CancellationToken cancellationToken = default);
 	Task<Contact?> FindSalesPersonByUserIdAsync (Company company, int userId, CancellationToken cancellationToken = default);
-	Task<IList<User>> GetUsersAsync (Company company, CancellationToken cancellationToken = default);
+	Task<IList<User>> FindUsersAsync (Company company, CancellationToken cancellationToken = default);
 
 	/***********************************************************************************************************************************
          ****** INSERT TRANSACTIONS
@@ -42,8 +42,8 @@ public interface ICompanyStore
 	Task<TransactionResult<Company>> CreateAsync (Company company);
 
 	/***********************************************************************************************************************************
-         ****** UPDATE TRANSACTIONS
-         ***********************************************************************************************************************************/
+	****** UPDATE TRANSACTIONS
+	***********************************************************************************************************************************/
 	Task<TransactionResult<CompanyRegionalSetup>> UpdateRegionalSettingsAsync (CompanyRegionalSetup regionalSettings);
 	Task<TransactionResult<CompanyTax>> UpdateTaxAsync (CompanyTax tax);
 	Task<TransactionResult<CompanyImage>> UpdateLogoAsync (Company company, CompanyImage companyImage);

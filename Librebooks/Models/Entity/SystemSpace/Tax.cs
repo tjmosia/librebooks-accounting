@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Models.Entity.SystemSpace;
 
 [Table(nameof(Tax))]
+[Index(nameof(Type), IsUnique = true)]
 public class Tax () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

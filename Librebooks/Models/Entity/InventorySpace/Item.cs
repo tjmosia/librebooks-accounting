@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.CompanySpace;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,12 @@ public class Item () : VersionedEntityBase()
 
 	[MaxLength(20)]
 	public virtual string? UnitOfMeasure { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal Cost { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal Price { get; set; }
 
 	public virtual bool Physical { get; set; }
 
