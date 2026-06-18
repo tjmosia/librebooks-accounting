@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Models.Entity.InventorySpace;
 
 [Table(nameof(ItemCategory))]
+[Index(nameof(CompanyId), nameof(Name), IsUnique = true)]
 public class ItemCategory
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,11 +29,7 @@ public class ItemCategory
     public static void OnModelCreating (ModelBuilder builder)
         => builder.Entity<ItemCategory>(options =>
         {
-            options.ToTable(nameof(ItemCategory))
-                .HasKey(p => p.Id)
-                .IsClustered(false);
-
-            options.HasIndex(p => p.CompanyId)
+            options.HasIndex(p => new { p.CompanyId, p.Id })
                 .IsClustered();
 
             options.HasMany(p => p.SubCategories)

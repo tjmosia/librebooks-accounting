@@ -18,7 +18,7 @@ public class AppErrorDescriber
 		{
 			var message = sqlEx.Message.ToUpper();
 			if (message.Contains("UNIQUE_INDEX"))
-				code = nameof(AppErrorDescriber.UniqueKeyConstraint);
+				code = nameof(AppErrorDescriber.UniqueKeyOrIndexConstraint);
 			else if (message.Contains("FOREIGN_KEY"))
 				code = nameof(AppErrorDescriber.ForeignKeyConstraint);
 		}
@@ -32,8 +32,8 @@ public class AppErrorDescriber
 	public static TransactionError DuplicateKey (string errorMessage = "")
 		=> new(nameof(DuplicateKey), errorMessage);
 
-	public static TransactionError UniqueKeyConstraint (string errorMessage = "")
-		=> new(nameof(UniqueKeyConstraint), errorMessage);
+	public static TransactionError UniqueKeyOrIndexConstraint (string errorMessage = "")
+		=> new(nameof(UniqueKeyOrIndexConstraint), errorMessage);
 
 	public static TransactionError ForeignKeyConstraint (string errorMessage = "")
 		=> new(nameof(ForeignKeyConstraint), errorMessage);

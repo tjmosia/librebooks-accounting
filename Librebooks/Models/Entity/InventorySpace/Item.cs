@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Models.Entity.InventorySpace;
 
 [Table(nameof(Item))]
-[Index(nameof(Code), IsUnique = true)]
+[Index(nameof(CompanyId), nameof(Code), IsUnique = true)]
 public class Item () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -42,14 +42,13 @@ public class Item () : VersionedEntityBase()
 	public virtual CompanyTax? TaxType { get; set; }
 	public virtual ICollection<ItemAdjustment>? StockAdjustments { get; set; }
 	public virtual ICollection<ItemPriceAdjustment>? PriceAdjustments { get; set; }
-	public virtual ICollection<ItemInfo>? Info { get; set; }
+	public virtual ICollection<ItemDetail>? Details { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
 		builder.Entity<Item>(options =>
 		{
 			options.HasIndex(p => new { p.CompanyId, p.Id })
-				.IsClustered()
 				.IsUnique();
 
 			options.HasOne(p => p.Inventory)

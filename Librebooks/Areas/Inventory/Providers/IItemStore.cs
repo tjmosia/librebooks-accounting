@@ -33,5 +33,5 @@ public interface IItemStore
 	Task<ItemCategory?> FindCategoryByIdAsync (Company company, int categoryId, CancellationToken cancellationToken = default);
 	Task<TransactionResult<ItemCategory>> CreateCategoryAsync (Company company, ItemCategory category);
 	Task<TransactionResult<ItemCategory>> UpdateCategoryAsync (ItemCategory category);
-	Task<TransactionResult> DeleteCategoryAsync (ItemCategory category);
+	Task<TransactionResult> DeleteCategoryAsync (params ItemCategory[] categories);
 }

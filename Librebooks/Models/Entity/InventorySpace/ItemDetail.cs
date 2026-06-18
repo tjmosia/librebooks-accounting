@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.InventorySpace;
 
-[Table(nameof(ItemInfo))]
-public class ItemInfo
+[Table(nameof(ItemDetail))]
+public class ItemDetail
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public virtual int Id { get; set; }
@@ -21,10 +21,10 @@ public class ItemInfo
 
     public static void OnModelCreating (ModelBuilder builder)
     {
-        builder.Entity<ItemInfo>(options =>
+        builder.Entity<ItemDetail>(options =>
         {
             options.HasOne(p => p.Item)
-                .WithMany(p => p.Info)
+                .WithMany(p => p.Details)
                 .HasForeignKey(p => p.ItemId)
                     .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

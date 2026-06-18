@@ -77,7 +77,7 @@ namespace Librebooks.Data
 		public DbSet<ItemAdjustment>? ItemAdjustments { get; set; }
 		public DbSet<ItemCategory>? ItemCategories { get; set; }
 		public DbSet<ItemInventory>? ItemInventories { get; set; }
-		public DbSet<ItemInfo>? ItemDetails { get; set; }
+		public DbSet<ItemDetail>? ItemDetails { get; set; }
 
 
 		/************************************************************************************************
@@ -178,7 +178,7 @@ namespace Librebooks.Data
 			ItemInventory.OnModelCreating(builder);
 			ItemAdjustment.OnModelCreating(builder);
 			ItemSetup.OnModelCreating(builder);
-			ItemInfo.OnModelCreating(builder);
+			ItemDetail.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Document Space

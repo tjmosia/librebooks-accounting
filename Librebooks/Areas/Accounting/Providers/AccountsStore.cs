@@ -110,7 +110,7 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 			logger.LogError("Exception occured while creating/updating a ledger account category with message: \n {message}", ex.InnerException?.Message ?? ex.Message);
 			return TransactionResult<LedgerAccountCategory>.Failure(() =>
 			{
-				if (IsUniqueKeyConstaint(ex))
+				if (IsUniqueConstaint(ex))
 					return new TransactionError(nameof(AppErrorDescriber.DuplicateKey), "Category with similar name already exists.");
 
 				if (IsForeignKeyViolation(ex))
@@ -175,7 +175,7 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 			logger.LogError("Exception occured while creating/updating cash flow type with message: \n {message}", ex.InnerException?.Message ?? ex.Message);
 			return TransactionResult<LedgerAccountCashFlowType>.Failure(() =>
 			{
-				if (IsUniqueKeyConstaint(ex))
+				if (IsUniqueConstaint(ex))
 					return new TransactionError(nameof(AppErrorDescriber.DuplicateKey), "Cash flow type with similar name already exists.");
 				return GeneralError;
 			});
