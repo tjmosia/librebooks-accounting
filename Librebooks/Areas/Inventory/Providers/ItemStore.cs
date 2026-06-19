@@ -3,14 +3,15 @@ using Librebooks.Core.Operations;
 using Librebooks.Data;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.InventorySpace;
-
+using Librebooks.Providers.Stores;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Librebooks.Areas.Inventory.Providers;
 
-public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) : IItemStore
+public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) : DbStoreBase(context), IItemStore
 {
-	private readonly AppDbContext context = context;
 	private readonly ILogger<ItemStore> logger = logger;
 
 	/********************************************************************
@@ -26,10 +27,14 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 			return TransactionResult<Item>.Success(result.Entity);
 		}
 		catch (Exception ex)
-		{
-			return TransactionResult<Item>
-				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(CreateAsync), logger));
-		}
+        {
+            return TransactionResult<Item>.Failure(() =>
+            {
+                if (IsUniqueConstaint(ex) && ex.InnerException!.Message.Contains($"{nameof(context.Items)}.{nameof(Item.Cost)}"))
+                    return new TransactionError(nameof(AppErrorDescriber.UniqueKeyOrIndexConstraint), "Item code must be unique.");
+                return GeneralError;
+            });
+        }
 	}
 
 	public async Task<TransactionResult<Item>> UpdateAsync (Item item)
@@ -42,8 +47,12 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 		}
 		catch (Exception ex)
 		{
-			return TransactionResult<Item>
-				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateAsync), logger));
+			return TransactionResult<Item>.Failure( () =>
+			{
+				if (IsUniqueConstaint(ex) && ex.InnerException!.Message.Contains($"{nameof(context.Items)}.{nameof(Item.Cost)}"))
+					return new TransactionError(nameof(AppErrorDescriber.UniqueKeyOrIndexConstraint), "Item code must be unique.");
+				return GeneralError;
+			});
 		}
 	}
 
@@ -154,31 +163,72 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 	}
 
 
-	/********************************************************************
+    /********************************************************************
 	 * ITEM CATEGORIES
 	 *******************************************************************/
-	public Task<IList<ItemCategory>> FindCategoriesAsync (Company company, CancellationToken cancellationToken = default)
+    public async Task<IList<ItemCategory>> FindCategoriesAsync(Company company, CancellationToken cancellationToken = default) 
+		=> await context.ItemCategories!.Where(p => p.CompanyId == company.Id)
+				.ToListAsync(cancellationToken);
+
+    public async Task<ItemCategory?> FindCategoryByIdAsync(Company company, int categoryId, CancellationToken cancellationToken = default)
+		=> await context.ItemCategories!.Where(p => p.CompanyId == company.Id && p.Id == categoryId)
+				.FirstOrDefaultAsync(cancellationToken);
+
+    public async Task<TransactionResult<ItemCategory>> CreateCategoryAsync (Company company, ItemCategory category)
 	{
-		throw new NotImplementedException();
+		try
+		{
+			category.CompanyId = company.Id;
+			var add = await context.ItemCategories!.AddAsync(category);
+			await context.SaveChangesAsync();
+			return TransactionResult<ItemCategory>.Success(add.Entity);
+		}
+		catch (Exception ex)
+		{
+			return TransactionResult<ItemCategory>.Failure(() =>
+            {
+                if (IsUniqueConstaint(ex) && ex.InnerException!.Message.Contains("Name"))
+                    return new TransactionError(nameof(AppErrorDescriber.UniqueKeyOrIndexConstraint), "Category name must be unique.");
+                return GeneralError;
+			});
+		}
 	}
 
-	public Task<ItemCategory?> FindCategoryByIdAsync (Company company, int categoryId, CancellationToken cancellationToken = default)
-	{
-		throw new NotImplementedException();
-	}
+	public async Task<TransactionResult<ItemCategory>> UpdateCategoryAsync (ItemCategory category)
+    {
+        try
+        {
+            var update = context.ItemCategories!.Update(category);
+            await context.SaveChangesAsync();
+            return TransactionResult<ItemCategory>.Success(update.Entity);
+        }
+        catch (Exception ex)
+        {
+            return TransactionResult<ItemCategory>.Failure(() =>
+            {
+                if (IsUniqueConstaint(ex) && ex.InnerException!.Message.Contains("Name"))
+                    return new TransactionError(nameof(AppErrorDescriber.UniqueKeyOrIndexConstraint), "Category name must be unique.");
+                return GeneralError;
+            });
+        }
+    }
 
-	public Task<TransactionResult<ItemCategory>> CreateCategoryAsync (Company company, ItemCategory category)
+	public async Task<TransactionResult> DeleteCategoryAsync (params ItemCategory[] categories)
 	{
-		throw new NotImplementedException();
-	}
-
-	public Task<TransactionResult<ItemCategory>> UpdateCategoryAsync (ItemCategory category)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task<TransactionResult> DeleteCategoryAsync (ItemCategory category)
-	{
-		throw new NotImplementedException();
+		try
+		{
+			context.ItemCategories!.RemoveRange(categories);
+			await context.SaveChangesAsync();
+			return TransactionResult.Success;
+		}
+		catch (Exception ex)
+		{
+			return TransactionResult.Failure(() =>
+			{
+				if (IsForeignKeyViolation(ex))
+					return new TransactionError(nameof(AppErrorDescriber.ForeignKeyConstraint), categories.Length > 1 ? "One or more categories have items listed under them." : "Category has items listed under it.");
+				return GeneralError;
+			});
+		}
 	}
 }

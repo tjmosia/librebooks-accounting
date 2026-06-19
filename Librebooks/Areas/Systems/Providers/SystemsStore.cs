@@ -63,7 +63,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			return TransactionResult<Tax>.Failure(() =>
 			{
-				if (IsUniqueKeyConstaint(ex) && ex.InnerException!.Message.Contains("Type"))
+				if (IsUniqueConstaint(ex) && ex.InnerException!.Message.Contains("Type"))
 					return new TransactionError(nameof(Tax.Type), "Tax type already exists.");
 				return GeneralError;
 			});
@@ -137,7 +137,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			return TransactionResult<Country>.Failure(() =>
 			{
-				if (IsUniqueKeyConstaint(ex))
+				if (IsUniqueConstaint(ex))
 				{
 					if (ex.InnerException!.Message.Contains("Name", StringComparison.InvariantCultureIgnoreCase))
 						return new TransactionError(nameof(Country.Name), UNIQUE_COUNTRY_NAME_ERROR);
@@ -163,7 +163,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			return TransactionResult<Country>.Failure(() =>
 			{
-				if (IsUniqueKeyConstaint(ex))
+				if (IsUniqueConstaint(ex))
 				{
 					if (ex.InnerException!.Message.Contains("Name", StringComparison.InvariantCultureIgnoreCase))
 						return new TransactionError(nameof(Country.Name), UNIQUE_COUNTRY_NAME_ERROR);
@@ -225,7 +225,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			logger.LogError("Error occured while creating currency with message: \n {message}", ex.InnerException?.Message ?? ex.Message);
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 			{
 				if (ex.InnerException!.Message.Contains("Name", StringComparison.InvariantCultureIgnoreCase))
 					errors.Add(new(nameof(Currency.Name), UNIQUE_CURRENCY_NAME_ERROR));
@@ -255,7 +255,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 			logger.LogError("Error occured while updating currency with message: \n {message}", ex.InnerException?.Message ?? ex.Message);
 
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 			{
 				if (ex.InnerException!.Message.Contains("Name", StringComparison.InvariantCultureIgnoreCase))
 					errors.Add(new(nameof(Currency.Name), UNIQUE_CURRENCY_NAME_ERROR));
@@ -331,7 +331,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		catch (Exception ex)
 		{
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(new(nameof(BusinessSector.Name), "Name is already taken."));
 
 			if (errors.Any())
@@ -353,7 +353,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		catch (Exception ex)
 		{
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(new(nameof(BusinessSector.Name), "Name is already taken."));
 
 			if (errors.Any())
@@ -405,7 +405,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 			logger.LogError("Error occured while creating date fromat with message: \n {message}", ex.InnerException?.Message ?? ex.Message);
 
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(TransactionError.Create(nameof(DateFormat.Format), UNIQUE_FORMAT_ERROR));
 
 			if (errors.Any())
@@ -428,7 +428,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 			logger.LogError("Error occured while updating datefromat with message: \n {message}", ex.InnerException?.Message ?? ex.Message);
 
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(TransactionError.Create(nameof(DateFormat.Format), UNIQUE_FORMAT_ERROR));
 
 			if (errors.Any())
@@ -489,7 +489,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			IList<TransactionError> errors = [];
 			if (ex is DbUpdateException && ex.InnerException != null &&
-				ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndex, StringComparison.InvariantCultureIgnoreCase))
+				ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndexConstraint, StringComparison.InvariantCultureIgnoreCase))
 				errors.Add(new(nameof(ShippingTerm.Name), "Shipping term already exists."));
 
 			return TransactionResult<ShippingTerm>.Failure([.. errors]);
@@ -508,7 +508,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			IList<TransactionError> errors = [];
 			if (ex is DbUpdateException && ex.InnerException != null &&
-				ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndex, StringComparison.InvariantCultureIgnoreCase))
+				ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndexConstraint, StringComparison.InvariantCultureIgnoreCase))
 				errors.Add(new(nameof(ShippingTerm.Name), "Shipping term already exists."));
 			if (ex is DbUpdateConcurrencyException)
 				errors.Add(new(description: "Something went wrong. Please try again."));
@@ -557,7 +557,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		catch (Exception ex)
 		{
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(new(nameof(ShippingMethod.Name), "Name is already taken."));
 
 			if (errors.Any())
@@ -578,7 +578,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		catch (Exception ex)
 		{
 			IList<TransactionError> errors = [];
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(new(nameof(ShippingMethod.Name), "Shipping method already exists."));
 
 			if (errors.Any())
@@ -659,7 +659,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			IList<TransactionError> errors = [];
 
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(TransactionError.Create(nameof(PaymentMethod.Name), "Name is alreay in use."));
 
 			if (errors.Any())
@@ -728,7 +728,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		{
 			IList<TransactionError> errors = [];
 
-			if (IsUniqueKeyConstaint(ex))
+			if (IsUniqueConstaint(ex))
 				errors.Add(new(nameof(PaymentTerm.Name), "Payment term already exists."));
 
 			if (errors.Any())

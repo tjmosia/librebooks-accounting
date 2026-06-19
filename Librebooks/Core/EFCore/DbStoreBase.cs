@@ -18,10 +18,11 @@ namespace Librebooks.Core.EFCore
 				ex.InnerException != null &&
 				ex.InnerException.Message.Contains(DbUpdateErrors.ForeignKeyConstaint, StringComparison.InvariantCultureIgnoreCase);
 
-		protected static bool IsUniqueKeyConstaint (Exception ex)
+		protected static bool IsUniqueConstaint (Exception ex)
 			=> ex is DbUpdateException && ex.InnerException != null &&
-				ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndex, StringComparison.InvariantCultureIgnoreCase);
-		protected string GenerateRowVersion ()
+				ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndexConstraint, StringComparison.InvariantCultureIgnoreCase);
+
+		protected static string GenerateRowVersion ()
 			=> Guid.NewGuid().ToString("N").ToUpper();
-	}
+    }
 }

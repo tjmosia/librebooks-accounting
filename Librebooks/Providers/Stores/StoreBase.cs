@@ -17,5 +17,5 @@ public abstract class StoreBase (AppDbContext context)
 
 	public static bool IsUniqueKeyConstaint (Exception ex)
 		=> ex is DbUpdateException && ex.InnerException != null &&
-			ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndex, StringComparison.InvariantCultureIgnoreCase);
+			ex.InnerException.Message.Contains(DbUpdateErrors.UniqueIndexConstraint, StringComparison.InvariantCultureIgnoreCase);
 }

@@ -38,7 +38,7 @@ namespace Librebooks.Models.Entity
 			ItemInventory.OnModelCreating(builder);
 			ItemAdjustment.OnModelCreating(builder);
 			ItemSetup.OnModelCreating(builder);
-			ItemInfo.OnModelCreating(builder);
+			ItemDetail.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Document Space
