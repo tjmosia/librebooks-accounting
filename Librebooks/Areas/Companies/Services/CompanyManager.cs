@@ -9,6 +9,7 @@ using Librebooks.Models.Entity.DocumentSpace;
 using Librebooks.Models.Entity.IdentitySpace;
 using Librebooks.Models.Entity.InventorySpace;
 using Librebooks.Models.Entity.SupplierSpace;
+using Librebooks.Models.Entity.SystemSpace;
 using Librebooks.Providers.Stores;
 
 namespace Librebooks.Areas.Companies.Services;
@@ -19,7 +20,7 @@ public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, Doc
 	private readonly SystemsStore systemsStore = systemsStore;
 	private readonly DocumentSetupStore documentSetupStore = documentSetupStore;
 	private readonly IAccountsStore? ledgerAccountStore = ledgerAccountStore;
-	public async Task<TransactionResult<Company>> CreateASync (Company company, User user)
+	public async Task<TransactionResult<Company>> CreateAsync (Company company, User user, Country country, Currency currency)
 	{
 		company.CustomerSetup = new CustomerSetup
 		{
@@ -42,8 +43,9 @@ public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, Doc
 
 		company.RegionalSetup = new CompanyRegionalSetup
 		{
-			DateFormat = await systemsStore.DateFormatsStore.FindDefaultAsync(),
-			Currency = await systemsStore.CurrenciesStore.FindDefaultAsync(),
+			DateFormat = await systemsStore.GetDefaultDateFormatAsync(),
+			Currency = currency,
+			Country = country,
 			DecimalMark = ".",
 			ThousandsSeperator = " ",
 			RoundToNearest = 2
@@ -66,7 +68,7 @@ public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, Doc
 			UserId = user.Id
 		}];
 
-		company.Taxes = [..(await systemsStore.TaxTypesStore.FindAllAsync()).Select(p => new CompanyTax
+		company.Taxes = [..(await systemsStore.GetTaxesAsync()).Select(p => new CompanyTax
 		{
 			Tax = p,
 			Default = company.VATNumber == null && p.Type!.Equals(TaxCodeTypes.ZeroVAT) || p.Type!.Equals(TaxCodeTypes.StandardVAT)
@@ -78,6 +80,5 @@ public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, Doc
 		})];
 
 		return await store.CreateAsync(company);
-
 	}
 }

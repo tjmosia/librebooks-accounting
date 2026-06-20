@@ -1,7 +1,32 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\customerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\customerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\icustomerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\icustomerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\models\\entity\\customerspace\\customercontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\customerspace\\customercontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\models\\entity\\generalspace\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\generalspace\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\models\\entity\\generalspace\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\generalspace\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\icustomermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\icustomermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +34,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ICustomerStore.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerStore.cs",
+              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ICustomerStore.cs",
+              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerStore.cs",
+              "RelativeToolTip": "Areas\\Customers\\Providers\\ICustomerStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-20T22:15:33.033Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerContact.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\CustomerSpace\\CustomerContact.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\CustomerSpace\\CustomerContact.cs",
+              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\CustomerSpace\\CustomerContact.cs",
+              "RelativeToolTip": "Models\\Entity\\CustomerSpace\\CustomerContact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-20T21:23:59.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Contact.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\GeneralSpace\\Contact.cs",
+              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Contact.cs",
+              "RelativeToolTip": "Models\\Entity\\GeneralSpace\\Contact.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-20T21:07:24.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Note.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Note.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\GeneralSpace\\Note.cs",
+              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Note.cs",
+              "RelativeToolTip": "Models\\Entity\\GeneralSpace\\Note.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAC8AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-20T21:00:46.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ICustomerManager.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerManager.cs",
+              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ICustomerManager.cs",
+              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerManager.cs",
+              "RelativeToolTip": "Areas\\Customers\\Providers\\ICustomerManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-20T20:32:13.64Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -22,6 +112,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomerStore.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\CustomerStore.cs",
+              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\CustomerStore.cs",
+              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\CustomerStore.cs",
+              "RelativeToolTip": "Areas\\Customers\\Providers\\CustomerStore.cs",
+              "ViewState": "AgIAAP8AAAAAAAAAAAAAAA0BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-20T19:38:01.931Z",
+              "EditorCaption": ""
             }
           ]
         }

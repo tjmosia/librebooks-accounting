@@ -33,29 +33,34 @@ namespace Librebooks.Models.Entity.GeneralSpace
 		[MaxLength(15)]
 		public virtual string? Mobile { get; set; }
 
+		public CustomerContact? CustomerContact { get; set;  }
+		public SupplierContact? SupplierContact { get; set; }
+		public SalesPerson? SalesPerson { get; set; }
+		public PurchaseBuyer? PurchaseBuyer { get; set;  }
+
 		public static void OnModelCreating (ModelBuilder builder)
 		{
 			builder.Entity<Contact>(options =>
 			{
-				options.HasOne<SalesPerson>()
+				options.HasOne(p=>p.SalesPerson)
 					.WithOne(p => p.Contact)
 					.HasForeignKey<SalesPerson>(p => p.ContactId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Restrict);
 
-				options.HasOne<CustomerContact>()
+				options.HasOne(p=>p.CustomerContact)
 					.WithOne(p => p.Contact)
 					.HasForeignKey<CustomerContact>(p => p.ContactId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Restrict);
 
-				options.HasOne<SupplierContact>()
+				options.HasOne(p=>p.SupplierContact)
 					.WithOne(p => p.Contact)
 					.HasForeignKey<SupplierContact>(p => p.ContactId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Restrict);
 
-				options.HasOne<PurchaseBuyer>()
+				options.HasOne(p=>p.PurchaseBuyer)
 					.WithOne(p => p.Contact)
 					.HasForeignKey<PurchaseBuyer>(p => p.ContactId)
 						.IsRequired()
