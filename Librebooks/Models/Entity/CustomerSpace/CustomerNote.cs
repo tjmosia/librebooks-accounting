@@ -15,6 +15,7 @@ public class CustomerNote
     public virtual int CustomerId { get; set; }
 
     public virtual Note? Note { get; set; }
+    public virtual Customer? Customer { get; set;  }
 
     public static void OnModelCreating (ModelBuilder builder)
     {

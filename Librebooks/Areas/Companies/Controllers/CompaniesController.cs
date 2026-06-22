@@ -8,6 +8,7 @@ using Librebooks.Extensions.Mvc;
 using Librebooks.Models.Entity.CompanySpace;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.WebSockets;
 
 namespace Librebooks.Areas.Companies.Controllers;
 
@@ -15,12 +16,14 @@ namespace Librebooks.Areas.Companies.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class CompaniesController
-	(SystemsStore sysStore,
+	(ISystemsStore sysStore,
 	UserManagerExtension userManager,
+	ICompanyManager companyManager,
 	ICompanyStore companyStore)
 	: SessionControllerBase(userManager)
 {
-	private readonly SystemsStore SystemsStore = sysStore;
+	private readonly ISystemsStore sysStore = sysStore;
+	private readonly ICompanyManager manager = companyManager;
 
 	[HttpGet]
 	[Route("{id}")]
@@ -45,42 +48,43 @@ public class CompaniesController
 		if (!validationResult.IsValid)
 			return BadRequest(TransactionResult.Failure([.. validationResult.Errors.Select(p => TransactionError.Create(p.PropertyName, p.ErrorMessage))]));
 
-		var taxes = await SystemsStore.TaxTypesStore.FindAllAsync();
+        var user = await userManager!.GetUserAsync(User);
+        if (user == null)
+            return Unauthorized();
 
-		var company = new Company()
-		{
-			BusinessSectorId = input.BusinessSectorId,
-			RegNumber = input.RegNumber,
-			FaxNumber = input.FaxNumber,
-			PhysicalAddress = input.PhysicalAddress,
-			PostalAddress = input.PostalAddress,
-			PhoneNumber = input.TelephoneNumber,
-			EmailAddress = input.Email,
-			VATNumber = input.VATNumber,
-			TradingName = input.TradingName,
-			LegalName = input.LegalName
-		};
+		var country = await sysStore.FindCountryByIdAsync(input.CountryId);
+		var currency = await sysStore.FindCurrencyByIdAsync(input.CurrencyId);
 
-		if (input.Logo != null)
-		{
-			company.Logo = new CompanyLogo
-			{
-				Image = new CompanyImage
-				{
-					PathName = input.Logo
-				}
-			};
-		}
+        if (country == null || currency == null)
+			return BadRequest(country == null 
+				? TransactionResult.Failure(new TransactionError(nameof(input.CountryId), "Invalid country.")) 
+				: TransactionResult.Failure(new TransactionError(nameof(input.CurrencyId), "Invalid currency.")));
 
-		var result = await companyStore.CreateAsync(company);
+        var createResult = await manager.CreateAsync(new Company()
+        {
+            BusinessSectorId = input.BusinessSectorId,
+            RegNumber = input.RegNumber,
+            FaxNumber = input.FaxNumber,
+            PhysicalAddress = input.PhysicalAddress,
+            PostalAddress = input.PostalAddress,
+            PhoneNumber = input.TelephoneNumber,
+            EmailAddress = input.Email,
+            VATNumber = input.VATNumber,
+            TradingName = input.TradingName,
+            LegalName = input.LegalName,
+            Logo = input.Logo != null ? new CompanyLogo
+            {
+                Image = new CompanyImage
+                {
+                    PathName = input.Logo,
+                    DateCreated = DateOnly.FromDateTime(DateTime.Now)
+                }
+            } : null
+        }, user, country, currency);
 
-		if (result.Succeeded)
-		{
-			return Created();
-		}
-		else
-		{
-			return Ok(TransactionResult.Failure([.. result.Errors.Select(p => TransactionError.Create(p.Code, p.Description))]));
-		}
+		if (createResult.Succeeded)
+            return Ok(new CompanySummaryData(createResult.Model!));
+
+		return Ok(TransactionResult.Failure([.. createResult.Errors.Select(p => TransactionError.Create(p.Code, p.Description))]));
 	}
 }

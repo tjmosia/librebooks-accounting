@@ -41,11 +41,12 @@ public class Customer () : VersionedEntityBase()
 
 	public virtual bool Active { get; set; }
 	public virtual int CompanyId { get; set; }
-	public virtual int CategoryId { get; set; }
+	public virtual int? CategoryId { get; set; }
 	public virtual int SalesPersonId { get; set; }
 	public virtual bool AcceptsElectronicInvoices { get; set; } = false;
 	public virtual int ShippingTermId { get; set; }
 	public virtual int ShippingMethodId { get; set; }
+	[MaxLength(155)]
 	public virtual string? Website { get; set; }
 
 	public virtual PaymentTerm? PaymentTerm { get; set; }

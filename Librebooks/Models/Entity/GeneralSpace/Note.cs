@@ -22,13 +22,17 @@ namespace Librebooks.Models.Entity.GeneralSpace
 		[MaxLength(255)]
 		public virtual string? Description { get; set; }
 
-		public virtual bool Actionable { get; set; }
-		public virtual bool Completed { get; set; }
+		public virtual bool Actionable { get; set; } = false;
+		public virtual bool Completed { get; set; } = false;
 		public virtual DateOnly DateCreated { get; set; }
 		public virtual DateOnly? DueDate { get; set; }
-		public virtual int CreatorId { get; set; }
+		public virtual int? CreatorId { get; set; }
 
-		public virtual User? Creator { get; set; }
+		public User? Creator { get; set; }
+		public CustomerNote? CustomerNote { get; set; }
+		public SupplierNote? SupplierNote { get; set; }
+		public SalesDocumentNote? SalesDocumentNote { get; set; }
+		public PurchaseDocumentNote? PurchaseDocumentNote { get; set; }
 
 		public static void OnModelCreating (ModelBuilder builder)
 			=> builder.Entity<Note>(options =>
@@ -39,33 +43,27 @@ namespace Librebooks.Models.Entity.GeneralSpace
 						.IsRequired(false)
 					.OnDelete(DeleteBehavior.SetNull);
 
-				options.HasOne<CustomerNote>()
-					.WithOne(p => p.Note)
-					.HasForeignKey<CustomerNote>(options => options.NoteId)
-						.IsRequired()
-					.OnDelete(DeleteBehavior.Cascade);
-
-				options.HasOne<SupplierNote>()
+				options.HasOne(p=>p.SupplierNote)
 					.WithOne(p => p.Note)
 					.HasForeignKey<SupplierNote>(options => options.NoteId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Cascade);
 
-				options.HasOne<SalesDocumentNote>()
+				options.HasOne(p=>p.SalesDocumentNote)
 					.WithOne(p => p.Note)
 					.HasForeignKey<SalesDocumentNote>(p => p.NoteId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Cascade);
 
-				options.HasOne<PurchaseDocumentNote>()
+				options.HasOne(p=>p.PurchaseDocumentNote)
 					.WithOne(p => p.Note)
 					.HasForeignKey<PurchaseDocumentNote>(p => p.NoteId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Cascade);
 
-				options.HasOne<JournalNote>()
+				options.HasOne(p => p.CustomerNote)
 					.WithOne(p => p.Note)
-					.HasForeignKey<JournalNote>(p => p.NoteId)
+					.HasForeignKey<CustomerNote>(p => p.NoteId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Cascade);
 			});

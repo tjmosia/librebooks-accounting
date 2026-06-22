@@ -33,7 +33,7 @@ public class CustomerCategory () : VersionedEntityBase()
                 .WithOne(p => p.Category)
                 .HasForeignKey(p => p.CategoryId)
                     .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             options.HasOne<Company>()
                 .WithMany()

@@ -16,7 +16,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 	/*****************************************************************
 	 * COMPNY NUMBER OPERATIONS
 	 *****************************************************************/
-	public async Task<CompanySetup?> FindCurrentCompanySetupAsync (CancellationToken cancellationToken = default)
+	public async Task<CompanySetup?> GetCurrentCompanySetupAsync (CancellationToken cancellationToken = default)
 		=> await context!.CompanySetups!.FirstOrDefaultAsync(cancellationToken);
 
 	public async Task<TransactionResult<CompanySetup>> CreateCompanySetupAsync (CompanySetup setup, CancellationToken cancellationToken = default)
@@ -106,7 +106,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		}
 	}
 
-	public async Task<IList<Tax>> FindTaxesAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<Tax>> GetTaxesAsync (CancellationToken cancellationToken = default)
 		=> await context!.Taxes!.Where(p => p.System).ToListAsync(cancellationToken);
 
 
@@ -116,10 +116,10 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 
 	private const string UNIQUE_COUNTRY_NAME_ERROR = "Country name already exists.";
 	private const string UNIQUE_COUNTRY_CODE_ERROR = "Country code already exists.";
-	public async Task<Country?> FindByIdAsync (int id, CancellationToken cancellationToken = default)
+	public async Task<Country?> FindCountryByIdAsync (int id, CancellationToken cancellationToken = default)
 		=> await context!.Countries!.FindAsync([id], cancellationToken);
 
-	public async Task<IList<Country>> FindCountriesAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<Country>> GetCountriesAsync (CancellationToken cancellationToken = default)
 		=> await context!.Countries!.ToListAsync(cancellationToken);
 
 	public async Task<IList<Country>> FindCountryByIdsAsync (int[] ids, CancellationToken cancellationToken = default)
@@ -206,7 +206,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 	private const string UNIQUE_CURRENCY_NAME_ERROR = "Currency name already exists";
 	private const string UNIQUE_CURRENCY_CODE_ERROR = "Currency code already exists.";
 
-	public async Task<IList<Currency>> FindCurrenciesAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<Currency>> GetCurrenciesAsync (CancellationToken cancellationToken = default)
 		=> await context!.Currencies!.ToListAsync(cancellationToken);
 
 	public async Task<Currency?> FindCurrencyByIdAsync (int id, CancellationToken cancellationToken = default)
@@ -292,7 +292,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		}
 	}
 
-	public async Task<Currency?> FindDefaultCurrencyAsync (CancellationToken cancellationToken = default)
+	public async Task<Currency?> GetDefaultCurrencyAsync (CancellationToken cancellationToken = default)
 		=> await context.Currencies!.Where(p => p.Default).FirstOrDefaultAsync(cancellationToken);
 
 
@@ -303,7 +303,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 	 *****************************************************************/
 
 
-	public async Task<IList<BusinessSector>> FindBusinessSectorsAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<BusinessSector>> GetBusinessSectorsAsync (CancellationToken cancellationToken = default)
 		=> await context!
 			.BusinessSectors!
 			.OrderBy(p => p.Name)
@@ -313,12 +313,6 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		=> await context!
 			.BusinessSectors!
 			.FindAsync([id], cancellationToken);
-
-	public async Task<IList<BusinessSector>> FindBusinessSectorsByIdsAsync (int[] sectorIds, CancellationToken cancellationToken = default)
-		=> await context!
-			.BusinessSectors!
-			.Where(p => sectorIds.Contains(p.Id))
-			.ToListAsync(cancellationToken);
 
 	public async Task<TransactionResult<BusinessSector>> CreateAsync (BusinessSector sector, CancellationToken cancellationToken = default)
 	{
@@ -467,14 +461,14 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 	public async Task<IList<DateFormat>> FindDateFormatsAsync (CancellationToken cancellationToken = default)
 		=> await context!.DateFormats!.ToListAsync(cancellationToken);
 
-	public async Task<DateFormat?> FindDefaultDateFormatAsync (CancellationToken cancellationToken = default)
+	public async Task<DateFormat?> GetDefaultDateFormatAsync (CancellationToken cancellationToken = default)
 		=> await context.DateFormats!.Where(p => p.Default).FirstOrDefaultAsync(cancellationToken);
 
 	/*****************************************************************
 	 * SHIPPING TERMS OPERATIONS
 	 *****************************************************************/
 
-	public async Task<IList<ShippingTerm>> FindShippingTermsAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<ShippingTerm>> GetShippingTermsAsync (CancellationToken cancellationToken = default)
 		=> await context!.ShippingTerms!.ToListAsync(cancellationToken);
 
 	public async Task<TransactionResult<ShippingTerm>> CreateShippingTermAsync (ShippingTerm term, CancellationToken cancellationToken = default)
@@ -613,7 +607,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		}
 	}
 
-	public async Task<IList<ShippingMethod>> FindShippingMethodsAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<ShippingMethod>> GetShippingMethodsAsync (CancellationToken cancellationToken = default)
 		=> await context!.ShippingMethods!.ToListAsync(cancellationToken);
 
 	/*****************************************************************
@@ -622,7 +616,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 	public async Task<PaymentMethod?> FindPaymentMethodByIdAsync (int id, CancellationToken cancellationToken = default)
 		=> await context!.PaymentMethods!.FindAsync([id], cancellationToken);
 
-	public async Task<IList<PaymentMethod>> FindPaymentMethodsAsync (CancellationToken cancellationToken)
+	public async Task<IList<PaymentMethod>> GetPaymentMethodsAsync (CancellationToken cancellationToken)
 		=> await context!.PaymentMethods!.ToListAsync(cancellationToken);
 
 	public async Task<TransactionResult<PaymentMethod>> CreatePaymentMethodAsync (PaymentMethod method, CancellationToken cancellationToken = default)
@@ -763,7 +757,7 @@ public class SystemsStore (AppDbContext context, ILogger<SystemsStore> logger) :
 		}
 	}
 
-	public async Task<IList<PaymentTerm>> FindPaymentTermsAsync (CancellationToken cancellationToken = default)
+	public async Task<IList<PaymentTerm>> GetPaymentTermsAsync (CancellationToken cancellationToken = default)
 		=> await context!.PaymentTerms!.ToListAsync(cancellationToken);
 
 }

@@ -9,7 +9,7 @@ namespace Librebooks.Areas.Systems.Providers
 		/*****************************************************************
 		 * COMPANY SETUP OPERATIONS
 		 *****************************************************************/
-		Task<CompanySetup?> FindCurrentCompanySetupAsync (CancellationToken cancellationToken = default);
+		Task<CompanySetup?> GetCurrentCompanySetupAsync (CancellationToken cancellationToken = default);
 		Task<TransactionResult<CompanySetup>> CreateCompanySetupAsync (CompanySetup setup, CancellationToken cancellationToken = default);
 		Task<TransactionResult<CompanySetup>> UpdateCompanySetupAsync (CompanySetup setup, CancellationToken cancellationToken = default);
 
@@ -20,13 +20,13 @@ namespace Librebooks.Areas.Systems.Providers
 		Task<TransactionResult<Tax>> UpdateTaxAsync (Tax vat, CancellationToken cancellationToken = default);
 		Task<Tax?> FindTaxByIdAsync (int id, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeleteTaxesAsync (Tax[] taxes, CancellationToken cancellationToken = default);
-		Task<IList<Tax>> FindTaxesAsync (CancellationToken cancellationToken = default);
+		Task<IList<Tax>> GetTaxesAsync (CancellationToken cancellationToken = default);
 
 		/*****************************************************************
 		 * COUNTRY OPERATIONS
 		 *****************************************************************/
-		Task<Country?> FindByIdAsync (int id, CancellationToken cancellationToken = default);
-		Task<IList<Country>> FindCountriesAsync (CancellationToken cancellationToken = default);
+		Task<Country?> FindCountryByIdAsync (int id, CancellationToken cancellationToken = default);
+		Task<IList<Country>> GetCountriesAsync (CancellationToken cancellationToken = default);
 		Task<IList<Country>> FindCountryByIdsAsync (int[] ids, CancellationToken cancellationToken = default);
 		Task<TransactionResult<Country>> CreateAsync (Country country, CancellationToken cancellationToken = default);
 		Task<TransactionResult<Country>> UpdateCountryAsync (Country country, CancellationToken cancellationToken = default);
@@ -35,19 +35,18 @@ namespace Librebooks.Areas.Systems.Providers
 		/*****************************************************************
 		 * CURRENCY OPERATIONS
 		 *****************************************************************/
-		Task<IList<Currency>> FindCurrenciesAsync (CancellationToken cancellationToken = default);
+		Task<IList<Currency>> GetCurrenciesAsync (CancellationToken cancellationToken = default);
 		Task<Currency?> FindCurrencyByIdAsync (int id, CancellationToken cancellationToken = default);
 		Task<TransactionResult<Currency>> CreateCurrencyAsync (Currency currency, CancellationToken cancellationToken = default);
 		Task<TransactionResult<Currency>> UpdateCurrencyAsync (Currency currency, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeleteCurrenciesAsync (params Currency[] currencies);
-		Task<Currency?> FindDefaultCurrencyAsync (CancellationToken cancellationToken = default);
+		Task<Currency?> GetDefaultCurrencyAsync (CancellationToken cancellationToken = default);
 
 		/*****************************************************************
 		 * BUSINESS SECTOR OPERATIONS
 		 *****************************************************************/
-		Task<IList<BusinessSector>> FindBusinessSectorsAsync (CancellationToken cancellationToken = default);
+		Task<IList<BusinessSector>> GetBusinessSectorsAsync (CancellationToken cancellationToken = default);
 		Task<BusinessSector?> FindBusinessSectorByIdAsync (int id, CancellationToken cancellationToken = default);
-		Task<IList<BusinessSector>> FindBusinessSectorsByIdsAsync (int[] sectorIds, CancellationToken cancellationToken = default);
 		Task<TransactionResult<BusinessSector>> CreateAsync (BusinessSector sector, CancellationToken cancellationToken = default);
 		Task<TransactionResult<BusinessSector>> UpdateBusinessSectorAsync (BusinessSector sector, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeleteBusinessSectorsAsync (params BusinessSector[] sectors);
@@ -60,12 +59,12 @@ namespace Librebooks.Areas.Systems.Providers
 		Task<DateFormat?> FindDateFormatByIdAsync (int id, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeleteDateFormatsAsync (params DateFormat[] dateFormats);
 		Task<IList<DateFormat>> FindDateFormatsAsync (CancellationToken cancellationToken = default);
-		Task<DateFormat?> FindDefaultDateFormatAsync (CancellationToken cancellationToken = default);
+		Task<DateFormat?> GetDefaultDateFormatAsync (CancellationToken cancellationToken = default);
 
 		/*****************************************************************
 		 * SHIPPING TERMS OPERATIONS
 		 *****************************************************************/
-		Task<IList<ShippingTerm>> FindShippingTermsAsync (CancellationToken cancellationToken = default);
+		Task<IList<ShippingTerm>> GetShippingTermsAsync (CancellationToken cancellationToken = default);
 		Task<TransactionResult<ShippingTerm>> CreateShippingTermAsync (ShippingTerm term, CancellationToken cancellationToken = default);
 		Task<TransactionResult<ShippingTerm>> UpdateShippingTermAsync (ShippingTerm term, CancellationToken cancellationToken = default);
 		Task<ShippingTerm?> FindShippingTermByIdAsync (int id, CancellationToken cancellationToken = default);
@@ -78,13 +77,13 @@ namespace Librebooks.Areas.Systems.Providers
 		Task<TransactionResult<ShippingMethod>> UpdateShippingMethodAsync (ShippingMethod method, CancellationToken cancellationToken = default);
 		Task<ShippingMethod?> FindShippingMethodByIdAsync (int id, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeleteShippingMethodsAsync (params ShippingMethod[] methods);
-		Task<IList<ShippingMethod>> FindShippingMethodsAsync (CancellationToken cancellationToken = default);
+		Task<IList<ShippingMethod>> GetShippingMethodsAsync (CancellationToken cancellationToken = default);
 
 		/*****************************************************************
 		 * PAYMENT METHOD OPERATIONS
 		 *****************************************************************/
 		Task<PaymentMethod?> FindPaymentMethodByIdAsync (int id, CancellationToken cancellationToken = default);
-		Task<IList<PaymentMethod>> FindPaymentMethodsAsync (CancellationToken cancellationToken);
+		Task<IList<PaymentMethod>> GetPaymentMethodsAsync (CancellationToken cancellationToken);
 		Task<TransactionResult<PaymentMethod>> CreatePaymentMethodAsync (PaymentMethod method, CancellationToken cancellationToken = default);
 		Task<TransactionResult<PaymentMethod>> UpdatePaymentMethodAsync (PaymentMethod method, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeletePaymentMethodsAsync (params PaymentMethod[] methods);
@@ -96,6 +95,6 @@ namespace Librebooks.Areas.Systems.Providers
 		Task<TransactionResult<PaymentTerm>> UpdatePaymentTermAsync (PaymentTerm term, CancellationToken cancellationToken = default);
 		Task<PaymentTerm?> FindPaymentTermByIdAsync (int id, CancellationToken cancellationToken = default);
 		Task<TransactionResult> DeletePaymentTermsAsync (params PaymentTerm[] terms);
-		Task<IList<PaymentTerm>> FindPaymentTermsAsync (CancellationToken cancellationToken = default);
+		Task<IList<PaymentTerm>> GetPaymentTermsAsync (CancellationToken cancellationToken = default);
 	}
 }

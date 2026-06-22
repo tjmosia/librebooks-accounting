@@ -14,7 +14,7 @@ public class Item () : VersionedEntityBase()
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
 
-	[MaxLength(50)]
+	[Required, MaxLength(50)]
 	public virtual string? Code { get; set; }
 
 	[Required, MaxLength(255)]

@@ -15,6 +15,9 @@ public class LedgerAccountCategory () : VersionedEntityBase()
 	[Required, MaxLength(75)]
 	public virtual string? Name { get; set; }
 
+	[Required, MaxLength(2)]
+	public virtual string? ShortName { get; set;  }
+
 	[MaxLength(255)]
 	public virtual string? Description { get; set; }
 
@@ -23,7 +26,7 @@ public class LedgerAccountCategory () : VersionedEntityBase()
 
 	public virtual int CashFlowTypeId { get; set; }
 
-	public virtual LedgerAccountCashFlowType? CashFlowType { get; set; }
+	public LedgerAccountCashFlowType? CashFlowType { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

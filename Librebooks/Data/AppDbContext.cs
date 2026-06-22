@@ -41,7 +41,7 @@ namespace Librebooks.Data
 		public DbSet<Customer>? Customers { get; set; }
 		public DbSet<CustomerAccountsContact>? CustomerAccountsContacts { get; set; }
 		public DbSet<CustomerAdjustment>? CustomerAdjustments { get; set; }
-		public DbSet<CustomerCategory>? CustomerCategorys { get; set; }
+		public DbSet<CustomerCategory>? CustomerCategories { get; set; }
 		public DbSet<CustomerContact>? CustomerContacts { get; set; }
 		public DbSet<CustomerNote>? CustomerNotes { get; set; }
 		public DbSet<CustomerSetup>? CustomerSetups { get; set; }
