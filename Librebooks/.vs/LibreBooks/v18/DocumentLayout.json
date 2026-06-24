@@ -1,30 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\",
+  "WorkspaceRootPath": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\customerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\customerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesledger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesledger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\icustomerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\icustomerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesdocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesdocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\models\\entity\\customerspace\\customercontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\customerspace\\customercontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\models\\entity\\generalspace\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\generalspace\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesinvoicecredit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesinvoicecredit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\models\\entity\\generalspace\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\generalspace\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salescredit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salescredit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\icustomermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\icustomermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesinvoicereceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesinvoicereceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,73 +38,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ICustomerStore.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-20T22:15:33.033Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CustomerContact.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\CustomerSpace\\CustomerContact.cs",
-              "RelativeDocumentMoniker": "Models\\Entity\\CustomerSpace\\CustomerContact.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\CustomerSpace\\CustomerContact.cs",
-              "RelativeToolTip": "Models\\Entity\\CustomerSpace\\CustomerContact.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-20T21:23:59.064Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Contact.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Contact.cs",
-              "RelativeDocumentMoniker": "Models\\Entity\\GeneralSpace\\Contact.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Contact.cs",
-              "RelativeToolTip": "Models\\Entity\\GeneralSpace\\Contact.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-20T21:07:24.499Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Note.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Note.cs",
-              "RelativeDocumentMoniker": "Models\\Entity\\GeneralSpace\\Note.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Models\\Entity\\GeneralSpace\\Note.cs",
-              "RelativeToolTip": "Models\\Entity\\GeneralSpace\\Note.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAC8AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-20T21:00:46.838Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ICustomerManager.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerManager.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ICustomerManager.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerManager.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\ICustomerManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-20T20:32:13.64Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -115,15 +54,87 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CustomerStore.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\CustomerStore.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\CustomerStore.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\CustomerStore.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\CustomerStore.cs",
-              "ViewState": "AgIAAP8AAAAAAAAAAAAAAA0BAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "SalesCredit.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesCredit.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesCredit.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesCredit.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesCredit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-20T19:38:01.931Z",
+              "WhenOpened": "2026-06-23T10:48:11.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SalesInvoiceReceipt.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesInvoiceReceipt.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesInvoiceReceipt.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesInvoiceReceipt.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesInvoiceReceipt.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T10:47:55.681Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SalesInvoiceCredit.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesInvoiceCredit.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesInvoiceCredit.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesInvoiceCredit.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesInvoiceCredit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T10:46:59.782Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SalesReceipt.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesReceipt.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesReceipt.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesReceipt.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesReceipt.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA8wCMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T10:25:52.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SalesDocument.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T10:21:56.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SalesInvoice.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesInvoice.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesInvoice.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesInvoice.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesInvoice.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAA2wAwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T10:21:54.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SalesLedger.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesLedger.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesLedger.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesLedger.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesLedger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T10:01:45.143Z",
               "EditorCaption": ""
             }
           ]

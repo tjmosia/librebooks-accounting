@@ -9,7 +9,7 @@ namespace Librebooks.Models.Entity.SalesSpace;
 [Table(nameof(SalesInvoice))]
 public class SalesInvoice
 {
-	[Key]
+	[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
 	public virtual int DocumentId { get; set; }
 	public virtual int CompanyId { get; set; }
 	public virtual int CustomerId { get; set; }
