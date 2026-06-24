@@ -27,6 +27,7 @@ public class CompanyTax ()
 	}
 
 	public virtual Tax? Tax { get; set; }
+	public virtual Company? Company { get; set; }
 
 	public static void BuildModel (ModelBuilder builder)
 	{
@@ -36,11 +37,11 @@ public class CompanyTax ()
 				.IsUnique()
 				.IsClustered();
 
-			options.HasOne<Company>()
+			options.HasOne(p=> p.Company)
 				.WithMany(p => p.Taxes)
 				.HasForeignKey(p => p.CompanyId)
 					.IsRequired()
-				.OnDelete(DeleteBehavior.Restrict);
+				.OnDelete(DeleteBehavior.Cascade);
 
 			options.HasOne(p => p.Tax)
 				.WithOne()

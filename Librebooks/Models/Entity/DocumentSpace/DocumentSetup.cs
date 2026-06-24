@@ -40,6 +40,7 @@ public class DocumentSetup () : VersionedEntityBase()
 	public DocumentPrintTemplate? PrintTemplate { get; set; }
 	public DocumentType? Type { get; set; }
 	public Company? Company { get; set; }
+
 	public static void OnModelCreating (ModelBuilder builder)
 		=> builder.Entity<DocumentSetup>(options =>
 		{

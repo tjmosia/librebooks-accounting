@@ -14,12 +14,14 @@ using Librebooks.Providers.Stores;
 
 namespace Librebooks.Areas.Companies.Services;
 
-public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, DocumentSetupStore documentSetupStore, IAccountsStore? ledgerAccountStore) : ICompanyManager
+public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, DocumentSetupStore documentSetupStore, IAccountsStore? ledgerAccountStore) 
+	: ICompanyManager
 {
 	private readonly ICompanyStore store = store;
 	private readonly SystemsStore systemsStore = systemsStore;
 	private readonly DocumentSetupStore documentSetupStore = documentSetupStore;
 	private readonly IAccountsStore? ledgerAccountStore = ledgerAccountStore;
+
 	public async Task<TransactionResult<Company>> CreateAsync (Company company, User user, Country country, Currency currency)
 	{
 		company.CustomerSetup = new CustomerSetup
@@ -32,7 +34,6 @@ public class CompanyManager (ICompanyStore store, SystemsStore systemsStore, Doc
 		{
 			Prefix = "SUP",
 			NextNumber = 1,
-			NumberFormat = "0000",
 		};
 
 		company.ItemSetup = new ItemSetup

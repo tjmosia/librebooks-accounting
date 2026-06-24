@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Core.Constants;
+using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.SystemSpace;
 using Microsoft.EntityFrameworkCore;
@@ -35,9 +36,13 @@ public class CustomerAdjustment
 
     public virtual int CompanyId { get; set; }
     public virtual int CustomerId { get; set; }
+    public virtual int DebitLedgerAccountId { get; set;  }
+    public virtual int CreditLedgerAccountId { get; set; }
 
-    public virtual Customer? Customer { get; set; }
-    public virtual Tax? TaxType { get; set; }
+    public Customer? Customer { get; set; }
+    public Tax? TaxType { get; set; }
+    public CompanyLedgerAccount? DebitAccount { get; set;  }
+    public CompanyLedgerAccount? CreditAccount { get; set;  }
 
     public static void OnModelCreating (ModelBuilder builder)
     {

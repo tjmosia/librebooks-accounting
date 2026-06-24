@@ -19,7 +19,11 @@ public class CustomerSetup () : VersionedEntityBase()
 	public virtual string? Suffix { get; set; }
 
 	public virtual int NextNumber { get; set; }
-	public Company? Company { get; set;  }
+
+    [MaxLength(10)]
+    public virtual string? NumberFormat { get; set; }
+
+    public Company? Company { get; set;  }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
@@ -29,7 +33,7 @@ public class CustomerSetup () : VersionedEntityBase()
 				.WithOne(p => p.CustomerSetup)
 				.HasForeignKey<CustomerSetup>(p => p.CompanyId)
 					.IsRequired()
-				.OnDelete(DeleteBehavior.Restrict);
+				.OnDelete(DeleteBehavior.Cascade);
 		});
 	}
 }

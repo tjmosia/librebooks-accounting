@@ -43,4 +43,13 @@ public interface ICustomerStore
     Task<TransactionResult<Note>> AddNoteAsync(Customer customer, Note note);
     Task<TransactionResult<Note>> UpdateNoteAsync(Note note);
     Task<TransactionResult> DeleteNotesAsync(params Note[] notes);
+
+    /*******************************************
+     * NOTES CATEGORIES
+     ******************************************/
+    Task<TransactionResult<CustomerAdjustment>> AddAdjustmentAsync(Customer customer, CustomerAdjustment adjustment);
+    Task<TransactionResult<CustomerAdjustment>> UpdateAdjustmentAsync(CustomerAdjustment adjustment);
+    Task<CustomerAdjustment?> FindAdjustmentByIdAsync(Customer customer, int id, CancellationToken cancellationToken = default);
+    Task<IList<CustomerAdjustment>> GetAdjustmentsAsync(Customer customer, CancellationToken cancellationToken = default);
+    Task<TransactionResult> DeleteAdjustmentAsync(CustomerAdjustment adjustment);
 }

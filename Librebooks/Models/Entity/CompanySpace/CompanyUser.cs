@@ -18,6 +18,7 @@ namespace Librebooks.Models.Entity.CompanySpace
 
 		public virtual Company? Company { get; set; }
 		public virtual User? User { get; set; }
+		public virtual SalesPerson? SalesPerson { get; set; }
 
 		public CompanyUser (int companyId, int userId) : this()
 		{
@@ -29,7 +30,7 @@ namespace Librebooks.Models.Entity.CompanySpace
 		{
 			builder.Entity<CompanyUser>(options =>
 			   {
-				   options.HasIndex(p => new { p.UserId, p.CompanyId })
+				   options.HasIndex(p => new { p.UserId, p.CompanyId, p.Id })
 					   .IsUnique()
 					   .IsClustered();
 
@@ -39,7 +40,7 @@ namespace Librebooks.Models.Entity.CompanySpace
 						   .IsRequired()
 					   .OnDelete(DeleteBehavior.Restrict);
 
-				   options.HasOne<SalesPerson>()
+				   options.HasOne(p=>p.SalesPerson)
 					   .WithOne(p => p.CompanyUser)
 					   .HasForeignKey<SalesPerson>(p => p.CompanyUserId)
 						   .IsRequired(false)

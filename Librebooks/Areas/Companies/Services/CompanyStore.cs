@@ -109,10 +109,11 @@ public partial class CompanyStore(AppDbContext context, ILogger<CompanyStore> lo
             .FirstOrDefaultAsync(cancellationToken);
 
     public async Task<Contact?> FindSalesPersonByUserIdAsync(Company company, int userId, CancellationToken cancellationToken = default)
-        => await context!.SalesPeople!
-            .Where(p => p.CompanyId == company.Id && p.CompanyUserId == userId)
-            .Include(p => p.Contact)
-            .Select(p => p.Contact)
+        => await context!.CompanyUsers!
+            .Where(p => p.CompanyId == company.Id && p.UserId == userId)
+            .Include(p => p.SalesPerson)
+                .ThenInclude(p=>p.Contact)
+            .Select(p => p.SalesPerson!.Contact)
             .FirstOrDefaultAsync(cancellationToken);
 
     public async Task<IList<User>> GetUsersAsync(Company company, CancellationToken cancellationToken = default)
@@ -144,7 +145,7 @@ public partial class CompanyStore(AppDbContext context, ILogger<CompanyStore> lo
         }
     }
 
-    public async Task<TransactionResult<CompanyTax>> AddTaxesAsync(Company company, Tax tax)
+    public async Task<TransactionResult<CompanyTax>> AddTaxAsync(Company company, Tax tax)
     {
         try
         {
@@ -156,7 +157,7 @@ public partial class CompanyStore(AppDbContext context, ILogger<CompanyStore> lo
         catch (Exception ex)
         {
             return TransactionResult<CompanyTax>
-                .Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddTaxesAsync), logger));
+                .Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddTaxAsync), logger));
         }
     }
 
@@ -234,6 +235,21 @@ public partial class CompanyStore(AppDbContext context, ILogger<CompanyStore> lo
 
             return TransactionResult<CompanyImage>
                 .Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(AddLogoAsync), logger));
+        }
+    }
+
+    public async Task<TransactionResult<CompanyMailSetup>> AddMailSettingsAsync(Company company, CompanyMailSetup companyMailSetup)
+    {
+        try
+        {
+            companyMailSetup.CompanyId = company.Id;
+            var add = await context.CompanyMailSettings!.AddAsync(companyMailSetup);
+            await context.SaveChangesAsync();
+            return TransactionResult<CompanyMailSetup>.Success(add.Entity);
+        }
+        catch (Exception)
+        {
+            return TransactionResult<CompanyMailSetup>.Failure();
         }
     }
 
@@ -455,7 +471,7 @@ public partial class CompanyStore(AppDbContext context, ILogger<CompanyStore> lo
         }
     }
 
-    public async Task<TransactionResult> DeleteTaxTypeAsync(CompanyTax companyTaxType)
+    public async Task<TransactionResult> DeleteTaxAsync(CompanyTax companyTaxType)
     {
         try
         {
@@ -467,7 +483,7 @@ public partial class CompanyStore(AppDbContext context, ILogger<CompanyStore> lo
         catch (Exception ex)
         {
             return TransactionResult
-                .Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteTaxTypeAsync), logger));
+                .Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(DeleteTaxAsync), logger));
         }
     }
 

@@ -33,7 +33,7 @@ namespace Librebooks.Models.Entity.SupplierSpace
 					   .WithOne(p => p.SupplierSetup)
 					   .HasForeignKey<SupplierSetup>(p => p.CompanyId)
 						   .IsRequired()
-					   .OnDelete(DeleteBehavior.Restrict);
+					   .OnDelete(DeleteBehavior.Cascade);
 			   });
 		}
 	}

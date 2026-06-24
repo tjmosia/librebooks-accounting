@@ -24,10 +24,10 @@ public class CompanyRegionalSetup () : VersionedEntityBase()
 	public virtual int CurrencyId { get; set; }
 	public virtual int RoundToNearest { get; set; }
 
-	public virtual DateFormat? DateFormat { get; set; }
-	public virtual Country? Country { get; set; }
-	public virtual Currency? Currency { get; set; }
-	public virtual Company? Company { get; set; }
+	public DateFormat? DateFormat { get; set; }
+	public Country? Country { get; set; }
+	public Currency? Currency { get; set; }
+	public Company? Company { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

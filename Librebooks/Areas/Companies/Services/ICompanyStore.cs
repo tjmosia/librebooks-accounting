@@ -15,8 +15,8 @@ namespace Librebooks.Areas.Companies.Services;
 public interface ICompanyStore
 {
 	/***********************************************************************************************************************************
-         ****** SELECT TRANSACTIONS
-         ***********************************************************************************************************************************/
+    ****** SELECT TRANSACTIONS
+    ***********************************************************************************************************************************/
 	Task<Company?> FindByIdAsync (int id, CancellationToken cancellationToken = default);
 	Task<Company?> FindByIdAsync (int companyId, int userId, CancellationToken cancellationToken = default);
 	Task<IList<Company?>> FindByUserIdAsync (int userId, CancellationToken cancellationToken = default);
@@ -33,13 +33,14 @@ public interface ICompanyStore
 	Task<IList<User>> GetUsersAsync (Company company, CancellationToken cancellationToken = default);
 
 	/***********************************************************************************************************************************
-         ****** INSERT TRANSACTIONS
-         ***********************************************************************************************************************************/
-	Task<TransactionResult<CompanyTax>> AddTaxesAsync (Company company, Tax tax);
+	****** INSERT TRANSACTIONS
+	***********************************************************************************************************************************/
+	Task<TransactionResult<CompanyTax>> AddTaxAsync (Company company, Tax tax);
 	Task<TransactionResult<Contact>> AddSalesPersonAsync (Company company, Contact contact);
 	Task<TransactionResult<BankAccount>> AddBankAccountAsync (Company company, BankAccount bankAccount);
 	Task<TransactionResult<CompanyImage>> AddLogoAsync (Company company, CompanyImage image);
 	Task<TransactionResult<Company>> CreateAsync (Company company);
+	Task<TransactionResult<CompanyMailSetup>> AddMailSettingsAsync(Company company, CompanyMailSetup companyMailSetup);
 
 	/***********************************************************************************************************************************
 	****** UPDATE TRANSACTIONS
@@ -56,11 +57,11 @@ public interface ICompanyStore
 	Task<TransactionResult<Company>> UpdateAsync (Company company);
 
 	/***********************************************************************************************************************************
-         ****** DELETE TRANSACTIONS
-         ***********************************************************************************************************************************/
+    ****** DELETE TRANSACTIONS
+    ***********************************************************************************************************************************/
 	Task<TransactionResult> DeleteSalesPersonAsync (SalesPerson salesPerson);
 	Task<TransactionResult> DeleteAsync (Company company);
-	Task<TransactionResult> DeleteTaxTypeAsync (CompanyTax companyTaxType);
+	Task<TransactionResult> DeleteTaxAsync (CompanyTax companyTax);
 	Task<TransactionResult> DeleteBankAccountAsync (BankAccount bankAccount);
 	Task<TransactionResult> DeleteLogoAsync (CompanyLogo companyLogo);
 }
