@@ -70,6 +70,8 @@ namespace Librebooks.Models.Entity
 			SalesReceipt.OnModelCreating(builder);
 			SalesProForma.OnModelCreating(builder);
 			SalesQuoteProForma.OnModelCreating(builder);
+			SalesLedger.OnModelCreating(builder);
+			SalesLedgerEntryType.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Company Space

@@ -68,6 +68,8 @@ namespace Librebooks.Data
 		public DbSet<SalesInvoiceWriteoff>? SalesInvoiceWriteoffs { get; set; }
 		public DbSet<SalesQuoteProForma>? SalesQuoteProFormas { get; set; }
 		public DbSet<SalesProForma>? SalesProFormas { get; set; }
+		public DbSet<SalesLedger>? SalesLedgers { get; set; }
+		public DbSet<SalesLedgerEntryType>? SalesLedgerEntryTypes { get; set; }
 
 		/************************************************************************************************
          * Inventory Space
