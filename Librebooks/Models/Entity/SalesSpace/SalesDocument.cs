@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
+using Librebooks.Models.Entity.CompanySpace;
+using Librebooks.Models.Entity.CustomerSpace;
 using Librebooks.Models.Entity.DocumentSpace;
 using Librebooks.Models.Entity.IdentitySpace;
-using Librebooks.Models.Entity.SystemSpace;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -27,41 +28,47 @@ public class SalesDocument () : VersionedEntityBase()
 	[MaxLength(50)]
 	public virtual string? CustomerReference { get; set; }
 
-	public virtual int CustomerInfoId { get; set; }
-	public virtual int CompanyInfoId { get; set; }
-
 	[MaxLength(255)]
 	public virtual string? Message { get; set; }
 
 	[MaxLength(500)]
 	public virtual string? FooterMessage { get; set; }
 
-	public virtual bool TaxExempt { get; set; }
 	public virtual int CurrencyId { get; set; }
-	public string? SalesPersonId { get; set; }
-	public virtual int? ShippingTermId { get; set; }
-	public virtual int? ShippingMethodId { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal SubTotal { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal TaxAmount { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal GrandTotal { get; set; }
 	public virtual int CustomerId { get; set; }
+	public virtual int CompanyId { get; set; }
+	public virtual int CustomerInfoId { get; set; }
+	public virtual int CompanyInfoId { get; set; }
+	public string? SalesPersonId { get; set; }
 	public virtual bool Recorded { get; set; }
 	public virtual int StatusId { get; set; }
 	public virtual bool Printed { get; set; }
 	public int? CreatorId { get; set; }
 	public virtual int TypeId { get; set; }
 
-	public DocumentType? Type { get; set; }
-	public Currency? Currency { get; set; }
 	public DocumentStatus? Status { get; set; }
 	public SalesPerson? SalesPerson { get; set; }
-	public ShippingMethod? ShippingMethod { get; set; }
-	public ShippingTerm? ShippingTerm { get; set; }
 	public SalesDocumentCustomerDetails? CustomerInfo { get; set; }
 	public DocumentCompanyDetails? CompanyInfo { get; set; }
 	public ICollection<SalesDocumentNote>? Notes { get; set; }
 	public ICollection<SalesDocumentLine>? Lines { get; set; }
+	public Company? Company { get; set; }
+	public Customer? Customer { get; set; }
 	public User? Creator { get; set; }
+	public DocumentType? Type { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
-		=> builder.Entity<SalesDocument>(options =>
+	{
+		builder.Entity<SalesDocument>(options =>
 		{
 			options.HasMany(p => p.Lines)
 				.WithOne(p => p.Document)
@@ -92,5 +99,24 @@ public class SalesDocument () : VersionedEntityBase()
 				.HasForeignKey(p => p.TypeId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.Type)
+				.WithMany()
+				.HasForeignKey(p => p.TypeId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.Customer)
+				.WithMany()
+				.HasForeignKey(p => p.CustomerId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.Company)
+				.WithMany()
+				.HasForeignKey(p => p.CompanyId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
 		});
+	}
 }

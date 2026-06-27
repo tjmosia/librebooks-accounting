@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.DocumentSpace;
 
@@ -23,6 +23,15 @@ public class PurchaseDocument () : VersionedEntityBase()
 	[MaxLength(50)]
 	public virtual string? SuppplierReference { get; set; }
 
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal SubTotal { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal TaxAmount { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal GrandTotal { get; set; }
+
 	[MaxLength(255)]
 	public virtual string? Message { get; set; }
 
@@ -34,7 +43,7 @@ public class PurchaseDocument () : VersionedEntityBase()
 	public virtual int? SupplierInfoId { get; set; }
 	public virtual int CompanyInfoId { get; set; }
 	public virtual int StatusId { get; set; }
-	public virtual int TypeId { get; set;  }
+	public virtual int TypeId { get; set; }
 
 	public virtual DocumentStatus? Status { get; set; }
 	public virtual ICollection<PurchaseDocumentLine>? Lines { get; set; }

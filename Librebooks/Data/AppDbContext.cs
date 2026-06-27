@@ -54,11 +54,8 @@ namespace Librebooks.Data
 		public DbSet<SalesDocument>? SalesDocuments { get; set; }
 		public DbSet<SalesDocumentNote>? SalesDocumentNotes { get; set; }
 		public DbSet<SalesDocumentLine>? SalesDocumentLines { get; set; }
-		public DbSet<SalesOrder>? SalesOrders { get; set; }
-		public DbSet<SalesInvoice>? SalesInvoices { get; set; }
 		public DbSet<SalesInvoiceReceipt>? SalesInvoiceReceipts { get; set; }
 		public DbSet<SalesOrderInvoice>? SalesOrderInvoices { get; set; }
-		public DbSet<SalesQuote>? SalesQuotes { get; set; }
 		public DbSet<SalesQuoteOrder>? SalesQuoteOrders { get; set; }
 		public DbSet<SalesCredit>? SalesCredits { get; set; }
 		public DbSet<SalesReceipt>? SalesReceipts { get; set; }
@@ -67,9 +64,7 @@ namespace Librebooks.Data
 		public DbSet<SalesInvoiceCredit>? SalesInvoiceCredits { get; set; }
 		public DbSet<SalesInvoiceWriteoff>? SalesInvoiceWriteoffs { get; set; }
 		public DbSet<SalesQuoteProForma>? SalesQuoteProFormas { get; set; }
-		public DbSet<SalesProForma>? SalesProFormas { get; set; }
 		public DbSet<SalesLedger>? SalesLedgers { get; set; }
-		public DbSet<SalesLedgerEntryType>? SalesLedgerEntryTypes { get; set; }
 
 		/************************************************************************************************
          * Inventory Space
@@ -87,7 +82,7 @@ namespace Librebooks.Data
          ************************************************************************************************/
 		public DbSet<LedgerAccount>? LedgerAccounts { get; set; }
 		public DbSet<LedgerAccountCategory>? LedgerAccountCategories { get; set; }
-		public DbSet<JournalEntry>? JournalEntries { get; set; }
+		public DbSet<JournalLine>? JournalEntries { get; set; }
 		public DbSet<LedgerAccountCashFlowType>? LedgerAccountCashFlowTypes { get; set; }
 		public DbSet<CompanyLedgerAccount>? CompanyLedgerAccounts { get; set; }
 
@@ -137,17 +132,17 @@ namespace Librebooks.Data
 		public DbSet<PurchaseDocument>? PurchaseDocuments { get; set; }
 		public DbSet<PurchaseDocumentNote>? PurchaseDocumentNotes { get; set; }
 		public DbSet<PurchaseDocumentLine>? PurchaseDocumentLines { get; set; }
-		public DbSet<PurchaseOrder>? PurchaseOrders { get; set; }
 		public DbSet<PurchaseBuyer>? PurchaseBuyers { get; set; }
 		public DbSet<PurchaseInvoice>? PurchaseInvoices { get; set; }
 		public DbSet<PurchaseLine>? PurchaseLines { get; set; }
-		public DbSet<PurchaseReturn>? PurchaseReturns { get; set; }
 		public DbSet<PurchaseInvoiceReturn>? PurchaseReturnInvoices { get; set; }
 		public DbSet<PurchaseReceipt>? PurchaseReceipts { get; set; }
 		public DbSet<PurchaseOrderInvoice>? PurchaseOrderInvoices { get; set; }
 		public DbSet<PurchaseInvoiceReceipt>? PurchaseInvoiceReceipts { get; set; }
 		public DbSet<DocumentSupplierDetail>? DocumentSupplierDetails { get; set; }
 		public DbSet<PurchaseRequestForQuote>? PurchaseRequestForQuotes { get; set; }
+		public DbSet<PurchaseLedger>? PurchaseLedgers { get; set; }
+		public DbSet<PurchaseLedgerJournal>? PurchaseLedgerJournals { get; set; }
 
 		/************************************************************************************************
          * GENERAL SPACE
@@ -159,7 +154,6 @@ namespace Librebooks.Data
 		protected override void OnModelCreating (ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
-
 
 			/************************************************************************************************
              * User Space
@@ -199,19 +193,17 @@ namespace Librebooks.Data
 			SalesDocument.OnModelCreating(builder);
 			SalesDocumentLine.OnModelCreating(builder);
 			SalesDocumentNote.OnModelCreating(builder);
-			SalesInvoice.OnModelCreating(builder);
 			SalesInvoiceCredit.OnModelCreating(builder);
 			SalesInvoiceReceipt.OnModelCreating(builder);
 			SalesInvoiceWriteoff.OnModelCreating(builder);
 			SalesLine.OnModelCreating(builder);
-			SalesOrder.OnModelCreating(builder);
 			SalesOrderInvoice.OnModelCreating(builder);
 			SalesPerson.OnModelCreating(builder);
-			SalesQuote.OnModelCreating(builder);
 			SalesQuoteOrder.OnModelCreating(builder);
 			SalesReceipt.OnModelCreating(builder);
-			SalesProForma.OnModelCreating(builder);
 			SalesQuoteProForma.OnModelCreating(builder);
+			SalesLedger.OnModelCreating(builder);
+			SalesLedgerJournal.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Company Space
@@ -256,7 +248,8 @@ namespace Librebooks.Data
 			LedgerAccount.OnModelCreating(builder);
 			LedgerAccountCategory.OnModelCreating(builder);
 			LedgerAccountCashFlowType.OnModelCreating(builder);
-			JournalEntry.OnModelCreating(builder);
+			Journal.OnModelCreating(builder);
+			JournalLine.OnModelCreating(builder);
 			CompanyLedgerAccount.OnModelCreating(builder);
 
 			/************************************************************************************************
@@ -282,11 +275,11 @@ namespace Librebooks.Data
 			PurchaseInvoiceReceipt.OnModelCreating(builder);
 			PurchaseInvoiceReturn.OnModelCreating(builder);
 			PurchaseLine.OnModelCreating(builder);
-			PurchaseOrder.OnModelCreating(builder);
 			PurchaseOrderInvoice.OnModelCreating(builder);
 			PurchaseReceipt.OnModelCreating(builder);
 			PurchaseRequestForQuote.OnModelCreating(builder);
-			PurchaseReturn.OnModelCreating(builder);
+			PurchaseLedger.OnModelCreating(builder);
+			PurchaseLedgerJournal.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Banking Space

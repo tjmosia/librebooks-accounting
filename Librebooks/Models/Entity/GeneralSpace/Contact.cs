@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.CustomerSpace;
 using Librebooks.Models.Entity.PurchasesSpace;
-using Librebooks.Models.Entity.SalesSpace;
 using Librebooks.Models.Entity.SupplierSpace;
 
 using Microsoft.EntityFrameworkCore;

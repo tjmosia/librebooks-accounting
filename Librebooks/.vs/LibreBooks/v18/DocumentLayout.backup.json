@@ -1,38 +1,46 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\",
+  "WorkspaceRootPath": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\isalesstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\isalesstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\purchasesspace\\purchasecredit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\purchasesspace\\purchasecredit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\companies\\services\\companymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\companies\\services\\companymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\core\\types\\purchasesandsales\\documenttypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:core\\types\\purchasesandsales\\documenttypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\salesstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\salesstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\core\\types\\purchasesandsales\\salesdocumenttypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:core\\types\\purchasesandsales\\salesdocumenttypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\customerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\customerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\salesspace\\salesdocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\salesspace\\salesdocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\icustomerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\icustomerstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\documentspace\\documenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\documentspace\\documenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\salesmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\salesmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\documentspace\\documentsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\documentspace\\documentsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\areas\\customers\\providers\\isalesmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:areas\\customers\\providers\\isalesmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\documentspace\\documentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\documentspace\\documentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\github\\librebooks\\librebooks\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\models\\entity\\purchasesspace\\purchasedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:models\\entity\\purchasesspace\\purchasedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\core\\types\\purchasesandsales\\salesdocumentstatuses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:core\\types\\purchasesandsales\\salesdocumentstatuses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|c:\\users\\tjmos\\source\\repos\\librebooks\\librebooks\\core\\types\\purchasesandsales\\purchasedocumentstatuses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A44FA4F9-E783-40E1-928D-A107B1226F7A}|Librebooks.csproj|solutionrelative:core\\types\\purchasesandsales\\purchasedocumentstatuses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,106 +66,132 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CompanyManager.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Companies\\Services\\CompanyManager.cs",
-              "RelativeDocumentMoniker": "Areas\\Companies\\Services\\CompanyManager.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Companies\\Services\\CompanyManager.cs",
-              "RelativeToolTip": "Areas\\Companies\\Services\\CompanyManager.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACwAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:26:41.987Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SalesStore.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\SalesStore.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\SalesStore.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\SalesStore.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\SalesStore.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:25:55.841Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ISalesStore.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ISalesStore.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ISalesStore.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ISalesStore.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\ISalesStore.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Title": "PurchaseCredit.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\PurchasesSpace\\PurchaseCredit.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\PurchasesSpace\\PurchaseCredit.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\PurchasesSpace\\PurchaseCredit.cs",
+              "RelativeToolTip": "Models\\Entity\\PurchasesSpace\\PurchaseCredit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:24:06.787Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CustomerStore.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\CustomerStore.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\CustomerStore.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\CustomerStore.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\CustomerStore.cs",
-              "ViewState": "AgIAAOQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:23:48.155Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ICustomerStore.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\ICustomerStore.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:23:43.497Z",
+              "WhenOpened": "2026-06-27T17:38:35.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "ISalesManager.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ISalesManager.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\ISalesManager.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\ISalesManager.cs",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\ISalesManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "DocumentStatus.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\DocumentSpace\\DocumentStatus.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\DocumentSpace\\DocumentStatus.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\DocumentSpace\\DocumentStatus.cs",
+              "RelativeToolTip": "Models\\Entity\\DocumentSpace\\DocumentStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:23:00.133Z",
+              "WhenOpened": "2026-06-27T16:54:24.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SalesDocumentTypes.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\SalesDocumentTypes.cs",
+              "RelativeDocumentMoniker": "Core\\Types\\PurchasesAndSales\\SalesDocumentTypes.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\SalesDocumentTypes.cs",
+              "RelativeToolTip": "Core\\Types\\PurchasesAndSales\\SalesDocumentTypes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:52:44.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DocumentTypes.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\DocumentTypes.cs",
+              "RelativeDocumentMoniker": "Core\\Types\\PurchasesAndSales\\DocumentTypes.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\DocumentTypes.cs",
+              "RelativeToolTip": "Core\\Types\\PurchasesAndSales\\DocumentTypes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:43:53.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DocumentType.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\DocumentSpace\\DocumentType.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\DocumentSpace\\DocumentType.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\DocumentSpace\\DocumentType.cs",
+              "RelativeToolTip": "Models\\Entity\\DocumentSpace\\DocumentType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:42:56.033Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "SalesManager.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\SalesManager.cs",
-              "RelativeDocumentMoniker": "Areas\\Customers\\Providers\\SalesManager.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Areas\\Customers\\Providers\\SalesManager.cs*",
-              "RelativeToolTip": "Areas\\Customers\\Providers\\SalesManager.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAiAAAAAAAAAA==",
+              "Title": "DocumentSetup.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\DocumentSpace\\DocumentSetup.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\DocumentSpace\\DocumentSetup.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\DocumentSpace\\DocumentSetup.cs",
+              "RelativeToolTip": "Models\\Entity\\DocumentSpace\\DocumentSetup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:22:21.521Z",
+              "WhenOpened": "2026-06-27T16:41:28.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SalesDocument.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "RelativeToolTip": "Models\\Entity\\SalesSpace\\SalesDocument.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAkwEEAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:40:47.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SalesDocumentStatuses.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\SalesDocumentStatuses.cs",
+              "RelativeDocumentMoniker": "Core\\Types\\PurchasesAndSales\\SalesDocumentStatuses.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\SalesDocumentStatuses.cs",
+              "RelativeToolTip": "Core\\Types\\PurchasesAndSales\\SalesDocumentStatuses.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:29:56.876Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\TJmos\\github\\librebooks\\Librebooks\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAEQAAABFAAAAAAAAAA==",
+              "Title": "PurchaseDocument.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\PurchasesSpace\\PurchaseDocument.cs",
+              "RelativeDocumentMoniker": "Models\\Entity\\PurchasesSpace\\PurchaseDocument.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Models\\Entity\\PurchasesSpace\\PurchaseDocument.cs",
+              "RelativeToolTip": "Models\\Entity\\PurchasesSpace\\PurchaseDocument.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA0wCoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T21:21:44.318Z",
+              "WhenOpened": "2026-06-27T16:29:25.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PurchaseDocumentStatuses.cs",
+              "DocumentMoniker": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\PurchaseDocumentStatuses.cs",
+              "RelativeDocumentMoniker": "Core\\Types\\PurchasesAndSales\\PurchaseDocumentStatuses.cs",
+              "ToolTip": "C:\\Users\\TJmos\\source\\repos\\Librebooks\\Librebooks\\Core\\Types\\PurchasesAndSales\\PurchaseDocumentStatuses.cs",
+              "RelativeToolTip": "Core\\Types\\PurchasesAndSales\\PurchaseDocumentStatuses.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:37:40.539Z",
               "EditorCaption": ""
             }
           ]

@@ -62,7 +62,7 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 			.Include(p => p.Inventory)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<IList<Item>> FindAllAsync (Company company, CancellationToken cancellationToken = default)
+	public async Task<IList<Item>> GetAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.Items!
 			.Where(p => p.CompanyId == company.Id)
 			.Include(p => p.Inventory)

@@ -185,30 +185,30 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 	/**********************************************************
 	 * JOURNAL ENTRIES
 	 **********************************************************/
-	public async Task<IList<JournalEntry>> FindJournalEntriesAsync (Company company, CancellationToken cancellationToken = default)
+	public async Task<IList<JournalLine>> FindJournalEntriesAsync (Company company, CancellationToken cancellationToken = default)
 	{
 		return await context.JournalEntries!.Where(p => p.CompanyId == company.Id).ToListAsync(cancellationToken);
 		throw new NotImplementedException();
 	}
 
-	public async Task<JournalEntry?> FindJournalEntryByIdAsync (Company company, int id, CancellationToken cancellationToken = default)
+	public async Task<JournalLine?> FindJournalEntryByIdAsync (Company company, int id, CancellationToken cancellationToken = default)
 	{
 		return await context.JournalEntries!
 			.Where(p => p.CompanyId == company.Id && p.Id == id)
 			.FirstOrDefaultAsync(cancellationToken);
 	}
 
-	public async Task<TransactionResult<JournalEntry>> CreateJournalEntryAsync (JournalEntry entry)
+	public async Task<TransactionResult<JournalLine>> CreateJournalEntryAsync (JournalLine entry)
 	{
 		try
 		{
 			var add = await context.JournalEntries!.AddAsync(entry);
 			await context.SaveChangesAsync();
-			return TransactionResult<JournalEntry>.Success(add.Entity);
+			return TransactionResult<JournalLine>.Success(add.Entity);
 		}
 		catch (Exception ex)
 		{
-			return TransactionResult<JournalEntry>.Failure(() =>
+			return TransactionResult<JournalLine>.Failure(() =>
 			{
 				if (IsForeignKeyViolation(ex))
 					return new TransactionError(nameof(AppErrorDescriber.ForeignKeyConstraint), "One or more dependencies were not found.");
@@ -217,17 +217,17 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 		}
 	}
 
-	public async Task<TransactionResult<JournalEntry>> UpdateJournalEntryAsync (JournalEntry entry)
+	public async Task<TransactionResult<JournalLine>> UpdateJournalEntryAsync (JournalLine entry)
 	{
 		try
 		{
 			var add = context.JournalEntries!.Update(entry);
 			await context.SaveChangesAsync();
-			return TransactionResult<JournalEntry>.Success(add.Entity);
+			return TransactionResult<JournalLine>.Success(add.Entity);
 		}
 		catch (Exception ex)
 		{
-			return TransactionResult<JournalEntry>.Failure(() =>
+			return TransactionResult<JournalLine>.Failure(() =>
 			{
 				if (IsForeignKeyViolation(ex))
 					return new TransactionError(nameof(AppErrorDescriber.ForeignKeyConstraint), "One or more dependencies were not found.");
@@ -236,7 +236,7 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 		}
 	}
 
-	public async Task<TransactionResult> DeleteJournalEntriesAsync (params JournalEntry[] entries)
+	public async Task<TransactionResult> DeleteJournalEntriesAsync (params JournalLine[] entries)
 	{
 		try
 		{
@@ -250,7 +250,7 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 		}
 	}
 
-	public async Task<TransactionResult> CreateJournalEntriesAsync (params JournalEntry[] entries)
+	public async Task<TransactionResult> CreateJournalEntriesAsync (params JournalLine[] entries)
 	{
 		try
 		{
@@ -269,7 +269,7 @@ public class AccountsStore (AppDbContext context, ILogger<AccountsStore> logger)
 		}
 	}
 
-	public async Task<TransactionResult> UpdateJournalEntriesAsync (params JournalEntry[] entries)
+	public async Task<TransactionResult> UpdateJournalEntriesAsync (params JournalLine[] entries)
 	{
 		try
 		{

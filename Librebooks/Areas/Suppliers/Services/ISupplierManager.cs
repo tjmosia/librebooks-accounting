@@ -7,7 +7,7 @@ namespace Librebooks.Areas.Suppliers.Services
 {
     public interface ISupplierManager
     {
-        Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchaseReturn purchaseReturn);
+        Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchasesReturn purchaseReturn);
         Task<TransactionResult> AllocateReceiptToInvoiceAsync (PurchaseReceipt receipt, PurchaseInvoice invoice);
 
         Task<IList<Supplier>> GetAllAsync (Company company);
@@ -16,7 +16,7 @@ namespace Librebooks.Areas.Suppliers.Services
         Task<TransactionResult<PurchaseOrder>> AddOrderAsync (Supplier supplier, PurchaseOrder order);
         Task<TransactionResult<PurchaseInvoice>> AddInvoiceAsync (Supplier supplier, PurchaseOrder order);
         Task<TransactionResult<PurchaseReceipt>> AddReceiptAsync (Supplier supplier, PurchaseOrder order);
-        Task<TransactionResult<PurchaseReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn);
+        Task<TransactionResult<PurchasesReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn);
 
         Task<Supplier> FindByIdAsync (Company company, string supplierId);
         Task<Supplier> FindByVendorNumberAsync (Company company, string vendorNumber);
@@ -28,7 +28,7 @@ namespace Librebooks.Areas.Suppliers.Services
         Task<IList<PurchaseOrder>> GetOrdersAsync (Supplier supplier);
         Task<IList<PurchaseInvoice>> GetInvoicesAsync (Supplier supplier);
         Task<IList<PurchaseReceipt>> GetReceiptsAsync (Supplier supplier);
-        Task<IList<PurchaseReturn>> GetReturnAsync (Supplier supplier);
+        Task<IList<PurchasesReturn>> GetReturnAsync (Supplier supplier);
 
         Task<TransactionResult<Supplier>> UpdateAsync (Supplier supplier);
 

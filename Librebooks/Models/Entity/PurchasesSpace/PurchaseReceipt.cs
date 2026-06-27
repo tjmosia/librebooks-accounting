@@ -31,7 +31,13 @@ namespace Librebooks.Models.Entity.PurchasesSpace
 		public virtual string? Comments { get; set; }
 
 		[Column(TypeName = ColumnTypes.MONETARY)]
-		public virtual decimal Amount { get; set; }
+		public virtual decimal SubTotal { get; set; }
+
+		[Column(TypeName = ColumnTypes.MONETARY)]
+		public virtual decimal TaxAmount { get; set; }
+
+		[Column(TypeName = ColumnTypes.MONETARY)]
+		public virtual decimal GrandAmount { get; set; }
 
 		public virtual bool Reconciled { get; set; }
 		public virtual bool Recorded { get; set; }

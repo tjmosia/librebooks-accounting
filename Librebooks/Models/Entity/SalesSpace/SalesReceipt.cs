@@ -25,7 +25,13 @@ public class SalesReceipt () : VersionedEntityBase()
 	public virtual string? Reference { get; set; }
 
 	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Amount { get; set; }
+	public virtual decimal SubTotal { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal TaxAmount { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal GrandAmount { get; set; }
 
 	[MaxLength(255)]
 	public virtual string? Message { get; set; }

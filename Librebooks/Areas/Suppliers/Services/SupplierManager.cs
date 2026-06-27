@@ -8,7 +8,7 @@ namespace Librebooks.Areas.Suppliers.Services
 {
 	public class SupplierManager : ISupplierManager
 	{
-		public Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchaseReturn purchaseReturn)
+		public Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchasesReturn purchaseReturn)
 		{
 			throw new NotImplementedException();
 		}
@@ -43,7 +43,7 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<TransactionResult<PurchaseReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn)
+		public Task<TransactionResult<PurchasesReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn)
 		{
 			throw new NotImplementedException();
 		}
@@ -93,7 +93,7 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<IList<PurchaseReturn>> GetReturnAsync (Supplier supplier)
+		public Task<IList<PurchasesReturn>> GetReturnAsync (Supplier supplier)
 		{
 			throw new NotImplementedException();
 		}

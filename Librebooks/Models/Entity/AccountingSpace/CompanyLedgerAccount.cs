@@ -20,7 +20,7 @@ public class CompanyLedgerAccount
 
 	public Company? Company { get; set; }
 	public LedgerAccount? Account { get; set; }
-	public ICollection<JournalEntry>? JournalEntries { get; set; }
+	public ICollection<JournalLine>? JournalLines { get; set; }
 	public static void OnModelCreating (ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<CompanyLedgerAccount>(options =>

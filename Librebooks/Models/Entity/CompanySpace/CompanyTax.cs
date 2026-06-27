@@ -49,7 +49,7 @@ public class CompanyTax ()
 				.IsRequired(true)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			options.HasMany<JournalEntry>()
+			options.HasMany<JournalLine>()
 				.WithOne(p => p.Tax)
 				.HasForeignKey(p => p.TaxId)
 					.IsRequired(false)
