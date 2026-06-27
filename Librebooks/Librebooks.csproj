@@ -46,7 +46,6 @@
     <None Remove="Extensions\Data\**" />
     <None Remove="Extensions\Identity\**" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
@@ -56,8 +55,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="10.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="10.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -70,11 +67,9 @@
     <PackageReference Include="NuGet.Protocol" Version="7.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.2" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Areas\Identity\Models\Account\DataTransferObjects\" />
     <Folder Include="Areas\Systems\Providers\Stores\" />
     <Folder Include="Test-Data\" />
   </ItemGroup>
-
 </Project>

@@ -1,7 +1,6 @@
 ﻿namespace Librebooks.Areas.Customers.Providers
 {
-	public class SalesReceiptsStore
-	{
-
-	}
+    public class ISalesManager
+    {
+    }
 }

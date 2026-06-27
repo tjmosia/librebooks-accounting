@@ -21,6 +21,7 @@ public class SalesLedger
 
 	[Column(TypeName = ColumnTypes.MONETARY)]
 	public virtual decimal Amount { get; set; }
+
 	public virtual int EntryTypeId { get; set; }
 	public virtual int DocumentId { get; set; }
 	public virtual int CustomerId { get; set; }
