@@ -35,7 +35,7 @@ namespace Librebooks.Models.Entity
              ************************************************************************************************/
 			Item.OnModelCreating(builder);
 			ItemCategory.OnModelCreating(builder);
-			ItemInventory.OnModelCreating(builder);
+			Inventory.OnModelCreating(builder);
 			InventoryAdjustment.OnModelCreating(builder);
 			ItemSetup.OnModelCreating(builder);
 			ItemDetail.OnModelCreating(builder);
@@ -60,7 +60,7 @@ namespace Librebooks.Models.Entity
 			SalesInvoiceCredit.OnModelCreating(builder);
 			SalesInvoiceReceipt.OnModelCreating(builder);
 			SalesInvoiceWriteoff.OnModelCreating(builder);
-			SalesLine.OnModelCreating(builder);
+			SalesDocumentLine.OnModelCreating(builder);
 			SalesOrderInvoice.OnModelCreating(builder);
 			SalesPerson.OnModelCreating(builder);
 			SalesQuoteOrder.OnModelCreating(builder);

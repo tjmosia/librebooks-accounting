@@ -13,7 +13,7 @@ public class InventoryAdjustment () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-	public virtual DateOnly Date { get; set; }
+	public virtual DateTime Date { get; set; }
 
 	[Required, MaxLength(50)]
 	public virtual string? Reason { get; set; }
@@ -33,7 +33,7 @@ public class InventoryAdjustment () : VersionedEntityBase()
 
 	public virtual Item? Item { get; set; }
 	public virtual Company? Company { get; set; }
-    public virtual ItemInventory? Inventory { get; set; }
+    public virtual Inventory? Inventory { get; set; }
 
     public static void OnModelCreating (ModelBuilder builder)
 	{

@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Librebooks.Models.Entity.InventorySpace;
 
-[Table(nameof(WarehouseZone))]
-public class WarehouseZone(): VersionedEntityBase()
+[Table(nameof(WarehouseShelve))]
+public class WarehouseShelve() : VersionedEntityBase()
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public virtual int Id { get; set; }
@@ -18,29 +18,29 @@ public class WarehouseZone(): VersionedEntityBase()
     [MaxLength(255)]
     public virtual string? Name { get; set; }
 
-    public virtual int WarehouseId { get; set; }
+    public virtual int ColumnId { get; set; }
     public virtual int CompanyId { get; set; }
 
-    public Warehouse? Warehouse { get; set; }
-    public ICollection<WarehouseRow>? Rows { get; set; }
+    public WarehouseColumn? Column { get; set; }
+    public ICollection<WarehouseBin>? Bins { get; set; }
 
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<WarehouseZone>(entity =>
+        modelBuilder.Entity<WarehouseShelve>(entity =>
         {
-            entity.HasIndex(p => new { p.CompanyId, p.WarehouseId, p.Id })
+            entity.HasIndex(p => new {p.CompanyId, p.ColumnId, p.Id })
                 .IsClustered()
                 .IsUnique();
 
-            entity.HasMany(p => p.Rows)
-                .WithOne(p => p.Zone)
-                .HasForeignKey(p => p.ZoneId)
+            entity.HasMany(p => p.Bins)
+                .WithOne(p => p.Shelve)
+                .HasForeignKey(p => p.ShelveId)
                     .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne<Company>()
                 .WithOne()
-                .HasForeignKey<WarehouseZone>(p=>p.CompanyId)
+                .HasForeignKey<WarehouseShelve>(p => p.CompanyId)
                     .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         });

@@ -13,7 +13,7 @@ public class Journal
 	public virtual int Id { get; set; }
 
 	[Column(ColumnTypes.DATE)]
-	public virtual DateOnly DateCreated { get; set; }
+	public virtual DateTime DateCreated { get; set; }
 
 	[MaxLength(50)]
 	public virtual string? Reference { get; set; }

@@ -11,13 +11,13 @@ public class ItemPriceHistory () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-	public virtual DateOnly Date { get; set; }
+	public virtual DateTime Date { get; set; }
 
 	[Column(TypeName = ColumnTypes.MONETARY)]
 	public virtual decimal OldPrice { get; set; }
 
-        [Column(TypeName = ColumnTypes.MONETARY)]
-        public virtual decimal NewPrice { get; set; }
+    [Column(TypeName = ColumnTypes.MONETARY)]
+    public virtual decimal NewPrice { get; set; }
 
 	public virtual int ItemId { get; set; }
 	public virtual int CompanyId { get; set; }

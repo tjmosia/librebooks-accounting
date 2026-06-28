@@ -13,11 +13,12 @@ public class JournalLine () : VersionedEntityBase()
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
 
-	[Required, Column(TypeName = "CHAR(1)")]
-	public virtual string? Type { get; set; }
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal Debit{ get; set; }
 
 	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Amount { get; set; }
+	public virtual decimal Credit{ get; set; }
+
 	public virtual int JournalId { get; set; }
 	public virtual int CompanyId { get; set; }
 	public virtual int LedgerAccountId { get; set; }

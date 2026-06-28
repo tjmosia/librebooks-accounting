@@ -97,18 +97,18 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 	 *******************************************************************/
 
 	public async Task<IList<InventoryAdjustment>> FindAdjustmentsByItemAsync (Item item, CancellationToken cancellationToken = default)
-		=> await context!.ItemAdjustments!
+		=> await context!.InventoryAdjustments!
 			.Where(p => p.CompanyId == item.CompanyId && p.ItemId == item.Id)
 			.Include(p => p.Item)
 			.ToListAsync(cancellationToken);
 	public async Task<IList<InventoryAdjustment>> FindAdjustmentsAsync (Company company, CancellationToken cancellationToken = default)
-		=> await context!.ItemAdjustments!
+		=> await context!.InventoryAdjustments!
 			.Where(p => p.CompanyId == company.Id)
 			.Include(p => p.Item)
 			.ToListAsync(cancellationToken);
 
 	public async Task<InventoryAdjustment?> FindAdjustmentByIdAsync (Company company, int adjustmentId, CancellationToken cancellationToken = default)
-		=> await context!.ItemAdjustments!
+		=> await context!.InventoryAdjustments!
 			.Where(p => p.CompanyId == company.Id && p.Id == adjustmentId)
 			.Include(p => p.Item)
 			.FirstOrDefaultAsync(cancellationToken);
@@ -119,7 +119,7 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 		{
 			adjustment.CompanyId = item.CompanyId;
 			adjustment.Id = item.Id;
-			var result = await context!.ItemAdjustments!.AddAsync(adjustment);
+			var result = await context!.InventoryAdjustments!.AddAsync(adjustment);
 			await context!.SaveChangesAsync();
 			return TransactionResult<InventoryAdjustment>.Success(result.Entity);
 
@@ -135,7 +135,7 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 	{
 		try
 		{
-			var update = context!.ItemAdjustments!.Update(adjustment);
+			var update = context!.InventoryAdjustments!.Update(adjustment);
 			await context!.SaveChangesAsync();
 			return TransactionResult<InventoryAdjustment>.Success(update.Entity);
 
@@ -151,7 +151,7 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 	{
 		try
 		{
-			context!.ItemAdjustments!.RemoveRange(adjustment);
+			context!.InventoryAdjustments!.RemoveRange(adjustment);
 			await context!.SaveChangesAsync();
 			return TransactionResult.Success;
 		}

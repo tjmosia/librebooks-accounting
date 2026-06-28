@@ -42,7 +42,7 @@ public class Item () : VersionedEntityBase()
 
 	public virtual Company? Company { get; set; }
 	public virtual ItemCategory? Category { get; set; }
-	public IList<ItemInventory>? Inventories { get; set; }
+	public IList<Inventory>? Inventories { get; set; }
 	public virtual CompanyTax? TaxType { get; set; }
 	public virtual ICollection<InventoryAdjustment>? StockAdjustments { get; set; }
 	public virtual ICollection<ItemPriceHistory>? PriceHistory { get; set; }

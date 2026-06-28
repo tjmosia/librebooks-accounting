@@ -16,8 +16,8 @@ public class PurchaseDocument () : VersionedEntityBase()
 	public virtual int Id { get; set; }
     public virtual int StatusId { get; set; }
     public virtual int TypeId { get; set; }
-    public virtual DateOnly Date { get; set; }
-	public virtual DateOnly? DueDate { get; set; }
+    public virtual DateTime Date { get; set; }
+	public virtual DateTime? DueDate { get; set; }
 
 	[MaxLength(75)]
 	public virtual string? Title { get; set; }

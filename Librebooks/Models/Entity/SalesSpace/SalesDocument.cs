@@ -15,47 +15,28 @@ namespace Librebooks.Models.Entity.SalesSpace;
 [Table(nameof(SalesDocument))]
 public class SalesDocument () : VersionedEntityBase()
 {
-	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
+    public virtual DateTime Date { get; set; }
+	public virtual DateTime DueDate { get; set; }
+	public virtual string? Title { get; set; }
+	public virtual string? Number { get; set; }
+	public virtual string? CustomerReference { get; set; }
+	public virtual string? Message { get; set; }
+	public virtual string? FooterComment { get; set; }
+	public virtual decimal SubTotalAmount { get; set; }
+	public virtual decimal VATAmount { get; set; }
+	public virtual decimal TotalAmount { get; set; }
     public virtual int TypeId { get; set; }
     public virtual int StatusId { get; set; }
-    public virtual DateOnly Date { get; set; }
-	public virtual DateOnly DueDate { get; set; }
-
-	[Required, MaxLength(50)]
-	public virtual string? Title { get; set; }
-
-	[MaxLength(20)]
-	public virtual string? Number { get; set; }
-
-	[MaxLength(50)]
-	public virtual string? CustomerReference { get; set; }
-
-	[MaxLength(255)]
-	public virtual string? Message { get; set; }
-
-	[MaxLength(500)]
-	public virtual string? FooterComment { get; set; }
-
-	public virtual int CurrencyId { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal SubTotalAmount { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal TaxAmount { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal TotalAmount { get; set; }
-
-	public virtual int CustomerId { get; set; }
+    public virtual int CustomerId { get; set; }
 	public virtual int CompanyId { get; set; }
 	public virtual int CustomerInfoId { get; set; }
 	public virtual int CompanyInfoId { get; set; }
-	public string? SalesPersonId { get; set; }
 	public virtual bool Recorded { get; set; }
 	public virtual bool Printed { get; set; }
-	public int? CreatorId { get; set; }
+    public string? SalesPersonId { get; set; }
+    public int? CreatorId { get; set; }
+    public virtual int CurrencyId { get; set; }
 
     public DocumentStatus? Status { get; set; }
 	public SalesPerson? SalesPerson { get; set; }
@@ -71,7 +52,19 @@ public class SalesDocument () : VersionedEntityBase()
 	{
 		builder.Entity<SalesDocument>(options =>
 		{
-			options.HasMany(p => p.Lines)
+			options.HasKey(p => p.Id);
+			options.Property(p => p.Id).UseIdentityColumn();
+			options.HasIndex(p => new { p.CompanyId, p.CustomerId, p.Id }).IsClustered();
+			options.Property(p => p.SubTotalAmount).HasColumnType(ColumnTypes.MONETARY);
+			options.Property(p => p.VATAmount).HasColumnType(ColumnTypes.MONETARY);
+			options.Property(p => p.TotalAmount).HasColumnType(ColumnTypes.MONETARY);
+            options.Property(p => p.Number).IsRequired().HasMaxLength(50);
+            options.Property(p => p.FooterComment).HasMaxLength(400);
+            options.Property(p => p.Message).HasMaxLength(400);
+            options.Property(p => p.Title).HasMaxLength(75);
+            options.Property(p => p.CustomerReference).HasMaxLength(400);
+
+            options.HasMany(p => p.Lines)
 				.WithOne(p => p.Document)
 				.HasForeignKey(p => p.DocumentId)
 					.IsRequired()

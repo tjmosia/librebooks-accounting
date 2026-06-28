@@ -58,7 +58,7 @@ public class AppDbContext :
 	public DbSet<SalesQuoteOrder>? SalesQuoteOrders { get; set; }
 	public DbSet<SalesCredit>? SalesCredits { get; set; }
 	public DbSet<SalesReceipt>? SalesReceipts { get; set; }
-	public DbSet<SalesLine>? SalesLines { get; set; }
+	public DbSet<SalesDocumentLine>? SalesLines { get; set; }
 	public DbSet<SalesDocumentCustomerDetails>? SalesDocumentCustomerDetails { get; set; }
 	public DbSet<SalesInvoiceCredit>? SalesInvoiceCredits { get; set; }
 	public DbSet<SalesInvoiceWriteoff>? SalesInvoiceWriteoffs { get; set; }
@@ -70,10 +70,16 @@ public class AppDbContext :
          ************************************************************************************************/
 	public DbSet<Item>? Items { get; set; }
 	public DbSet<ItemSetup>? ItemSetups { get; set; }
-	public DbSet<InventoryAdjustment>? ItemAdjustments { get; set; }
+	public DbSet<InventoryAdjustment>? InventoryAdjustments { get; set; }
 	public DbSet<ItemCategory>? ItemCategories { get; set; }
-	public DbSet<ItemInventory>? ItemInventories { get; set; }
+	public DbSet<Inventory>? Inventories { get; set; }
 	public DbSet<ItemDetail>? ItemDetails { get; set; }
+	public DbSet<Warehouse> Warehouses { get; set; }
+	public DbSet<WarehouseBin> WarehouseBins { get; set; }
+	public DbSet<WarehouseColumn> WarehouseColumns { get; set; }	
+	public DbSet<WarehouseRow> WarehouseRows { get; set; }
+	public DbSet<WarehouseShelve> WarehouseShelves { get; set; }
+	public DbSet<WarehouseZone> WarehouseZones { get; set; }
 
 
 	/************************************************************************************************
@@ -168,10 +174,17 @@ public class AppDbContext :
              ************************************************************************************************/
 		Item.OnModelCreating(builder);
 		ItemCategory.OnModelCreating(builder);
-		ItemInventory.OnModelCreating(builder);
+		Inventory.OnModelCreating(builder);
 		InventoryAdjustment.OnModelCreating(builder);
 		ItemSetup.OnModelCreating(builder);
 		ItemDetail.OnModelCreating(builder);
+		Warehouse.OnModelCreating(builder);
+		WarehouseBin.OnModelCreating (builder);
+		WarehouseColumn.OnModelCreating(builder);
+		WarehouseRow.OnModelCreating(builder);
+		WarehouseZone.OnModelCreating(builder);
+		WarehouseShelve.OnModelCreating(builder);
+		InventoryTransfer.OnModelCreating(builder);
 
 		/************************************************************************************************
              * Document Space
@@ -192,7 +205,7 @@ public class AppDbContext :
 		SalesInvoiceCredit.OnModelCreating(builder);
 		SalesInvoiceReceipt.OnModelCreating(builder);
 		SalesInvoiceWriteoff.OnModelCreating(builder);
-		SalesLine.OnModelCreating(builder);
+		SalesDocumentLine.OnModelCreating(builder);
 		SalesOrderInvoice.OnModelCreating(builder);
 		SalesPerson.OnModelCreating(builder);
 		SalesQuoteOrder.OnModelCreating(builder);

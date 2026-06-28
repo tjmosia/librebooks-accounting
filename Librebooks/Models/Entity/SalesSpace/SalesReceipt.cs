@@ -16,7 +16,7 @@ public class SalesReceipt () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-	public virtual DateOnly Date { get; set; }
+	public virtual DateTime Date { get; set; }
 
 	[MaxLength(50)]
 	public virtual string? Number { get; set; }

@@ -20,7 +20,7 @@ namespace Librebooks.Models.Entity.PurchasesSpace
 		public virtual string? Description { get; set; }
 
 		[Column(TypeName = ColumnTypes.DATE)]
-		public virtual DateOnly Date { get; set; }
+		public virtual DateTime Date { get; set; }
 
 
 		[Column(TypeName = ColumnTypes.MONETARY)]

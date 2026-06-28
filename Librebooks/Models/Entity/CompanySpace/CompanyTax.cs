@@ -61,7 +61,7 @@ public class CompanyTax ()
 					.IsRequired(false)
 				.OnDelete(DeleteBehavior.SetNull);
 
-			options.HasMany<SalesLine>()
+			options.HasMany<SalesDocumentLine>()
 				.WithOne(p => p.Tax)
 				.HasForeignKey(p => p.TaxId)
 					.IsRequired(false)

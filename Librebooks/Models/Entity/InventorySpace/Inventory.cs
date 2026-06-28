@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.InventorySpace;
 
-[Table(nameof(ItemInventory))]
-public class ItemInventory () : VersionedEntityBase()
+[Table(nameof(Inventory))]
+public class Inventory () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
@@ -24,9 +24,8 @@ public class ItemInventory () : VersionedEntityBase()
 	public virtual decimal MaxQuantity { get; set; }
 
 	public virtual int? WarehouseId { get; set;  }
-
-	[MaxLength(155)]
-	public virtual string? Location { get; set;  }
+	public virtual int? ShelveId{ get; set;  }
+	public virtual int? BinId { get; set;  }
 
 	[Column(TypeName = ColumnTypes.NUMBER)]
 	public virtual decimal? Weight { get; set;  }
@@ -34,10 +33,12 @@ public class ItemInventory () : VersionedEntityBase()
 	public Item? Item { get; set; }
 	public Warehouse? Warehouse { get; set; }
 	public InventoryAdjustment? Adjustments { get; set;  }
+	public WarehouseBin? Bin { get; set; }
+	public WarehouseShelve? Shelve { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
-		builder.Entity<ItemInventory>(options =>
+		builder.Entity<Inventory>(options =>
 		{
 			options.HasIndex(p => new { p.ItemId, p.Id })
 				.IsUnique()
@@ -48,6 +49,18 @@ public class ItemInventory () : VersionedEntityBase()
 				.HasForeignKey<InventoryAdjustment>(p => p.InventoryId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p=>p.Shelve)
+				.WithOne()
+				.HasForeignKey<Inventory>(p=>p.ShelveId)
+					.IsRequired(false)
+				.OnDelete(DeleteBehavior.SetNull);
+
+			options.HasOne(p=>p.Bin)
+				.WithOne()
+				.HasForeignKey<Inventory>(p=>p.ShelveId)
+					.IsRequired(false)
+				.OnDelete(DeleteBehavior.SetNull);
 		});
 	}
 }
