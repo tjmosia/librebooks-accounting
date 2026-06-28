@@ -42,10 +42,10 @@ public class Item () : VersionedEntityBase()
 
 	public virtual Company? Company { get; set; }
 	public virtual ItemCategory? Category { get; set; }
-	public virtual ItemInventory? Inventory { get; set; }
+	public IList<ItemInventory>? Inventories { get; set; }
 	public virtual CompanyTax? TaxType { get; set; }
-	public virtual ICollection<ItemAdjustment>? StockAdjustments { get; set; }
-	public virtual ICollection<ItemPriceAdjustment>? PriceAdjustments { get; set; }
+	public virtual ICollection<InventoryAdjustment>? StockAdjustments { get; set; }
+	public virtual ICollection<ItemPriceHistory>? PriceHistory { get; set; }
 	public virtual ICollection<ItemDetail>? Details { get; set; }
 
 	public LedgerAccount? InventoryAccount { get; set;  }
@@ -59,9 +59,9 @@ public class Item () : VersionedEntityBase()
 			options.HasIndex(p => new { p.CompanyId, p.Id })
 				.IsUnique();
 
-			options.HasOne(p => p.Inventory)
+			options.HasMany(p => p.Inventories)
 				.WithOne(p => p.Item)
-				.HasForeignKey<ItemInventory>(p => p.ItemId)
+				.HasForeignKey(p => p.ItemId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Cascade);
 
@@ -71,7 +71,7 @@ public class Item () : VersionedEntityBase()
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Cascade);
 
-			options.HasMany(p => p.PriceAdjustments)
+			options.HasMany(p => p.PriceHistory)
 				.WithOne(p => p.Item)
 				.HasForeignKey(p => p.ItemId)
 					.IsRequired()

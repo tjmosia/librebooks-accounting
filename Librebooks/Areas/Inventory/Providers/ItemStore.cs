@@ -96,24 +96,24 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 	 * ITEM ADJUSTMENTS OPERATIONS
 	 *******************************************************************/
 
-	public async Task<IList<ItemAdjustment>> FindAdjustmentsByItemAsync (Item item, CancellationToken cancellationToken = default)
+	public async Task<IList<InventoryAdjustment>> FindAdjustmentsByItemAsync (Item item, CancellationToken cancellationToken = default)
 		=> await context!.ItemAdjustments!
 			.Where(p => p.CompanyId == item.CompanyId && p.ItemId == item.Id)
 			.Include(p => p.Item)
 			.ToListAsync(cancellationToken);
-	public async Task<IList<ItemAdjustment>> FindAdjustmentsAsync (Company company, CancellationToken cancellationToken = default)
+	public async Task<IList<InventoryAdjustment>> FindAdjustmentsAsync (Company company, CancellationToken cancellationToken = default)
 		=> await context!.ItemAdjustments!
 			.Where(p => p.CompanyId == company.Id)
 			.Include(p => p.Item)
 			.ToListAsync(cancellationToken);
 
-	public async Task<ItemAdjustment?> FindAdjustmentByIdAsync (Company company, int adjustmentId, CancellationToken cancellationToken = default)
+	public async Task<InventoryAdjustment?> FindAdjustmentByIdAsync (Company company, int adjustmentId, CancellationToken cancellationToken = default)
 		=> await context!.ItemAdjustments!
 			.Where(p => p.CompanyId == company.Id && p.Id == adjustmentId)
 			.Include(p => p.Item)
 			.FirstOrDefaultAsync(cancellationToken);
 
-	public async Task<TransactionResult<ItemAdjustment>> CreateAdjustmentAsync (Item item, ItemAdjustment adjustment)
+	public async Task<TransactionResult<InventoryAdjustment>> CreateAdjustmentAsync (Item item, InventoryAdjustment adjustment)
 	{
 		try
 		{
@@ -121,33 +121,33 @@ public sealed class ItemStore (AppDbContext context, ILogger<ItemStore> logger) 
 			adjustment.Id = item.Id;
 			var result = await context!.ItemAdjustments!.AddAsync(adjustment);
 			await context!.SaveChangesAsync();
-			return TransactionResult<ItemAdjustment>.Success(result.Entity);
+			return TransactionResult<InventoryAdjustment>.Success(result.Entity);
 
 		}
 		catch (Exception ex)
 		{
-			return TransactionResult<ItemAdjustment>
+			return TransactionResult<InventoryAdjustment>
 				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(CreateAdjustmentAsync), logger));
 		}
 	}
 
-	public async Task<TransactionResult<ItemAdjustment>> UpdateAdjustmentAsync (ItemAdjustment adjustment)
+	public async Task<TransactionResult<InventoryAdjustment>> UpdateAdjustmentAsync (InventoryAdjustment adjustment)
 	{
 		try
 		{
 			var update = context!.ItemAdjustments!.Update(adjustment);
 			await context!.SaveChangesAsync();
-			return TransactionResult<ItemAdjustment>.Success(update.Entity);
+			return TransactionResult<InventoryAdjustment>.Success(update.Entity);
 
 		}
 		catch (Exception ex)
 		{
-			return TransactionResult<ItemAdjustment>
+			return TransactionResult<InventoryAdjustment>
 				.Failure(AppErrorDescriber.GetErrorFromDbException(ex, nameof(UpdateAdjustmentAsync), logger));
 		}
 	}
 
-	public async Task<TransactionResult> DeleteAdjustmentAsync (ItemAdjustment adjustment)
+	public async Task<TransactionResult> DeleteAdjustmentAsync (InventoryAdjustment adjustment)
 	{
 		try
 		{

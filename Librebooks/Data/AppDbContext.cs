@@ -70,7 +70,7 @@ public class AppDbContext :
          ************************************************************************************************/
 	public DbSet<Item>? Items { get; set; }
 	public DbSet<ItemSetup>? ItemSetups { get; set; }
-	public DbSet<ItemAdjustment>? ItemAdjustments { get; set; }
+	public DbSet<InventoryAdjustment>? ItemAdjustments { get; set; }
 	public DbSet<ItemCategory>? ItemCategories { get; set; }
 	public DbSet<ItemInventory>? ItemInventories { get; set; }
 	public DbSet<ItemDetail>? ItemDetails { get; set; }
@@ -169,7 +169,7 @@ public class AppDbContext :
 		Item.OnModelCreating(builder);
 		ItemCategory.OnModelCreating(builder);
 		ItemInventory.OnModelCreating(builder);
-		ItemAdjustment.OnModelCreating(builder);
+		InventoryAdjustment.OnModelCreating(builder);
 		ItemSetup.OnModelCreating(builder);
 		ItemDetail.OnModelCreating(builder);
 

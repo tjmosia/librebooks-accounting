@@ -36,7 +36,7 @@ namespace Librebooks.Models.Entity
 			Item.OnModelCreating(builder);
 			ItemCategory.OnModelCreating(builder);
 			ItemInventory.OnModelCreating(builder);
-			ItemAdjustment.OnModelCreating(builder);
+			InventoryAdjustment.OnModelCreating(builder);
 			ItemSetup.OnModelCreating(builder);
 			ItemDetail.OnModelCreating(builder);
 

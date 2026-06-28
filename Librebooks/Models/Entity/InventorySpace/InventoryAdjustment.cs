@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.InventorySpace;
 
-[Table(nameof(ItemAdjustment))]
-public class ItemAdjustment () : VersionedEntityBase()
+[Table(nameof(InventoryAdjustment))]
+public class InventoryAdjustment () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
@@ -18,6 +18,7 @@ public class ItemAdjustment () : VersionedEntityBase()
 	[Required, MaxLength(50)]
 	public virtual string? Reason { get; set; }
 
+	public virtual int InventoryId { get; set; }
 	public virtual int ItemId { get; set; }
 
 	[Column(TypeName = ColumnTypes.NUMBER)]
@@ -26,22 +27,17 @@ public class ItemAdjustment () : VersionedEntityBase()
 	[Column(TypeName = ColumnTypes.NUMBER)]
 	public virtual decimal QuantityOnHand { get; set; }
 
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal OldPrice { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Price { get; set; }
-
 	public virtual int CompanyId { get; set; }
 
 	public virtual bool FromSales { get; set; }
 
 	public virtual Item? Item { get; set; }
 	public virtual Company? Company { get; set; }
+    public virtual ItemInventory? Inventory { get; set; }
 
-	public static void OnModelCreating (ModelBuilder builder)
+    public static void OnModelCreating (ModelBuilder builder)
 	{
-		builder.Entity<ItemAdjustment>(options =>
+		builder.Entity<InventoryAdjustment>(options =>
 		{
 			options.HasIndex(p => new { p.CompanyId, p.ItemId, p.Id })
 				.IsClustered();
