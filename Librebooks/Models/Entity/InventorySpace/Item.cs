@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
+using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +36,9 @@ public class Item () : VersionedEntityBase()
 	public virtual int TaxId { get; set; }
 	public virtual int CompanyId { get; set; }
 	public virtual int Active { get; set; }
+	public virtual int InventoryAccountId { get; set; }
+	public virtual int CostAccountId { get; set;  }
+	public virtual int SalesAccountId { get; set; }
 
 	public virtual Company? Company { get; set; }
 	public virtual ItemCategory? Category { get; set; }
@@ -43,6 +47,10 @@ public class Item () : VersionedEntityBase()
 	public virtual ICollection<ItemAdjustment>? StockAdjustments { get; set; }
 	public virtual ICollection<ItemPriceAdjustment>? PriceAdjustments { get; set; }
 	public virtual ICollection<ItemDetail>? Details { get; set; }
+
+	public LedgerAccount? InventoryAccount { get; set;  }
+	public LedgerAccount? SalesAccount { get; set;  }
+	public LedgerAccount? CostAccount { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
@@ -72,6 +80,24 @@ public class Item () : VersionedEntityBase()
 			options.HasOne(p => p.Company)
 				.WithMany()
 				.HasForeignKey(p => p.CompanyId)
+				.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.CostAccount)
+				.WithOne()
+				.HasForeignKey<Item>(p => p.CostAccountId)
+				.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.SalesAccount)
+				.WithOne()
+				.HasForeignKey<Item>(p => p.SalesAccountId)
+				.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.InventoryAccount)
+				.WithOne()
+				.HasForeignKey<Item>(p => p.InventoryAccountId)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 		});

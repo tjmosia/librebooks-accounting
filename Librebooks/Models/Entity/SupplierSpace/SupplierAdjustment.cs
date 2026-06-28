@@ -14,7 +14,7 @@ namespace Librebooks.Models.Entity.SupplierSpace
 		public virtual int CompanyId { get; set; }
 		public virtual int SupplierId { get; set; }
 
-		public virtual JournalEntry? JournalEntry { get; set; }
+		public virtual JournalLine? JournalEntry { get; set; }
 		public virtual Supplier? Supplier { get; set; }
 
 		public static void OnModelCreating (ModelBuilder builder)

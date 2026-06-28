@@ -34,10 +34,10 @@ public interface IAccountsStore
 	/**********************************************************
 	 * JOURNAL ENTRIES
 	 **********************************************************/
-	Task<IList<JournalEntry>> FindJournalEntriesAsync (Company company, CancellationToken cancellationToken = default);
-	Task<JournalEntry?> FindJournalEntryByIdAsync (Company company, int id, CancellationToken cancellationToken = default);
-	Task<TransactionResult<JournalEntry>> CreateJournalEntryAsync (JournalEntry entry);
-	Task<TransactionResult> CreateJournalEntriesAsync (params JournalEntry[] entry);
-	Task<TransactionResult<JournalEntry>> UpdateJournalEntryAsync (JournalEntry entry);
-	Task<TransactionResult> DeleteJournalEntriesAsync (params JournalEntry[] entries);
+	Task<IList<JournalLine>> FindJournalEntriesAsync (Company company, CancellationToken cancellationToken = default);
+	Task<JournalLine?> FindJournalEntryByIdAsync (Company company, int id, CancellationToken cancellationToken = default);
+	Task<TransactionResult<JournalLine>> CreateJournalEntryAsync (JournalLine entry);
+	Task<TransactionResult> CreateJournalEntriesAsync (params JournalLine[] entry);
+	Task<TransactionResult<JournalLine>> UpdateJournalEntryAsync (JournalLine entry);
+	Task<TransactionResult> DeleteJournalEntriesAsync (params JournalLine[] entries);
 }

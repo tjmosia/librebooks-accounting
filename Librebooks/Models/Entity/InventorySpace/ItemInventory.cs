@@ -21,6 +21,12 @@ public class ItemInventory () : VersionedEntityBase()
 	[Column(TypeName = ColumnTypes.NUMBER)]
 	public virtual decimal MaxQuantity { get; set; }
 
+	[MaxLength(155)]
+	public virtual string? Location { get; set;  }
+
+	[Column(TypeName = ColumnTypes.NUMBER)]
+	public virtual decimal? Weight { get; set;  }
+
 	public virtual Item? Item { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)

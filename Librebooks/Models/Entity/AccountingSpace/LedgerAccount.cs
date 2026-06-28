@@ -32,6 +32,8 @@ public class LedgerAccount () : VersionedEntityBase()
 	public ICollection<LedgerAccount>? ChildAccounts { get; set; }
 	public ICollection<CompanyLedgerAccount>? CompanyAccounts { get; set; }
 
+	public ICollection<JournalLine>? JournalEntries { get; set; }
+
 	public static void OnModelCreating (ModelBuilder builder)
 		=> builder.Entity<LedgerAccount>(options =>
 		{

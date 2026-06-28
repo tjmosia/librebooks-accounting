@@ -9,8 +9,8 @@ namespace Librebooks.Models.Entity.PurchasesSpace
         public virtual int OrderId { get; set; }
         public virtual int InvoiceId { get; set; }
 
-        public virtual PurchaseOrder? Order { get; set; }
-        public virtual PurchaseInvoice? Invoice { get; set; }
+        public virtual PurchaseDocument? Order { get; set; }
+        public virtual PurchaseDocument? Invoice { get; set; }
 
         public static void OnModelCreating (ModelBuilder builder)
         {

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.PurchasesSpace
 {
-	[Table(nameof(PurchaseReceipt))]
-	public class PurchaseReceipt () : VersionedEntityBase()
+	[Table(nameof(PurchasePayment))]
+	public class PurchasePayment () : VersionedEntityBase()
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public virtual int Id { get; set; }
@@ -31,7 +31,13 @@ namespace Librebooks.Models.Entity.PurchasesSpace
 		public virtual string? Comments { get; set; }
 
 		[Column(TypeName = ColumnTypes.MONETARY)]
-		public virtual decimal Amount { get; set; }
+		public virtual decimal SubTotal { get; set; }
+
+		[Column(TypeName = ColumnTypes.MONETARY)]
+		public virtual decimal TaxAmount { get; set; }
+
+		[Column(TypeName = ColumnTypes.MONETARY)]
+		public virtual decimal GrandAmount { get; set; }
 
 		public virtual bool Reconciled { get; set; }
 		public virtual bool Recorded { get; set; }
@@ -42,11 +48,11 @@ namespace Librebooks.Models.Entity.PurchasesSpace
 
 		public virtual PaymentMethod? PaymentMethod { get; set; }
 		public virtual BankAccount? BankAccount { get; set; }
-		public virtual ICollection<PurchaseInvoiceReceipt>? AllocatedInvoices { get; set; }
+		public virtual ICollection<PurchaseInvoicePayment>? AllocatedInvoices { get; set; }
 
 		public static void OnModelCreating (ModelBuilder builder)
 		{
-			builder.Entity<PurchaseReceipt>(options =>
+			builder.Entity<PurchasePayment>(options =>
 			{
 				options.HasOne(p => p.PaymentMethod)
 					.WithMany()
@@ -55,8 +61,8 @@ namespace Librebooks.Models.Entity.PurchasesSpace
 					.OnDelete(DeleteBehavior.Restrict);
 
 				options.HasMany(p => p.AllocatedInvoices)
-					.WithOne(p => p.Receipt)
-					.HasForeignKey(p => p.ReceiptId)
+					.WithOne(p => p.Payment)
+					.HasForeignKey(p => p.PaymentId)
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Restrict);
 

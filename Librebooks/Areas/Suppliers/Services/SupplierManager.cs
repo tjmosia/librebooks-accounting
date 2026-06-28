@@ -8,12 +8,12 @@ namespace Librebooks.Areas.Suppliers.Services
 {
 	public class SupplierManager : ISupplierManager
 	{
-		public Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchaseReturn purchaseReturn)
+		public Task<TransactionResult> AllocateReturnToInvoiceAsync (PurchaseInvoice invoice, PurchasesReturn purchaseReturn)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<TransactionResult> AllocateReceiptToInvoiceAsync (PurchaseReceipt receipt, PurchaseInvoice invoice)
+		public Task<TransactionResult> AllocateReceiptToInvoiceAsync (PurchasePayment receipt, PurchaseInvoice invoice)
 		{
 			throw new NotImplementedException();
 		}
@@ -38,12 +38,12 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<TransactionResult<PurchaseReceipt>> AddReceiptAsync (Supplier supplier, PurchaseOrder order)
+		public Task<TransactionResult<PurchasePayment>> AddReceiptAsync (Supplier supplier, PurchaseOrder order)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<TransactionResult<PurchaseReturn>> AddReturnAsync (Supplier supplier, PurchaseReceipt purchaseReturn)
+		public Task<TransactionResult<PurchasesReturn>> AddReturnAsync (Supplier supplier, PurchasePayment purchaseReturn)
 		{
 			throw new NotImplementedException();
 		}
@@ -73,7 +73,7 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<PurchaseReceipt> FindReceiptByNumberAsync (Supplier supplier, string receiptNumber)
+		public Task<PurchasePayment> FindReceiptByNumberAsync (Supplier supplier, string receiptNumber)
 		{
 			throw new NotImplementedException();
 		}
@@ -88,12 +88,12 @@ namespace Librebooks.Areas.Suppliers.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<IList<PurchaseReceipt>> GetReceiptsAsync (Supplier supplier)
+		public Task<IList<PurchasePayment>> GetReceiptsAsync (Supplier supplier)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<IList<PurchaseReturn>> GetReturnAsync (Supplier supplier)
+		public Task<IList<PurchasesReturn>> GetReturnAsync (Supplier supplier)
 		{
 			throw new NotImplementedException();
 		}

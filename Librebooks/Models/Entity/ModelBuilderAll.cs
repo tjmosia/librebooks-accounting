@@ -57,21 +57,16 @@ namespace Librebooks.Models.Entity
 			SalesDocument.OnModelCreating(builder);
 			SalesDocumentLine.OnModelCreating(builder);
 			SalesDocumentNote.OnModelCreating(builder);
-			SalesInvoice.OnModelCreating(builder);
 			SalesInvoiceCredit.OnModelCreating(builder);
 			SalesInvoiceReceipt.OnModelCreating(builder);
 			SalesInvoiceWriteoff.OnModelCreating(builder);
 			SalesLine.OnModelCreating(builder);
-			SalesOrder.OnModelCreating(builder);
 			SalesOrderInvoice.OnModelCreating(builder);
 			SalesPerson.OnModelCreating(builder);
-			SalesQuote.OnModelCreating(builder);
 			SalesQuoteOrder.OnModelCreating(builder);
 			SalesReceipt.OnModelCreating(builder);
-			SalesProForma.OnModelCreating(builder);
 			SalesQuoteProForma.OnModelCreating(builder);
 			SalesLedger.OnModelCreating(builder);
-			SalesLedgerEntryType.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Company Space
@@ -116,7 +111,7 @@ namespace Librebooks.Models.Entity
 			LedgerAccount.OnModelCreating(builder);
 			LedgerAccountCategory.OnModelCreating(builder);
 			LedgerAccountCashFlowType.OnModelCreating(builder);
-			JournalEntry.OnModelCreating(builder);
+			JournalLine.OnModelCreating(builder);
 			CompanyLedgerAccount.OnModelCreating(builder);
 
 			/************************************************************************************************
@@ -139,14 +134,14 @@ namespace Librebooks.Models.Entity
 			PurchaseDocumentLine.OnModelCreating(builder);
 			PurchaseDocumentNote.OnModelCreating(builder);
 			PurchaseInvoice.OnModelCreating(builder);
-			PurchaseInvoiceReceipt.OnModelCreating(builder);
+			PurchaseInvoicePayment.OnModelCreating(builder);
 			PurchaseInvoiceReturn.OnModelCreating(builder);
 			PurchaseLine.OnModelCreating(builder);
 			PurchaseOrder.OnModelCreating(builder);
 			PurchaseOrderInvoice.OnModelCreating(builder);
-			PurchaseReceipt.OnModelCreating(builder);
+			PurchasePayment.OnModelCreating(builder);
 			PurchaseRequestForQuote.OnModelCreating(builder);
-			PurchaseReturn.OnModelCreating(builder);
+			PurchasesReturn.OnModelCreating(builder);
 
 			/************************************************************************************************
              * Banking Space

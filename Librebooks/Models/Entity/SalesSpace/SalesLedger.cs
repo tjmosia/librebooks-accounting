@@ -14,22 +14,41 @@ public class SalesLedger
 	public virtual int Id { get; set; }
 
 	[MaxLength(50), Required]
-	public virtual string? DocumentNumber { get; set; }
+	public virtual string? Reference { get; set; }
+
+	[MaxLength(155), Required]
+	public virtual string? Description { get; set; }
 
 	[Column(TypeName = ColumnTypes.DATE)]
 	public virtual DateOnly Date { get; set; }
 
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Amount { get; set; }
 
-	public virtual int EntryTypeId { get; set; }
-	public virtual int DocumentId { get; set; }
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal SubTotal { get; set; }
+
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal TaxAmount { get; set; }
+
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal GrandTotal { get; set; }
+
+
+	[Required, Column(TypeName = "CHAR(1)")]
+	public virtual string? Type { get; set; }
+
+
+	[Required, Column(TypeName = "CHAR(1)")]
+	public virtual int SourceType { get; set; }
+	public virtual int SourceId { get; set; }
 	public virtual int CustomerId { get; set; }
 	public virtual int CompanyId { get; set; }
 
+	public SalesDocument? Document { get; set; }
 	public Customer? Customer { get; set; }
 	public Company? Company { get; set; }
-	public SalesLedgerEntryType? EntryType { get; set; }
+	public SalesLedgerJournal? Journal { get; set; }
 
 	public static void OnModelCreating (ModelBuilder modelBuilder)
 	{
@@ -37,12 +56,6 @@ public class SalesLedger
 		{
 			entity.HasIndex(p => new { p.CompanyId, p.CustomerId, p.Id })
 				.IsClustered();
-
-			entity.HasOne(p => p.EntryType)
-				.WithMany()
-				.HasForeignKey(p => p.EntryTypeId)
-					.IsRequired()
-				.OnDelete(DeleteBehavior.Restrict);
 
 			entity.HasOne(p => p.Customer)
 				.WithMany()

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
+using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.DocumentSpace;
-
+using Librebooks.Models.Entity.SupplierSpace;
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.PurchasesSpace;
@@ -13,8 +14,12 @@ public class PurchaseDocument () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-	public virtual DateOnly Date { get; set; }
+    public virtual int StatusId { get; set; }
+    public virtual int TypeId { get; set; }
+    public virtual DateOnly Date { get; set; }
 	public virtual DateOnly? DueDate { get; set; }
+
+	[MaxLength(75)]
 	public virtual string? Title { get; set; }
 
 	[MaxLength(50)]
@@ -23,25 +28,36 @@ public class PurchaseDocument () : VersionedEntityBase()
 	[MaxLength(50)]
 	public virtual string? SuppplierReference { get; set; }
 
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal SubTotalAmount { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal TaxAmount { get; set; }
+
+	[Column(TypeName = ColumnTypes.MONETARY)]
+	public virtual decimal TotalAmount { get; set; }
+
+	public virtual bool? Recorded { get; set;  }
+
 	[MaxLength(255)]
 	public virtual string? Message { get; set; }
 
 	[MaxLength(500)]
-	public virtual string? Footer { get; set; }
+	public virtual string? FooterComment { get; set; }
 
-	public virtual string? Currency { get; set; }
 	public virtual bool Printed { get; set; }
+	public virtual int SupplierId { get; set;  }
 	public virtual int? SupplierInfoId { get; set; }
 	public virtual int CompanyInfoId { get; set; }
-	public virtual int StatusId { get; set; }
-	public virtual int TypeId { get; set;  }
+	public virtual int CompanyId { get; set; }
 
-	public virtual DocumentStatus? Status { get; set; }
-	public virtual ICollection<PurchaseDocumentLine>? Lines { get; set; }
-	public virtual ICollection<PurchaseDocumentNote>? Notes { get; set; }
-	public virtual DocumentSupplierDetail? SupplierInfo { get; set; }
-	public virtual DocumentCompanyDetails? CompanyInfo { get; set; }
-	public virtual DocumentType? Type { get; set; }
+	public DocumentStatus? Status { get; set; }
+	public ICollection<PurchaseDocumentLine>? Lines { get; set; }
+	public DocumentSupplierDetail? SupplierInfo { get; set; }
+	public DocumentCompanyDetails? CompanyInfo { get; set; }
+	public DocumentType? Type { get; set; }
+	public Company? Company { get; set; }
+	public Supplier? Supplier { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
@@ -52,12 +68,6 @@ public class PurchaseDocument () : VersionedEntityBase()
 				.HasForeignKey(p => p.DocumentId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
-
-			options.HasMany(p => p.Notes)
-				.WithOne()
-				.HasForeignKey(p => p.DocumentId)
-					.IsRequired()
-				.OnDelete(DeleteBehavior.Cascade);
 
 			options.HasOne(p => p.Status)
 				.WithMany()
@@ -75,6 +85,18 @@ public class PurchaseDocument () : VersionedEntityBase()
 				.WithMany()
 				.HasForeignKey(p => p.TypeId)
 					.IsRequired(false)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p=>p.Supplier)
+				.WithMany()
+				.HasForeignKey(p => p.SupplierId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p=>p.Company)
+				.WithMany()
+				.HasForeignKey(p => p.CompanyId)
+					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
 		});

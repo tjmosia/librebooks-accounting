@@ -12,7 +12,7 @@ public interface IItemStore
 	Task<TransactionResult<Item>> CreateAsync (Company company, Item item);
 	Task<TransactionResult<Item>> UpdateAsync (Item item);
 	Task<Item?> FindByCodeAsync (Company company, string itemCode, CancellationToken cancellationToken = default);
-	Task<IList<Item>> FindAllAsync (Company company, CancellationToken cancellationToken = default);
+	Task<IList<Item>> GetAsync (Company company, CancellationToken cancellationToken = default);
 	Task<Item?> FindByIdAsync (Company company, int itemId, CancellationToken cancellationToken = default);
 	Task<TransactionResult> DeleteItemAsync (Item item);
 

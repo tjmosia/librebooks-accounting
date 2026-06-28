@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Librebooks.Models.Entity.CustomerSpace;
 using Librebooks.Models.Entity.IdentitySpace;
-using Librebooks.Models.Entity.SalesSpace;
 
 using Microsoft.EntityFrameworkCore;
 

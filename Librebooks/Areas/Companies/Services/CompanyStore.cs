@@ -9,7 +9,6 @@ using Librebooks.Models.Entity.DocumentSpace;
 using Librebooks.Models.Entity.GeneralSpace;
 using Librebooks.Models.Entity.IdentitySpace;
 using Librebooks.Models.Entity.InventorySpace;
-using Librebooks.Models.Entity.SalesSpace;
 using Librebooks.Models.Entity.SupplierSpace;
 using Librebooks.Models.Entity.SystemSpace;
 using Microsoft.EntityFrameworkCore;

@@ -13,8 +13,8 @@ namespace Librebooks.Models.Entity.PurchasesSpace
 		[MaxLength(255)]
 		public virtual string? Comment { get; set; }
 
-		public virtual PurchaseReturn? Return { get; set; }
-		public virtual PurchaseInvoice? Invoice { get; set; }
+		public virtual PurchaseDocument? Return { get; set; }
+		public virtual PurchaseDocument? Invoice { get; set; }
 
 		public static void OnModelCreating (ModelBuilder builder)
 		{
