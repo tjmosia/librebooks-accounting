@@ -2,23 +2,25 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Extensions.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace Librebooks.Models.Entity.DocumentSpace;
 
 [Table(nameof(DocumentType))]
+[Index(nameof(Name), IsUnique = true)]
 public class DocumentType () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
 	public virtual int Id { get; set; }
 
-	[Required, MaxLength(100)]
+	[Required, MaxLength(75)]
 	public virtual string? Name { get; set; }
 
 	[Required, MaxLength(50)]
 	public virtual string? Group { get; set; }
 
 	[Required, MaxLength(6)]
-	public virtual string? Abbreviation { get; set; }
+	public virtual string? Prefix { get; set; }
 
 	public ICollection<DocumentStatus>? Statuses { get; set; }
 
@@ -26,6 +28,7 @@ public class DocumentType () : VersionedEntityBase()
 	{
 		modelBuilder.Entity<DocumentType>(options =>
 		{
+			
 			options.HasMany(p => p.Statuses)
 				.WithOne(p => p.DocumentType)
 				.HasForeignKey(p => p.DocumentTypeId)

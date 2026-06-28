@@ -18,7 +18,13 @@ public class BankAccount () : VersionedEntityBase()
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
 
-	[Required, MaxLength(100)]
+	[Required, MaxLength(155)]
+	public virtual string? Name { get; set; }
+
+    [Column(TypeName = ColumnTypes.MONETARY)]
+    public virtual decimal Balance { get; set; }
+
+    [Required, MaxLength(100)]
 	public virtual string? BankName { get; set; }
 
 	[MaxLength(50), Required]
@@ -33,8 +39,6 @@ public class BankAccount () : VersionedEntityBase()
 	[MaxLength(50)]
 	public virtual string? SwiftCode { get; set; }
 
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Balance { get; set; }
 	public virtual bool Active { get; set; }
 	public virtual int? CategoryId { get; set; }
 	public virtual int CompanyId { get; set; }
@@ -45,7 +49,7 @@ public class BankAccount () : VersionedEntityBase()
 	public virtual PaymentMethod? PaymentMethod { get; set; }
 	public virtual CompanyBankAccount? DefaultBankAccount { get; set; }
 	public virtual ICollection<SalesReceipt>? SalesReceipts { get; set; }
-	public virtual ICollection<PurchaseReceipt>? PurchaseReceipts { get; set; }
+	public virtual ICollection<PurchasePayment>? PurchaseReceipts { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

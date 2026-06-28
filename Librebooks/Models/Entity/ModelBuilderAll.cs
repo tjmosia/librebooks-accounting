@@ -134,12 +134,12 @@ namespace Librebooks.Models.Entity
 			PurchaseDocumentLine.OnModelCreating(builder);
 			PurchaseDocumentNote.OnModelCreating(builder);
 			PurchaseInvoice.OnModelCreating(builder);
-			PurchaseInvoiceReceipt.OnModelCreating(builder);
+			PurchaseInvoicePayment.OnModelCreating(builder);
 			PurchaseInvoiceReturn.OnModelCreating(builder);
 			PurchaseLine.OnModelCreating(builder);
 			PurchaseOrder.OnModelCreating(builder);
 			PurchaseOrderInvoice.OnModelCreating(builder);
-			PurchaseReceipt.OnModelCreating(builder);
+			PurchasePayment.OnModelCreating(builder);
 			PurchaseRequestForQuote.OnModelCreating(builder);
 			PurchasesReturn.OnModelCreating(builder);
 

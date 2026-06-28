@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Librebooks.Models.Entity.DocumentSpace;
 
 [Table(nameof(DocumentStatus))]
+[Index(nameof(Name), IsUnique = true)]
 public class DocumentStatus () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,6 +20,7 @@ public class DocumentStatus () : VersionedEntityBase()
 
 	[MaxLength(6)]
 	public virtual string? Color { get; set; }
+
 	public virtual int DocumentTypeId { get; set; }
 
 	public DocumentType? DocumentType { get; set; }
@@ -36,6 +38,12 @@ public class DocumentStatus () : VersionedEntityBase()
 			options.HasMany<SalesDocument>()
 				.WithOne(p => p.Status)
 				.HasForeignKey(p => p.StatusId)
+					.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
+
+			options.HasOne(p => p.DocumentType)
+				.WithMany()
+				.HasForeignKey(p => p.DocumentTypeId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 		});

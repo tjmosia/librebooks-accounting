@@ -23,7 +23,7 @@ public class Supplier
 	public virtual int? VendorNumber { get; set; }
 
 	[MaxLength(10)]
-	public virtual string? VATRegNumber { get; set; }
+	public virtual string? VATNumber { get; set; }
 
 	[MaxLength(15), Required]
 	public virtual string? Telephone { get; set; }

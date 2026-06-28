@@ -22,14 +22,12 @@ public class Company : VersionedEntityBase
 	[MaxLength(155)]
 	public virtual string SecurityId { get; set; }
 
-	[Required]
-	[MaxLength(100)]
+	[Required, MaxLength(100)]
 	public virtual string? LegalName { get; set; }
 
 	[MaxLength(100)]
 	public virtual string? TradingName { get; set; }
 
-	[Required]
 	[MaxLength(20)]
 	public virtual string? RegNumber { get; set; }
 
@@ -42,12 +40,10 @@ public class Company : VersionedEntityBase
 	[MaxLength(155)]
 	public virtual string? PhysicalAddress { get; set; }
 
-	[Required]
-	[MaxLength(15)]
+	[Required, MaxLength(15)]
 	public virtual string? PhoneNumber { get; set; }
 
-	[Required]
-	[MaxLength(100)]
+	[Required, MaxLength(100)]
 	public virtual string? EmailAddress { get; set; }
 
 	[MaxLength(15)]

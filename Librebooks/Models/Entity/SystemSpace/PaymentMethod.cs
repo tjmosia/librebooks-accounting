@@ -37,7 +37,7 @@ namespace Librebooks.Models.Entity.SystemSpace
 						.IsRequired()
 					.OnDelete(DeleteBehavior.Restrict);
 
-				options.HasMany<PurchaseReceipt>()
+				options.HasMany<PurchasePayment>()
 					.WithOne(p => p.PaymentMethod)
 					.HasForeignKey(p => p.PaymentMethodId)
 						.IsRequired()

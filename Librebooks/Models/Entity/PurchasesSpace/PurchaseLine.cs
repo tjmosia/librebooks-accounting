@@ -13,9 +13,9 @@ public class PurchaseLine () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-	public virtual bool IsItemType { get; set; }
+	public virtual int Type { get; set; }
 	public virtual string? Code { get; set; }
-	public virtual int? AccountId { get; set; }
+	public virtual int? LedgerAccountId { get; set; }
 
 	[MaxLength(255)]
 	public virtual string? Description { get; set; }
@@ -24,13 +24,22 @@ public class PurchaseLine () : VersionedEntityBase()
 	public virtual string? Unit { get; set; }
 
 	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal Price { get; set; }
+	public virtual decimal UnitCost { get; set; }
 
 	[Column(TypeName = ColumnTypes.PERCENTATE)]
 	public virtual decimal DiscountRate { get; set; }
 
 	[Column(TypeName = ColumnTypes.PERCENTATE)]
 	public virtual decimal TaxRate { get; set; }
+
+    [Column(TypeName = ColumnTypes.MONETARY)]
+    public virtual decimal UnitTaxAmount { get; set; }
+
+    [Column(TypeName = ColumnTypes.MONETARY)]
+    public virtual decimal SubTotal { get; set; }
+
+    [Column(TypeName = ColumnTypes.MONETARY)]
+    public virtual decimal Total { get; set; }
 
 	public virtual int TaxId { get; set; }
 	public virtual int DocumentId { get; set; }
