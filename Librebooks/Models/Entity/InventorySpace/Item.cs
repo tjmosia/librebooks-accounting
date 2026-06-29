@@ -1,44 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
 using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.CompanySpace;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.InventorySpace;
 
 [Table(nameof(Item))]
-[Index(nameof(CompanyId), nameof(Code), IsUnique = true)]
-public class Item () : VersionedEntityBase()
+public class Item : VersionedEntityBase
 {
-	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-
-	[Required, MaxLength(50)]
 	public virtual string? Code { get; set; }
-
-	[Required, MaxLength(255)]
 	public virtual string? Description { get; set; }
-
-	[MaxLength(20)]
 	public virtual string? UnitOfMeasure { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
 	public virtual decimal Cost { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
 	public virtual decimal Price { get; set; }
-
 	public virtual bool Physical { get; set; }
-
 	public virtual int? CategoryId { get; set; }
 	public virtual int TaxId { get; set; }
 	public virtual int CompanyId { get; set; }
 	public virtual int Active { get; set; }
-	public virtual int InventoryAccountId { get; set; }
-	public virtual int CostAccountId { get; set;  }
-	public virtual int SalesAccountId { get; set; }
+	public virtual int DebitLedgerAccountId { get; set; }
+	public virtual int CreditLedgerAccountId { get; set; }
+	public virtual int? InventoryLedgerAccountId { get; set; }
 
 	public virtual Company? Company { get; set; }
 	public virtual ItemCategory? Category { get; set; }
@@ -47,18 +34,41 @@ public class Item () : VersionedEntityBase()
 	public virtual ICollection<InventoryAdjustment>? StockAdjustments { get; set; }
 	public virtual ICollection<ItemPriceHistory>? PriceHistory { get; set; }
 	public virtual ICollection<ItemDetail>? Details { get; set; }
-
-	public LedgerAccount? InventoryAccount { get; set;  }
-	public LedgerAccount? SalesAccount { get; set;  }
-	public LedgerAccount? CostAccount { get; set; }
+	public LedgerAccount? InventoryLedgerAccount { get; set; }
+	public LedgerAccount? CreditLedgerAccount { get; set; }
+	public LedgerAccount? DebitLedgerAccount { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
 		builder.Entity<Item>(options =>
 		{
-			options.HasIndex(p => new { p.CompanyId, p.Id })
+			// Key
+			options.HasKey(x => x.Id);
+			options.Property(x => x.Id).UseIdentityColumn();
+
+			// Indexes
+			options.HasIndex(p => new { p.CompanyId, p.Code })
 				.IsUnique();
 
+			// Properties
+			options.Property(x => x.Code)
+				.IsRequired()
+				.HasMaxLength(50);
+
+			options.Property(x => x.Description)
+				.IsRequired()
+				.HasMaxLength(255);
+
+			options.Property(x => x.UnitOfMeasure)
+				.HasMaxLength(20);
+
+			options.Property(x => x.Cost)
+				.HasColumnType(ColumnTypes.MONETARY);
+
+			options.Property(x => x.Price)
+				.HasColumnType(ColumnTypes.MONETARY);
+
+			// Relationships
 			options.HasMany(p => p.Inventories)
 				.WithOne(p => p.Item)
 				.HasForeignKey(p => p.ItemId)
@@ -83,21 +93,21 @@ public class Item () : VersionedEntityBase()
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
-			options.HasOne(p => p.CostAccount)
+			options.HasOne(p => p.CreditLedgerAccount)
 				.WithOne()
-				.HasForeignKey<Item>(p => p.CostAccountId)
+				.HasForeignKey<Item>(p => p.CreditLedgerAccountId)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
-			options.HasOne(p => p.SalesAccount)
+			options.HasOne(p => p.DebitLedgerAccount)
 				.WithOne()
-				.HasForeignKey<Item>(p => p.SalesAccountId)
+				.HasForeignKey<Item>(p => p.DebitLedgerAccountId)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 
-			options.HasOne(p => p.InventoryAccount)
+			options.HasOne(p => p.InventoryLedgerAccount)
 				.WithOne()
-				.HasForeignKey<Item>(p => p.InventoryAccountId)
+				.HasForeignKey<Item>(p => p.InventoryLedgerAccountId)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 		});

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.InventorySpace;
 using Librebooks.Models.Entity.PurchasesSpace;
@@ -33,11 +34,11 @@ public class CompanyTax ()
 	{
 		builder.Entity<CompanyTax>(options =>
 		{
-			options.HasIndex(p => new { p.CompanyId, p.TaxId })
+			options.HasIndex(p => new { p.CompanyId, p.TaxId, p.Id })
 				.IsUnique()
 				.IsClustered();
 
-			options.HasOne(p=> p.Company)
+			options.HasOne(p => p.Company)
 				.WithMany(p => p.Taxes)
 				.HasForeignKey(p => p.CompanyId)
 					.IsRequired()

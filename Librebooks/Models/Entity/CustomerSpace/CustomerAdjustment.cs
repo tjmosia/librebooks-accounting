@@ -22,7 +22,7 @@ public class CustomerAdjustment
 
 	public virtual int TaxId { get; set; }
 
-	[Column(TypeName = ColumnTypes.PERCENTATE)]
+	[Column(TypeName = ColumnTypes.PERCENTAGE)]
 	public virtual int TaxRate { get; set; }
 
 	[Column(TypeName = ColumnTypes.MONETARY)]

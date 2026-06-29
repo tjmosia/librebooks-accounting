@@ -76,7 +76,7 @@ public class AppDbContext :
 	public DbSet<ItemDetail>? ItemDetails { get; set; }
 	public DbSet<Warehouse> Warehouses { get; set; }
 	public DbSet<WarehouseBin> WarehouseBins { get; set; }
-	public DbSet<WarehouseColumn> WarehouseColumns { get; set; }	
+	public DbSet<WarehouseBay> WarehouseColumns { get; set; }	
 	public DbSet<WarehouseRow> WarehouseRows { get; set; }
 	public DbSet<WarehouseShelve> WarehouseShelves { get; set; }
 	public DbSet<WarehouseZone> WarehouseZones { get; set; }
@@ -180,7 +180,7 @@ public class AppDbContext :
 		ItemDetail.OnModelCreating(builder);
 		Warehouse.OnModelCreating(builder);
 		WarehouseBin.OnModelCreating (builder);
-		WarehouseColumn.OnModelCreating(builder);
+		WarehouseBay.OnModelCreating(builder);
 		WarehouseRow.OnModelCreating(builder);
 		WarehouseZone.OnModelCreating(builder);
 		WarehouseShelve.OnModelCreating(builder);

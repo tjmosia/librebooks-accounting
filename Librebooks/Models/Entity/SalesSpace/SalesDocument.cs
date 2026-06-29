@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
 using Librebooks.Core.Constants;
 using Librebooks.Extensions.Models;
 using Librebooks.Models.Entity.CompanySpace;
@@ -16,7 +15,7 @@ namespace Librebooks.Models.Entity.SalesSpace;
 public class SalesDocument () : VersionedEntityBase()
 {
 	public virtual int Id { get; set; }
-    public virtual DateTime Date { get; set; }
+	public virtual DateTime Date { get; set; }
 	public virtual DateTime DueDate { get; set; }
 	public virtual string? Title { get; set; }
 	public virtual string? Number { get; set; }
@@ -26,19 +25,21 @@ public class SalesDocument () : VersionedEntityBase()
 	public virtual decimal SubTotalAmount { get; set; }
 	public virtual decimal VATAmount { get; set; }
 	public virtual decimal TotalAmount { get; set; }
-    public virtual int TypeId { get; set; }
-    public virtual int StatusId { get; set; }
-    public virtual int CustomerId { get; set; }
+	public virtual int TypeId { get; set; }
+	public virtual int StatusId { get; set; }
+	public virtual int CustomerId { get; set; }
 	public virtual int CompanyId { get; set; }
 	public virtual int CustomerInfoId { get; set; }
 	public virtual int CompanyInfoId { get; set; }
 	public virtual bool Recorded { get; set; }
+	public virtual bool Posted { get; set; }
 	public virtual bool Printed { get; set; }
-    public string? SalesPersonId { get; set; }
-    public int? CreatorId { get; set; }
-    public virtual int CurrencyId { get; set; }
+	public string? SalesPersonId { get; set; }
+	public int? CreatorId { get; set; }
+	public virtual int CurrencyId { get; set; }
+	public virtual bool Archived { get; set; }
 
-    public DocumentStatus? Status { get; set; }
+	public DocumentStatus? Status { get; set; }
 	public SalesPerson? SalesPerson { get; set; }
 	public SalesDocumentCustomerDetails? CustomerInfo { get; set; }
 	public DocumentCompanyDetails? CompanyInfo { get; set; }
@@ -58,13 +59,13 @@ public class SalesDocument () : VersionedEntityBase()
 			options.Property(p => p.SubTotalAmount).HasColumnType(ColumnTypes.MONETARY);
 			options.Property(p => p.VATAmount).HasColumnType(ColumnTypes.MONETARY);
 			options.Property(p => p.TotalAmount).HasColumnType(ColumnTypes.MONETARY);
-            options.Property(p => p.Number).IsRequired().HasMaxLength(50);
-            options.Property(p => p.FooterComment).HasMaxLength(400);
-            options.Property(p => p.Message).HasMaxLength(400);
-            options.Property(p => p.Title).HasMaxLength(75);
-            options.Property(p => p.CustomerReference).HasMaxLength(400);
+			options.Property(p => p.Number).HasMaxLength(50);
+			options.Property(p => p.FooterComment).HasMaxLength(400);
+			options.Property(p => p.Message).HasMaxLength(400);
+			options.Property(p => p.Title).HasMaxLength(75);
+			options.Property(p => p.CustomerReference).HasMaxLength(50);
 
-            options.HasMany(p => p.Lines)
+			options.HasMany(p => p.Lines)
 				.WithOne(p => p.Document)
 				.HasForeignKey(p => p.DocumentId)
 					.IsRequired()
