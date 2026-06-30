@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Librebooks.Models.Entity.CompanySpace;
+using Librebooks.Models.Entity.CustomerSpace;
 using Librebooks.Models.Entity.GeneralSpace;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace Librebooks.Models.Entity.CustomerSpace;
+namespace Librebooks.Models.Entity.SalesSpace;
 
 [Table(nameof(SalesPerson))]
 public class SalesPerson
@@ -14,8 +16,8 @@ public class SalesPerson
 	public virtual int CompanyId { get; set; }
 	public virtual int? CompanyUserId { get; set; }
 
-	public Contact? Contact { get; set; }
-	public CompanyUser? CompanyUser { get; set; }
+	public virtual Contact? Contact { get; set; }
+	public virtual CompanyUser? CompanyUser { get; set; }
 
 	public SalesPerson () { }
 

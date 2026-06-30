@@ -10,8 +10,8 @@ public class SalesQuoteOrder
 	public virtual int QuoteId { get; set; }
 	public virtual int OrderId { get; set; }
 
-	public SalesQuote? Quote { get; set; }
-	public SalesOrder? Order { get; set; }
+	public virtual SalesQuote? Quote { get; set; }
+	public virtual SalesOrder? Order { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{

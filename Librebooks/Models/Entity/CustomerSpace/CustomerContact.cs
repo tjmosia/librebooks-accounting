@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using Librebooks.Models.Entity.GeneralSpace;
 
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace Librebooks.Models.Entity.CustomerSpace
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public virtual int ContactId { get; set; }
 		public virtual int CustomerId { get; set; }
+		public virtual bool IsPrimary { get; set; }
 
 		public virtual Contact? Contact { get; set; }
 		

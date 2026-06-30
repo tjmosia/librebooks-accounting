@@ -43,7 +43,7 @@ namespace Librebooks.Models.Entity
 			/************************************************************************************************
              * Document Space
              ************************************************************************************************/
-			DocumentCompanyDetails.OnModelCreating(builder);
+			DocumentCompanyInfo.OnModelCreating(builder);
 			DocumentPrintTemplate.OnModelCreating(builder);
 			DocumentSetup.OnModelCreating(builder);
 			DocumentStatus.OnModelCreating(builder);
@@ -52,7 +52,7 @@ namespace Librebooks.Models.Entity
 			/************************************************************************************************
              * Sales Space
              ************************************************************************************************/
-			SalesDocumentCustomerDetails.OnModelCreating(builder);
+			SalesDocumentCustomerInfo.OnModelCreating(builder);
 			SalesCredit.OnModelCreating(builder);
 			SalesDocument.OnModelCreating(builder);
 			SalesDocumentLine.OnModelCreating(builder);
@@ -62,10 +62,10 @@ namespace Librebooks.Models.Entity
 			SalesInvoiceWriteoff.OnModelCreating(builder);
 			SalesDocumentLine.OnModelCreating(builder);
 			SalesOrderInvoice.OnModelCreating(builder);
-			SalesPerson.OnModelCreating(builder);
-			SalesQuoteOrder.OnModelCreating(builder);
+			CompanySalesRep.OnModelCreating(builder);
+			SalesDocumentSource.OnModelCreating(builder);
 			SalesReceipt.OnModelCreating(builder);
-			SalesQuoteProForma.OnModelCreating(builder);
+			SalesQuiteOrderProforma.OnModelCreating(builder);
 			SalesLedger.OnModelCreating(builder);
 
 			/************************************************************************************************
@@ -129,7 +129,7 @@ namespace Librebooks.Models.Entity
              * Purchasing Space
              ************************************************************************************************/
 			DocumentSupplierDetail.OnModelCreating(builder);
-			PurchaseBuyer.OnModelCreating(builder);
+			CompanyBuyer.OnModelCreating(builder);
 			PurchaseDocument.OnModelCreating(builder);
 			PurchaseDocumentLine.OnModelCreating(builder);
 			PurchaseDocumentNote.OnModelCreating(builder);

@@ -34,36 +34,37 @@ public class AppDbContext :
 	public DbSet<CompanyMailSetup>? CompanyMailSettings { get; set; }
 	public DbSet<CompanyLogo>? CompanyLogos { get; set; }
 	public DbSet<CompanyImage>? CompanyImages { get; set; }
+	public DbSet<CompanySetup>? CompanySetups { get; set; }
+	public DbSet<CompanyRegionalSetup>? CompanyRegionalSettings { get; set; }
+	public DbSet<CompanyBuyer>? CompanyBuyers { get; set; }
 
 	/************************************************************************************************
          * Customer Space
          ************************************************************************************************/
 	public DbSet<Customer>? Customers { get; set; }
-	public DbSet<CustomerAccountsContact>? CustomerAccountsContacts { get; set; }
 	public DbSet<CustomerAdjustment>? CustomerAdjustments { get; set; }
 	public DbSet<CustomerCategory>? CustomerCategories { get; set; }
 	public DbSet<CustomerContact>? CustomerContacts { get; set; }
 	public DbSet<CustomerNote>? CustomerNotes { get; set; }
 	public DbSet<CustomerSetup>? CustomerSetups { get; set; }
-	public DbSet<CompanyRegionalSetup>? CompanyRegionalSettings { get; set; }
 
 	/************************************************************************************************
          * Sales Space
          ************************************************************************************************/
-	public DbSet<SalesPerson>? SalesPeople { get; set; }
+	public DbSet<CompanySalesRep>? SalesPeople { get; set; }
 	public DbSet<SalesDocument>? SalesDocuments { get; set; }
 	public DbSet<SalesDocumentLine>? SalesDocumentLines { get; set; }
 	public DbSet<SalesInvoiceReceipt>? SalesInvoiceReceipts { get; set; }
-	public DbSet<SalesOrderInvoice>? SalesOrderInvoices { get; set; }
-	public DbSet<SalesQuoteOrder>? SalesQuoteOrders { get; set; }
-	public DbSet<SalesCredit>? SalesCredits { get; set; }
 	public DbSet<SalesReceipt>? SalesReceipts { get; set; }
 	public DbSet<SalesDocumentLine>? SalesLines { get; set; }
-	public DbSet<SalesDocumentCustomerDetails>? SalesDocumentCustomerDetails { get; set; }
+	public DbSet<SalesDocumentCustomerInfo>? SalesDocumentCustomerDetails { get; set; }
 	public DbSet<SalesInvoiceCredit>? SalesInvoiceCredits { get; set; }
 	public DbSet<SalesInvoiceWriteoff>? SalesInvoiceWriteoffs { get; set; }
-	public DbSet<SalesQuoteProForma>? SalesQuoteProFormas { get; set; }
 	public DbSet<SalesLedger>? SalesLedgers { get; set; }
+	public DbSet<SalesInvoice>? SalesInvoices{ get; set; }
+	public DbSet<SalesProforma>? SalesProformas { get; set; }
+	public DbSet<SalesOrder>? SalesOrders { get; set; }
+	public DbSet<SalesQuote>? SalesQuotes { get; set; }
 
 	/************************************************************************************************
          * Inventory Space
@@ -80,6 +81,8 @@ public class AppDbContext :
 	public DbSet<WarehouseRow> WarehouseRows { get; set; }
 	public DbSet<WarehouseShelve> WarehouseShelves { get; set; }
 	public DbSet<WarehouseZone> WarehouseZones { get; set; }
+	public DbSet<InventoryTransfer> InventoryTransfers { get; set; }
+	public DbSet<ItemPriceHistory> ItemPriceHistory { get; set; }
 
 
 	/************************************************************************************************
@@ -103,7 +106,7 @@ public class AppDbContext :
 	public DbSet<DocumentSetup>? DocumentSetups { get; set; }
 	public DbSet<DocumentStatus>? DocumentStatuses { get; set; }
 	public DbSet<DocumentPrintTemplate>? DocumentPrintTemplates { get; set; }
-	public DbSet<DocumentCompanyDetails>? DocumentCompanyDetails { get; set; }
+	public DbSet<DocumentCompanyInfo>? DocumentCompanyDetails { get; set; }
 	public DbSet<DocumentType>? DocumentTypes { get; set; }
 
 	/************************************************************************************************
@@ -117,7 +120,6 @@ public class AppDbContext :
 	public DbSet<Tax>? Taxes { get; set; }
 	public DbSet<PaymentMethod>? PaymentMethods { get; set; }
 	public DbSet<PaymentTerm>? PaymentTerms { get; set; }
-	public DbSet<CompanySetup>? CompanySetups { get; set; }
 	public DbSet<BusinessSector>? BusinessSectors { get; set; }
 
 	/************************************************************************************************
@@ -136,7 +138,6 @@ public class AppDbContext :
          ************************************************************************************************/
 	public DbSet<PurchaseDocument>? PurchaseDocuments { get; set; }
 	public DbSet<PurchaseDocumentLine>? PurchaseDocumentLines { get; set; }
-	public DbSet<PurchaseBuyer>? PurchaseBuyers { get; set; }
 	public DbSet<PurchaseCreditInvoice>? PurchaseCreditInvoices { get; set; }
 	public DbSet<PurchaseLine>? PurchaseLines { get; set; }
 	public DbSet<PurchaseInvoiceReturn>? PurchaseReturnInvoices { get; set; }
@@ -153,6 +154,7 @@ public class AppDbContext :
 	public DbSet<Contact>? Contacts { get; set; }
 	public DbSet<Note>? Notes { get; set; }
 	public DbSet<VerificationRequest>? VerificationRequests { get; set; }
+	public DbSet<Address>? Addresses { get; set; }
 
 	protected override void OnModelCreating (ModelBuilder builder)
 	{
@@ -189,7 +191,7 @@ public class AppDbContext :
 		/************************************************************************************************
              * Document Space
              ************************************************************************************************/
-		Models.Entity.DocumentSpace.DocumentCompanyDetails.OnModelCreating(builder);
+		DocumentCompanyInfo.OnModelCreating(builder);
 		DocumentPrintTemplate.OnModelCreating(builder);
 		DocumentSetup.OnModelCreating(builder);
 		DocumentStatus.OnModelCreating(builder);
@@ -198,21 +200,21 @@ public class AppDbContext :
 		/************************************************************************************************
              * Sales Space
              ************************************************************************************************/
-		Models.Entity.SalesSpace.SalesDocumentCustomerDetails.OnModelCreating(builder);
-		SalesCredit.OnModelCreating(builder);
+		SalesDocumentCustomerInfo.OnModelCreating(builder);
 		SalesDocument.OnModelCreating(builder);
 		SalesDocumentLine.OnModelCreating(builder);
 		SalesInvoiceCredit.OnModelCreating(builder);
 		SalesInvoiceReceipt.OnModelCreating(builder);
 		SalesInvoiceWriteoff.OnModelCreating(builder);
 		SalesDocumentLine.OnModelCreating(builder);
-		SalesOrderInvoice.OnModelCreating(builder);
-		SalesPerson.OnModelCreating(builder);
-		SalesQuoteOrder.OnModelCreating(builder);
+		CompanySalesRep.OnModelCreating(builder);
 		SalesReceipt.OnModelCreating(builder);
-		SalesQuoteProForma.OnModelCreating(builder);
 		SalesLedger.OnModelCreating(builder);
 		SalesLedgerJournal.OnModelCreating(builder);
+		SalesInvoice.OnModelCreating(builder);
+		SalesProforma.OnModelCreating(builder);
+		SalesQuote.OnModelCreating(builder);
+		SalesQuoteInvoice.OnModelCreating(builder);
 
 		/************************************************************************************************
              * Company Space
@@ -243,7 +245,6 @@ public class AppDbContext :
              * Customer Space
              ************************************************************************************************/
 		Customer.OnModelCreating(builder);
-		CustomerAccountsContact.OnModelCreating(builder);
 		CustomerAdjustment.OnModelCreating(builder);
 		CustomerCategory.OnModelCreating(builder);
 		CustomerContact.BuildModel(builder);
@@ -276,7 +277,7 @@ public class AppDbContext :
              * Purchasing Space
              ************************************************************************************************/
 		DocumentSupplierDetail.OnModelCreating(builder);
-		PurchaseBuyer.OnModelCreating(builder);
+		CompanyBuyer.OnModelCreating(builder);
 		PurchaseDocument.OnModelCreating(builder);
 		PurchaseDocumentLine.OnModelCreating(builder);
 		PurchaseCreditInvoice.OnModelCreating(builder);
@@ -300,5 +301,6 @@ public class AppDbContext :
 		Contact.OnModelCreating(builder);
 		Note.OnModelCreating(builder);
 		VerificationRequest.OnModelCreating(builder);
+		Address.OnModelCreating(builder);
 	}
 }

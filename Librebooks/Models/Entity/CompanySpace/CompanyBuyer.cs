@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Librebooks.Models.Entity.CompanySpace;
+
 using Librebooks.Models.Entity.GeneralSpace;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Librebooks.Models.Entity.PurchasesSpace;
+namespace Librebooks.Models.Entity.CompanySpace;
 
-[Table(nameof(PurchaseBuyer))]
-public class PurchaseBuyer
+[Table(nameof(CompanyBuyer))]
+public class CompanyBuyer
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
@@ -20,14 +20,14 @@ public class PurchaseBuyer
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
-		builder.Entity<PurchaseBuyer>(options =>
+		builder.Entity<CompanyBuyer>(options =>
 		{
 			options.HasIndex(p => new { p.CompanyId, p.Id })
 				.IsClustered();
 
 			options.HasOne<CompanyUser>()
 				.WithOne()
-				.HasForeignKey<PurchaseBuyer>(p => p.CompanyUserId)
+				.HasForeignKey<CompanyBuyer>(p => p.CompanyUserId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 

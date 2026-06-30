@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.DocumentSpace;
 
-[Table(nameof(DocumentCompanyDetails))]
-public class DocumentCompanyDetails () : VersionedEntityBase()
+[Table(nameof(DocumentCompanyInfo))]
+public class DocumentCompanyInfo () : VersionedEntityBase()
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
@@ -41,14 +41,14 @@ public class DocumentCompanyDetails () : VersionedEntityBase()
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
-		builder.Entity<DocumentCompanyDetails>(options =>
+		builder.Entity<DocumentCompanyInfo>(options =>
 		{
 			options.HasIndex(p => new { p.CompanyId, p.Id })
 				.IsClustered();
 
 			options.HasOne<Company>()
 				.WithOne()
-				.HasForeignKey<DocumentCompanyDetails>(p => p.CompanyId)
+				.HasForeignKey<DocumentCompanyInfo>(p => p.CompanyId)
 					.IsRequired(false)
 				.OnDelete(DeleteBehavior.Restrict);
 
@@ -60,7 +60,7 @@ public class DocumentCompanyDetails () : VersionedEntityBase()
 
 			options.HasOne(p => p.Currency)
 				.WithOne()
-				.HasForeignKey<DocumentCompanyDetails>(p => p.CurrencyId)
+				.HasForeignKey<DocumentCompanyInfo>(p => p.CurrencyId)
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict);
 

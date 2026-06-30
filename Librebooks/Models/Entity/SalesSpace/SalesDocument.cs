@@ -32,22 +32,22 @@ public class SalesDocument () : VersionedEntityBase()
 	public virtual int CustomerInfoId { get; set; }
 	public virtual int CompanyInfoId { get; set; }
 	public virtual bool Recorded { get; set; }
-	public virtual bool Posted { get; set; }
-	public virtual bool Printed { get; set; }
-	public string? SalesPersonId { get; set; }
-	public int? CreatorId { get; set; }
-	public virtual int CurrencyId { get; set; }
-	public virtual bool Archived { get; set; }
+	public int? SalesPersonId { get; set; }
+	public int CreatedById { get; set; }
+	public virtual string? CurrencyCode { get; set; }
 
 	public DocumentStatus? Status { get; set; }
-	public SalesPerson? SalesPerson { get; set; }
-	public SalesDocumentCustomerDetails? CustomerInfo { get; set; }
-	public DocumentCompanyDetails? CompanyInfo { get; set; }
+	public CompanySalesRep? SalesPerson { get; set; }
+	public SalesDocumentCustomerInfo? CustomerInfo { get; set; }
+	public DocumentCompanyInfo? CompanyInfo { get; set; }
 	public ICollection<SalesDocumentLine>? Lines { get; set; }
 	public Company? Company { get; set; }
 	public Customer? Customer { get; set; }
-	public User? Creator { get; set; }
+	public User? CreatedBy { get; set; }
 	public DocumentType? Type { get; set; }
+	public SalesQuote? Quote { get; set; }
+	public SalesProforma? ProForma { get; set; }
+	public SalesInvoice? Invoice { get; set; }
 
 	public static void OnModelCreating (ModelBuilder builder)
 	{
@@ -71,9 +71,9 @@ public class SalesDocument () : VersionedEntityBase()
 					.IsRequired()
 				.OnDelete(DeleteBehavior.Cascade);
 
-			options.HasOne(p => p.Creator)
+			options.HasOne(p => p.CreatedBy)
 				.WithOne()
-				.HasForeignKey<SalesDocument>(p => p.CreatorId)
+				.HasForeignKey<SalesDocument>(p => p.CreatedById)
 					.IsRequired(false)
 				.OnDelete(DeleteBehavior.SetNull);
 

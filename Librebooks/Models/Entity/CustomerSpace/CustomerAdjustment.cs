@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using Librebooks.Core.Constants;
 using Librebooks.Models.Entity.AccountingSpace;
 using Librebooks.Models.Entity.CompanySpace;
 using Librebooks.Models.Entity.SystemSpace;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Librebooks.Models.Entity.CustomerSpace;
@@ -13,25 +15,16 @@ public class CustomerAdjustment
 {
 	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public virtual int Id { get; set; }
-
-	[MaxLength(50), Required]
 	public virtual string? Number { get; set; }
-
-	[MaxLength(50)]
 	public virtual string? Reference { get; set; }
-
 	public virtual int TaxId { get; set; }
-
-	[Column(TypeName = ColumnTypes.PERCENTAGE)]
-	public virtual int TaxRate { get; set; }
-
-	[Column(TypeName = ColumnTypes.MONETARY)]
-	public virtual decimal? Amount { get; set; }
-
-	[MaxLength(255)]
+	public virtual decimal TaxRate { get; set; }
+	public virtual decimal Amount { get; set;  }
+	public virtual decimal TaxAmount { get; set; }
+	public virtual decimal TotalAmount { get; set; }
+	public virtual int DebitAccountId { get; set; }
+	public virtual int CreditAccountId { get; set; }
 	public virtual string? Description { get; set; }
-
-	[MaxLength(255)]
 	public virtual string? Comments { get; set; }
 
 	public virtual int CompanyId { get; set; }

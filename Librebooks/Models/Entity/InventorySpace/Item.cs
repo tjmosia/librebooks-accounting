@@ -16,8 +16,8 @@ public class Item : VersionedEntityBase
 	public virtual string? Code { get; set; }
 	public virtual string? Description { get; set; }
 	public virtual string? UnitOfMeasure { get; set; }
-	public virtual decimal Cost { get; set; }
-	public virtual decimal Price { get; set; }
+	public virtual decimal CostPrice { get; set; }
+	public virtual decimal SalePrice { get; set; }
 	public virtual bool Physical { get; set; }
 	public virtual int? CategoryId { get; set; }
 	public virtual int TaxId { get; set; }

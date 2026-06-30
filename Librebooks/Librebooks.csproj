@@ -78,5 +78,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Models\Account\DataTransferObjects\" />
     <Folder Include="Areas\Systems\Providers\Stores\" />
+    <Folder Include="Core\Types\PurchasesAndSales\" />
   </ItemGroup>
 </Project>
